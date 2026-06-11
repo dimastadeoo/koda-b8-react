@@ -10,7 +10,7 @@ export default function DetailPage() {
         <>
             <header className="sticky top-0 z-50" id="header">
                 <Header />
-            </header>z
+            </header>
 
             <main className="bg-gray-50 min-h-screen py-6">
                 <section className="w-full max-w-5xl mx-auto font-sans px-4 mb-6">
