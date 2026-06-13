@@ -47,7 +47,7 @@ export default function Footer() {
 
                 <div className="max-w-5xl mx-auto px-4 grid grid-cols-1 md:grid-cols-12 gap-8 mb-10">
                     <div className="md:col-span-4 flex flex-col gap-4">
-                        <Link to="/main/landing-page.html" className="flex items-center gap-2 no-underline">
+                        <Link to="/main/" className="flex items-center gap-2 no-underline">
                             <div className="w-8 h-8 bg-blue-600 text-white flex justify-center items-center text-base font-bold rounded-md">B</div>
                             <div className="text-lg font-bold text-white tracking-tight">BeliMudah</div>
                         </Link>

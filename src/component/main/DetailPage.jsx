@@ -15,7 +15,7 @@ export default function DetailPage() {
             <main className="bg-gray-50 min-h-screen py-6">
                 <section className="w-full max-w-5xl mx-auto font-sans px-4 mb-6">
                     <ul className="flex items-center gap-2 text-sm text-gray-500 flex-wrap">
-                        <li><Link to="landingPage.html" className="hover:text-blue-600 transition-colors">Beranda</Link></li>
+                        <li><Link to="/main/" className="hover:text-blue-600 transition-colors">Beranda</Link></li>
                         <li className="text-gray-400">
                             <svg xmlns={urlW3} width="14" height="14" viewBox="0 0 24 24" fill="none"
                                 stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"

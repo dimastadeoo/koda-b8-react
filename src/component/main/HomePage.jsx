@@ -64,7 +64,7 @@ export default function HomePage() {
                 <section className="w-full max-w-5xl mx-auto font-sans">
                     <div className="flex justify-between items-center mb-6">
                         <h2 className="text-xl md:text-2xl font-bold text-gray-900 tracking-tight">Belanja Berdasarkan Kategori</h2>
-                        <Link to="browse-products.html"
+                        <Link to="/main/all-products"
                             className="flex items-center gap-1 text-sm font-medium text-blue-600 hover:text-blue-700 transition-colors no-underline group">
                             <span>Lihat Semua</span>
                             <img className="w-4 h-4 object-contain transition-transform group-hover:translate-x-1"
@@ -172,7 +172,7 @@ export default function HomePage() {
                                 </span>
                             </span>
                         </div>
-                        <Link to="browse-products.html"
+                        <Link to="/main/all-products"
                             className="flex items-center gap-1 text-sm font-medium text-blue-600 hover:text-blue-700 transition-colors no-underline group/link">
                             <span>Lihat Semua</span>
                             <img className="w-4 h-4 object-contain transition-transform group-hover/link:translate-x-1"
@@ -227,7 +227,7 @@ export default function HomePage() {
                                 Produk Terbaru
                             </span>
                         </div>
-                        <Link to="browse-products.html"
+                        <Link to="/main/all-products"
                             className="flex items-center gap-1 text-sm font-medium text-blue-600 hover:text-blue-700 transition-colors no-underline group/link">
                             <span>Lihat Semua</span>
                             <img className="w-4 h-4 object-contain transition-transform group-hover/link:translate-x-1"
@@ -247,7 +247,7 @@ export default function HomePage() {
                         <span className="flex flex-wrap items-center gap-4">
                             Produk Unggulan
                         </span>
-                        <Link to="browse-products.html"
+                        <Link to="/main/all-products"
                             className="flex items-center gap-1 text-sm font-medium text-blue-600 hover:text-blue-700 transition-colors no-underline group/link">
                             <span>Lihat Semua</span>
                             <img className="w-4 h-4 object-contain transition-transform group-hover/link:translate-x-1"

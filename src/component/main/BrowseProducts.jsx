@@ -14,7 +14,7 @@ export default function BrowseProducts() {
                 <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 pb-2">
                     <ul className="flex items-center gap-2 text-xs sm:text-sm text-gray-500 font-medium">
                         <li>
-                            <Link to="landingPage.html" className="hover:text-blue-600 transition-colors">Beranda</Link>
+                            <Link to="/main" className="hover:text-blue-600 transition-colors">Beranda</Link>
                         </li>
                         <li className="text-gray-400">
                             <svg xmlns={urlW3} width="14" height="14" viewBox="0 0 24 24" fill="none"
