@@ -90,7 +90,7 @@ export default function Login() {
                                 <div className="grid gap-1">
                                     <div className="flex justify-between items-center">
                                         <label className="text-xs font-medium text-[#111827]" for="pass">Kata Sandi</label>
-                                        <Link to="forgot-password" className="text-xs text-[#1A73E8] hover:underline">Lupa kata
+                                        <Link to="/auth/forgot-password" className="text-xs text-[#1A73E8] hover:underline">Lupa kata
                                             sandi?</Link>
                                     </div>
                                     <div className="relative flex items-center">

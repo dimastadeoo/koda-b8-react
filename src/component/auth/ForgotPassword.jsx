@@ -1,1 +1,106 @@
-export default function ForgotPassword() {}
+import { Link } from "react-router"
+const urlW3 = 'http://www.w3.org/2000/svg'
+
+export default function ForgotPassword() {
+    return (
+        <>
+            <main
+                className="bg-[#f8f9fa] font-sans h-screen w-screen overflow-hidden flex items-center justify-center p-0 md:p-4">
+
+                <div className="w-full h-full md:h-auto md:max-h-[90vh] md:max-w-5xl bg-white md:rounded-2xl md:shadow-lg overflow-hidden flex flex-col md:flex-row">
+                    <div class="relative flex-1 bg-gradient-to-br from-[#1447E6] to-[#312C85] p-8 lg:p-12 text-white hidden md:flex flex-col justify-between overflow-hidden">
+                        <img src="/bg-auth-forgorpass.jpg" alt="bg auth forgot password" class="absolute inset-0 w-full h-full object-cover opacity-20 z-10" />
+
+                        <div class="z-20 flex flex-col h-full justify-between">
+                            <Link to="/main" class="no-underline inline-block self-start">
+                                <div class="font-semibold text-base flex items-center gap-2 text-white">
+                                    <span class="bg-white/15 backdrop-blur-md px-3 py-1.5 flex justify-center items-center font-normal rounded-xl text-base">B</span>
+                                    <span>BeliMudah</span>
+                                </div>
+                            </Link>
+
+                            <div class="my-auto flex flex-col gap-5 max-w-[400px]">
+                                <div class="flex flex-col gap-3">
+                                    <div class="w-10 h-10 bg-white/15 backdrop-blur-md rounded-xl flex items-center justify-center text-xl">
+                                        🔐
+                                    </div>
+                                    <h1 class="font-bold text-2xl lg:text-3xl leading-tight">Akun kamu aman bersama kami</h1>
+                                    <p class="text-sm text-white/70 font-normal leading-relaxed">Kami menggunakan enkripsi tingkat militer untuk menjaga keamanan data dan transaksimu.</p>
+                                </div>
+
+                                <div class="flex flex-col gap-2.5 border-t border-white/10 pt-4">
+                                    <span class="text-xs text-white/80 font-normal flex items-center gap-2">
+                                        <span>🔒</span> Enkripsi SSL 256-bit
+                                    </span>
+                                    <span class="text-xs text-white/80 font-normal flex items-center gap-2">
+                                        <span>🛡️</span> Perlindungan data pribadi
+                                    </span>
+                                    <span class="text-xs text-white/80 font-normal flex items-center gap-2">
+                                        <span>📧</span> Verifikasi dua langkah
+                                    </span>
+                                </div>
+                            </div>
+
+                            <p class="font-normal text-xs text-white/40">© 2026 BeliMudah. Seluruh hak cipta dilindungi.</p>
+                        </div>
+                    </div>
+
+                    <div class="flex-1 bg-[#FAFAFA] p-6 lg:p-10 flex flex-col justify-center overflow-y-auto h-full">
+                        <div class="w-full max-w-md mx-auto grid gap-5 lg:gap-6">
+
+                            <Link to="/auth/login" class="no-underline inline-block self-start group">
+                                <div class="flex items-center gap-2 text-sm text-[#6B7280] font-medium hover:text-[#111827] transition-colors">
+                                    <svg xmlns={urlW3} width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-left transition-transform group-hover:-translate-x-1"><path d="m12 19-7-7 7-7" /><path d="M19 12H5" /></svg>
+                                    <span>Kembali ke Login</span>
+                                </div>
+                            </Link>
+
+                            <div class="grid gap-2 pt-1">
+                                <h2 class="text-xl lg:text-2xl font-bold text-[#111827]">Lupa Kata Sandi?</h2>
+                                <p class="text-xs lg:text-sm text-[#6B7280] leading-relaxed">Tidak perlu khawatir. Masukkan email yang terdaftar dan kami akan mengirimkan tautan untuk membuat kata sandi baru.</p>
+                            </div>
+
+                            <form class="grid gap-4">
+                                <div class="grid gap-1">
+                                    <label class="text-xs font-medium text-[#111827]">Email</label>
+                                    <div class="relative flex items-center">
+                                        <span class="absolute left-3.5 text-[#6B7280]">
+                                            <svg xmlns={urlW3} width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-mail"><path d="m22 7-8.991 5.727a2 2 0 0 1-2.009 0L2 7" /><rect x="2" y="4" width="20" height="16" rx="2" /></svg>
+                                        </span>
+                                        <input type="email" placeholder="email@contoh.com" required class="w-full py-2.5 pl-10 pr-3.5 bg-[#F1F1F3] border border-[#E5E5E5] rounded-lg text-sm outline-none transition-colors focus:border-[#1A73E8] focus:bg-white" />
+                                    </div>
+                                </div>
+
+                                <button type="submit" class="w-full bg-[#1A73E8] hover:bg-[#1565C0] text-white border-none rounded-lg py-3 text-sm font-semibold cursor-pointer flex justify-center items-center gap-2 transition-colors mt-1 shadow-sm">
+                                    <svg xmlns={urlW3} width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-send"><path d="M14.536 21.686a.5.5 0 0 0 .937-.024l6.5-19a.496.496 0 0 0-.635-.635l-19 6.5a.5.5 0 0 0-.024.937l7.93 3.18a2 2 0 0 1 1.112 1.11z" /><path d="m21.854 2.147-10.94 10.939" /></svg>
+                                    Kirim Tautan Reset
+                                </button>
+                            </form>
+
+                            <div class="bg-[#F1F1F3]/60 border border-[#E5E5E5]/60 rounded-xl p-4 grid gap-1.5">
+                                <p class="text-xs font-semibold text-[#111827] flex items-center gap-1">
+                                    💡 Tips keamanan:
+                                </p>
+                                <ul class="list-none grid gap-1 text-[11px] text-[#6B7280] pl-0">
+                                    <li class="flex items-start gap-1.5">
+                                        <span class="text-[#8C8C8C] shrink-0">•</span>
+                                        <span>Pastikan kamu memeriksa folder spam/junk email jika tidak menemukannya di kotak masuk.</span>
+                                    </li>
+                                    <li class="flex items-start gap-1.5">
+                                        <span class="text-[#8C8C8C] shrink-0">•</span>
+                                        <span>Tautan konfirmasi reset hanya berlaku selama 30 menit demi keamanan akun.</span>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <div class="text-center text-xs text-[#6B7280] border-t border-gray-100 pt-4">
+                                Ingat kata sandi kamu? <Link to="#" class="text-[#1A73E8] font-medium hover:underline">Masuk sekarang</Link>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </>
+    )
+
+}
