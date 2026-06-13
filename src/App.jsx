@@ -19,6 +19,12 @@ import ProductsList from './component/admin/ProductsList';
 import OrderList from './component/admin/OrderList';
 import Dashboard from './component/admin/Dashboard';
 import CustomerList from './component/admin/CustomerList';
+import Step1 from './component/checkout/Step1';
+import Step2 from './component/checkout/Step2';
+import Step3 from './component/checkout/Step3';
+import Success from './component/checkout/StepSuccess';
+
+
 
 // Konfigurasi Peta Rute URL halaman
 const router = createBrowserRouter([
@@ -86,6 +92,22 @@ const router = createBrowserRouter([
   {
     path: "/admin/list-customers",
     element: <CustomerList />,
+  },
+  {
+    path: "/checkout/step-1",
+    element: <Step1 />,
+  },
+  {
+    path: "/checkout/step-2",
+    element: <Step2 />,
+  },
+  {
+    path: "/checkout/step-3",
+    element: <Step3 />,
+  },
+  {
+    path: "/checkout/order-success",
+    element: <Success />,
   },
 
 ]);
