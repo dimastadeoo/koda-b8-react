@@ -4,7 +4,7 @@ export default function CartItem() {
     const urlW3 = 'http://www.w3.org/2000/svg'
     return (
         <>
-            <div
+            <article
                 className="bg-white border border-gray-100 rounded-2xl flex flex-col justify-between shadow-sm hover:shadow-md transition-all group">
                 <div type="button" className="block cursor-pointer">
                     <div className="relative w-full aspect-square rounded-xl bg-cover bg-center bg-no-repeat transition-transform group-hover:scale-[1.02] duration-300 bg-[url('/item-1.png')]">
@@ -63,7 +63,8 @@ export default function CartItem() {
                         </div>
                     </div>
                 </div>
-            </div>
+            </article>
+            
         </>
     )
 }

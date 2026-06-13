@@ -8,7 +8,7 @@ export default function ForgotPassword() {
                 className="bg-[#f8f9fa] font-sans h-screen w-screen overflow-hidden flex items-center justify-center p-0 md:p-4">
 
                 <div className="w-full h-full md:h-auto md:max-h-[90vh] md:max-w-5xl bg-white md:rounded-2xl md:shadow-lg overflow-hidden flex flex-col md:flex-row">
-                    <div class="relative flex-1 bg-gradient-to-br from-[#1447E6] to-[#312C85] p-8 lg:p-12 text-white hidden md:flex flex-col justify-between overflow-hidden">
+                    <section class="relative flex-1 bg-gradient-to-br from-[#1447E6] to-[#312C85] p-8 lg:p-12 text-white hidden md:flex flex-col justify-between overflow-hidden">
                         <img src="/bg-auth-forgorpass.jpg" alt="bg auth forgot password" class="absolute inset-0 w-full h-full object-cover opacity-20 z-10" />
 
                         <div class="z-20 flex flex-col h-full justify-between">
@@ -43,9 +43,9 @@ export default function ForgotPassword() {
 
                             <p class="font-normal text-xs text-white/40">© 2026 BeliMudah. Seluruh hak cipta dilindungi.</p>
                         </div>
-                    </div>
+                    </section>
 
-                    <div class="flex-1 bg-[#FAFAFA] p-6 lg:p-10 flex flex-col justify-center overflow-y-auto h-full">
+                    <section class="flex-1 bg-[#FAFAFA] p-6 lg:p-10 flex flex-col justify-center overflow-y-auto h-full">
                         <div class="w-full max-w-md mx-auto grid gap-5 lg:gap-6">
 
                             <Link to="/auth/login" class="no-underline inline-block self-start group">
@@ -97,7 +97,7 @@ export default function ForgotPassword() {
                                 Ingat kata sandi kamu? <Link to="#" class="text-[#1A73E8] font-medium hover:underline">Masuk sekarang</Link>
                             </div>
                         </div>
-                    </div>
+                    </section>
                 </div>
             </main>
         </>
