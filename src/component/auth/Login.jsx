@@ -12,7 +12,7 @@ export default function Login() {
                 <div className="w-full h-full md:h-auto md:max-h-[90vh] md:max-w-5xl bg-white md:rounded-2xl md:shadow-lg overflow-hidden flex flex-col md:flex-row">
                     <section
                         className="relative flex-1 bg-gradient-to-br from-[#1447E6] to-[#312C85] p-8 lg:p-12 text-white hidden md:flex flex-col justify-between overflow-hidden">
-                        <img src="/asset/img/bg-auth.jpg" alt="bg-auth"
+                        <img src="/bg-auth.jpg" alt="bg-auth"
                             className="absolute inset-0 w-full h-full object-cover opacity-20 z-10" />
                         <div className="z-20 flex flex-col h-full justify-between">
                             <Link to="/main" className="no-underline inline-block self-start">
