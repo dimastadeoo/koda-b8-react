@@ -15,7 +15,7 @@ export default function Login() {
                         <img src="/bg-auth.jpg" alt="bg-auth"
                             className="absolute inset-0 w-full h-full object-cover opacity-20 z-10" />
                         <div className="z-20 flex flex-col h-full justify-between">
-                            <Link to="/main" className="no-underline inline-block self-start">
+                            <Link to="/main/" className="no-underline inline-block self-start">
                                 <div className="font-semibold text-base flex items-center gap-2 text-white">
                                     <span
                                         className="bg-white/15 backdrop-blur-md px-3 py-1.5 flex justify-center items-center font-normal rounded-xl text-base">B</span>
@@ -51,7 +51,7 @@ export default function Login() {
                         <div className="w-full max-w-md mx-auto grid gap-5 lg:gap-6">
                             <div className="grid gap-1">
                                 <h2 className="text-xl lg:text-2xl font-bold text-[#111827]">Masuk ke Akun</h2>
-                                <p className="text-sm text-[#6B7280]">Belum punya akun? <Link to="register"
+                                <p className="text-sm text-[#6B7280]">Belum punya akun? <Link to="/auth/register"
                                     className="text-[#1A73E8] font-medium hover:underline">Daftar gratis</Link></p>
                             </div>
                             <div className="flex gap-3">

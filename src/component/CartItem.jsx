@@ -1,4 +1,4 @@
-import {Link} from "react-router"
+// import {Link} from "react-router"
 
 export default function CartItem() {
     const urlW3 = 'http://www.w3.org/2000/svg'
@@ -6,7 +6,7 @@ export default function CartItem() {
         <>
             <div
                 className="bg-white border border-gray-100 rounded-2xl flex flex-col justify-between shadow-sm hover:shadow-md transition-all group">
-                <Link to="#" className="no-underline block">
+                <div type="button" className="block cursor-pointer">
                     <div className="relative w-full aspect-square rounded-xl bg-cover bg-center bg-no-repeat transition-transform group-hover:scale-[1.02] duration-300 bg-[url('/item-1.png')]">
                         <span
                             className="absolute top-2 left-2 bg-[#db2777] text-white text-xs font-bold px-2 py-1 rounded-full">-31%</span>
@@ -62,7 +62,7 @@ export default function CartItem() {
                             <span className="text-xs text-gray-400 line-through">Rp 650.000</span>
                         </div>
                     </div>
-                </Link>
+                </div>
             </div>
         </>
     )

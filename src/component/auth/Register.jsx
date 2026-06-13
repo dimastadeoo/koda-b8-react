@@ -75,7 +75,7 @@ export default function Register() {
 
                             <div className="grid gap-1">
                                 <h2 className="text-xl lg:text-2xl font-bold text-[#111827]">Buat Akun Baru</h2>
-                                <p className="text-sm text-[#6B7280]">Sudah punya akun? <Link to="login.html"
+                                <p className="text-sm text-[#6B7280]">Sudah punya akun? <Link to="/auth/login"
                                     className="text-[#1A73E8] font-medium hover:underline">Masuk</Link></p>
                             </div>
 
