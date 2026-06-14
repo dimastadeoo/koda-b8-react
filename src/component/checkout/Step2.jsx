@@ -8,7 +8,7 @@ export default function Step2() {
 
     return (
         <>
-            <header class="sticky top-0 z-50" id="header">
+            <header className="sticky top-0 z-50" id="header">
                 <Header />
             </header>
             <main className="flex justify-center items-center w-full max-w-[1200px] mx-auto mb-16">
