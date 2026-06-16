@@ -222,12 +222,13 @@ const products = [
 export default function Dashboard() {
   return (
     <>
+      {/* Content Aside di sebelah kiri */}
       <AsideContent />
 
-      <header className="fixed right-0 top-0 z-99 flex h-16 w-[calc(100%-72px)] items-center gap-3 border-b border-black/10 bg-white px-4 md:w-[calc(100%-240px)] md:px-6">
-        <NavPage />
-      </header>
-
+    {/* Header */}
+      <NavPage />
+      
+      {/* Content di sebelah kanan */}
       <main className="min-h-screen bg-[#F8F9FA] pl-18 pt-16 md:pl-60">
         <section className="grid gap-6 p-6">
           <div className="grid gap-4 sm:flex sm:items-center sm:justify-between">
