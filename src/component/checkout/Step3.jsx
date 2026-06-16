@@ -11,7 +11,7 @@ export default function Step3() {
             <header className="sticky top-0 z-50" id="header">
                 <Header />
             </header>
-            <main className="flex justify-center items-center w-full max-w-[1200px] mx-auto mb-16">
+            <main className="flex justify-center items-center w-full max-w-300 mx-auto mb-16">
                 <section className="grid w-full gap-10 px-8 py-4 max-sm:px-4">
                     {/* Stepper */}
                     <div className="flex justify-center items-center mb-2">
@@ -37,7 +37,7 @@ export default function Step3() {
                                 </span>
                             </div>
 
-                            <div className="w-[120px] max-sm:w-[60px] mb-5 border-t-2 border-solid border-[#00C950]" />
+                            <div className="w-30 max-sm:w-15 mb-5 border-t-2 border-solid border-[#00C950]" />
                         </div>
 
                         <div className="flex justify-center items-center">
@@ -63,7 +63,7 @@ export default function Step3() {
                             </div>
                         </div>
 
-                        <div className="w-[120px] max-sm:w-[60px] mb-5 border-t-2 border-solid border-[#00C950]" />
+                        <div className="w-30 max-sm:w-15 mb-5 border-t-2 border-solid border-[#00C950]" />
 
                         <div className="flex justify-center items-center">
                             <div className="flex flex-col items-center gap-2">
@@ -188,7 +188,7 @@ export default function Step3() {
                             <div className="flex gap-3 max-sm:flex-col">
                                 <button
                                     type="button"
-                                    className="px-5 py-[13px] rounded-xl border border-black/10 bg-transparent cursor-pointer text-[#111827] hover:bg-[#5f6368] hover:text-white"
+                                    className="px-5 py-3.25 rounded-xl border border-black/10 bg-transparent cursor-pointer text-[#111827] hover:bg-[#5f6368] hover:text-white"
                                 >
                                     Kembali
                                 </button>

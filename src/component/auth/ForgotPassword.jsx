@@ -8,7 +8,7 @@ export default function ForgotPassword() {
                 className="bg-[#f8f9fa] font-sans h-screen w-screen overflow-hidden flex items-center justify-center p-0 md:p-4">
 
                 <div className="w-full h-full md:h-auto md:max-h-[90vh] md:max-w-5xl bg-white md:rounded-2xl md:shadow-lg overflow-hidden flex flex-col md:flex-row">
-                    <section class="relative flex-1 bg-gradient-to-br from-[#1447E6] to-[#312C85] p-8 lg:p-12 text-white hidden md:flex flex-col justify-between overflow-hidden">
+                    <section class="relative flex-1 bg-linear-to-br from-[#1447E6] to-[#312C85] p-8 lg:p-12 text-white hidden md:flex flex-col justify-between overflow-hidden">
                         <img src="/bg-auth-forgorpass.jpg" alt="bg auth forgot password" class="absolute inset-0 w-full h-full object-cover opacity-20 z-10" />
 
                         <div class="z-20 flex flex-col h-full justify-between">
@@ -19,7 +19,7 @@ export default function ForgotPassword() {
                                 </div>
                             </Link>
 
-                            <div class="my-auto flex flex-col gap-5 max-w-[400px]">
+                            <div class="my-auto flex flex-col gap-5 max-w-100">
                                 <div class="flex flex-col gap-3">
                                     <div class="w-10 h-10 bg-white/15 backdrop-blur-md rounded-xl flex items-center justify-center text-xl">
                                         🔐

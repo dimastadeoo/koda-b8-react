@@ -113,7 +113,7 @@ export default function Success() {
                                     </p>
                                 </div>
 
-                                <div className="ml-auto w-[27px] h-5 px-2 py-0.5 rounded-full bg-[#DCFCE7] flex items-center justify-center">
+                                <div className="ml-auto w-6.75 h-5 px-2 py-0.5 rounded-full bg-[#DCFCE7] flex items-center justify-center">
                                     <svg
                                         xmlns={urlW3}
                                         width="11"

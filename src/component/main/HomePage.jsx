@@ -14,7 +14,7 @@ export default function HomePage() {
             <main className="grid gap-7">
                
                 <section
-                    className="relative w-full bg-gradient-to-r from-[#4F39F6] from-50% to-[#8200DB] to-50% overflow-hidden min-h-[440px] flex items-center group">
+                    className="relative w-full bg-linear-to-r from-[#4F39F6] from-50% to-[#8200DB] to-50% overflow-hidden min-h-110 flex items-center group">
 
                     <div
                         className="absolute inset-y-0 right-0 w-1/2 h-full opacity-60 md:opacity-90 mix-blend-multiply pointer-events-none">
@@ -187,7 +187,7 @@ export default function HomePage() {
                 {/* <!-- section 4 --> */}
                 <section className="w-full max-w-5xl mx-auto font-sans grid lg:grid-cols-2  sm:grid-cols-1 gap-3">
                     <div
-                        className="relative min-h-[180px] sm:min-h-[220px] rounded-[24px] overflow-hidden bg-cover bg-center bg-no-repeat flex items-center p-6 sm:p-10 text-white shadow-md bg-[linear-gradient(90deg,rgba(0,0,0,0.7)_0%,rgba(0,0,0,0.2)_100%),url('/kat-1.png')]">
+                        className="relative min-h-45 sm:min-h-55 rounded-3xl overflow-hidden bg-cover bg-center bg-no-repeat flex items-center p-6 sm:p-10 text-white shadow-md bg-[linear-gradient(90deg,rgba(0,0,0,0.7)_0%,rgba(0,0,0,0.2)_100%),url('/kat-1.png')]">
 
                         <div className="flex flex-col items-start gap-3 sm:gap-4 z-10">
                             <span className="text-sm sm:text-base font-medium opacity-90 tracking-wide">Fashion Wanita</span>
@@ -200,7 +200,7 @@ export default function HomePage() {
                     </div>
 
                     <div
-                        className="relative min-h-[180px] sm:min-h-[220px] rounded-[24px] overflow-hidden bg-cover bg-center bg-no-repeat flex items-center p-6 sm:p-10 text-white shadow-md bg-[linear-gradient(90deg,rgba(28,57,142,0.8)_0%,rgba(28,57,142,0.2)_100%),url('/kat2.png')]">
+                        className="relative min-h-45 sm:min-h-55 rounded-3xl overflow-hidden bg-cover bg-center bg-no-repeat flex items-center p-6 sm:p-10 text-white shadow-md bg-[linear-gradient(90deg,rgba(28,57,142,0.8)_0%,rgba(28,57,142,0.2)_100%),url('/kat2.png')]">
 
                         <div className="flex flex-col items-start gap-3 sm:gap-4 z-10">
                             <span className="text-sm sm:text-base font-medium opacity-90 tracking-wide">Elektronik Pilihan</span>
@@ -278,7 +278,7 @@ export default function HomePage() {
                                 <h3 className="text-base sm:text-lg font-bold text-gray-900 mb-2">
                                     Gratis Ongkir
                                 </h3>
-                                <p className="text-sm text-gray-500 max-w-[240px] leading-relaxed">
+                                <p className="text-sm text-gray-500 max-w-60 leading-relaxed">
                                     Pembelian di atas Rp 100.000 gratis ongkir ke seluruh Indonesia
                                 </p>
                             </div>
@@ -291,7 +291,7 @@ export default function HomePage() {
                                 <h3 className="text-base sm:text-lg font-bold text-gray-900 mb-2">
                                     Pembayaran Aman
                                 </h3>
-                                <p className="text-sm text-gray-500 max-w-[240px] leading-relaxed">
+                                <p className="text-sm text-gray-500 max-w-60 leading-relaxed">
                                     Data kamu terenkripsi dengan standar keamanan tertinggi
                                 </p>
                             </div>
@@ -304,7 +304,7 @@ export default function HomePage() {
                                 <h3 className="text-base sm:text-lg font-bold text-gray-900 mb-2">
                                     Retur Mudah
                                 </h3>
-                                <p className="text-sm text-gray-500 max-w-[240px] leading-relaxed">
+                                <p className="text-sm text-gray-500 max-w-60 leading-relaxed">
                                     Produk tidak sesuai? Kembalikan dalam 30 hari tanpa ribet
                                 </p>
                             </div>
@@ -317,7 +317,7 @@ export default function HomePage() {
                                 <h3 className="text-base sm:text-lg font-bold text-gray-900 mb-2">
                                     CS 24/7
                                 </h3>
-                                <p className="text-sm text-gray-500 max-w-[240px] leading-relaxed">
+                                <p className="text-sm text-gray-500 max-w-60 leading-relaxed">
                                     Tim kami siap membantu kamu kapan saja
                                 </p>
                             </div>
