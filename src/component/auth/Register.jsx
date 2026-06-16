@@ -9,7 +9,7 @@ export default function Register() {
 
                 <div className="w-full h-full md:h-auto md:max-h-[90vh] md:max-w-5xl bg-white md:rounded-2xl md:shadow-lg overflow-hidden flex flex-col md:flex-row">
                     <section
-                        className="relative flex-1 bg-gradient-to-br from-[#1447E6] to-[#312C85] p-8 lg:p-12 text-white hidden md:flex flex-col justify-between overflow-hidden">
+                        className="relative flex-1 bg-linear-to-br from-[#1447E6] to-[#312C85] p-8 lg:p-12 text-white hidden md:flex flex-col justify-between overflow-hidden">
                         <img src="/bg-auth-regis.jpg" alt="bg auth register"
                             className="absolute inset-0 w-full h-full object-cover opacity-20 z-10" />
 
@@ -22,7 +22,7 @@ export default function Register() {
                                     </div>
                                 </Link>
 
-                                <div className="my-auto flex flex-col gap-5 max-w-[400px]">
+                                <div className="my-auto flex flex-col gap-5 max-w-100">
                                     <h1 className="font-bold text-2xl lg:text-3xl leading-tight">Bergabung dengan 500.000+ pelanggan puas
                                     </h1>
                                     <ul className="list-none grid gap-3">
@@ -93,7 +93,7 @@ export default function Register() {
                             </div>
 
                             <div className="text-center relative my-1">
-                                <div className="absolute top-1/2 left-0 w-full h-[1px] bg-[#E5E5E5] z-10"></div>
+                                <div className="absolute top-1/2 left-0 w-full h-px bg-[#E5E5E5] z-10"></div>
                                 <span className="relative z-20 bg-[#FAFAFA] px-3 text-xs text-[#6B7280]">atau daftar dengan email</span>
                             </div>
 
