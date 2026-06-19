@@ -3,7 +3,7 @@ import { Link, useParams } from "react-router";
 
 import Header from "../Header";
 import Footer from "../Footer";
-import {CartItem, formatRupiah} from "../CartItem";
+import { CartItem, formatRupiah } from "../CartItem";
 import { makeProducts } from "../ProdutsContext";
 
 import {
@@ -19,7 +19,7 @@ import {
 
 export default function DetailPage() {
   const { id } = useParams();
-  const { products, loading, error } = makeProducts();
+  const { products, loading, error, kategoriProducts } = makeProducts();
 
   const [quantity, setQuantity] = React.useState(1);
   const [selectedImage, setSelectedImage] = React.useState("");
@@ -27,6 +27,7 @@ export default function DetailPage() {
   const productId = Number(id);
 
   const product = products.find((item) => item.id === productId);
+
 
   React.useEffect(() => {
     if (product?.image?.[0]) {
@@ -79,11 +80,14 @@ export default function DetailPage() {
     badgeContent,
     cartJenisContent,
     cartNameContent,
+    kategori,
     rateContent,
     reviewContent,
     price,
     image,
   } = product;
+
+  const kategoriName = kategoriProducts.find((item) => item.id === kategori)
 
   const isDiscount = typeof badgeContent === "number";
 
@@ -140,10 +144,10 @@ export default function DetailPage() {
 
             <li>
               <Link
-                to="/main/all-products"
+                to={`/main/all-products/${kategoriName.title.toLowerCase()}`}
                 className="hover:text-blue-600 transition-colors"
               >
-                Toko
+                {kategoriName.title}
               </Link>
             </li>
 
@@ -187,7 +191,7 @@ export default function DetailPage() {
 
               <img
                 id="main-product-image"
-                src={selectedImage}
+                src={selectedImage || null}
                 alt={cartNameContent}
                 className="w-full h-full object-contain transition-all duration-300"
               />
@@ -200,8 +204,8 @@ export default function DetailPage() {
                   type="button"
                   onClick={() => setSelectedImage(img)}
                   className={`w-20 h-20 bg-white rounded-xl overflow-hidden p-1 cursor-pointer transition-all ${selectedImage === img
-                      ? "border-2 border-blue-600"
-                      : "border border-gray-200 hover:border-gray-400"
+                    ? "border-2 border-blue-600"
+                    : "border border-gray-200 hover:border-gray-400"
                     }`}
                 >
                   <img
