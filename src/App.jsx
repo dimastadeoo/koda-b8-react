@@ -51,6 +51,10 @@ const router = createBrowserRouter([
     element: <BrowseProducts />,
   },
   {
+    path: "/main/all-products/:category",
+    element: <BrowseProducts />,
+  },
+  {
     path: "/profile/address",
     element: <AlamatSaya />,
   },
