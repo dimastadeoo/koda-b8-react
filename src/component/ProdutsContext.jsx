@@ -6,6 +6,51 @@ export function ProductProvider({ children }) {
   const [loading, setLoading] = React.useState(true);
   const [error, setError] = React.useState(null);
 
+  const kategoriProducts = [
+    {
+      id: 1,
+      image: "/src/img/katPro-1.png",
+      title: "Elektronik",
+      qty: 7,
+      url: "#"
+    },
+    {
+      id: 2,
+      image: "/src/img/katPro-2.png",
+      title: "Fashion",
+      qty: 5,
+      url: "#"
+    },
+    {
+      id: 3,
+      image: "/src/img/katPro-3.png",
+      title: "Rumah & Produk",
+      qty: 3,
+      url: "#"
+    },
+    {
+      id: 4,
+      image: "/src/img/katPro-4.png",
+      title: "Kecantikan",
+      qty: 2,
+      url: "#"
+    },
+    {
+      id: 5,
+      image: "/src/img/katPro-5.png",
+      title: "Olahraga",
+      qty: 3,
+      url: "#"
+    },
+    {
+      id: 6,
+      image: "/src/img/katPro-6.png",
+      title: "Buku & Alat Tulis",
+      qty: 2,
+      url: "#"
+    }
+  ]
+
   React.useEffect(() => {
     async function fetchProducts() {
       try {
@@ -41,6 +86,7 @@ export function ProductProvider({ children }) {
         products,
         loading,
         error,
+        kategoriProducts,
         getProductsByIds,
         getProductById,
       }}
