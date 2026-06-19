@@ -1,4 +1,4 @@
-import { createBrowserRouter, RouterProvider } from 'react-router';
+import { createBrowserRouter, Navigate, RouterProvider } from 'react-router';
 
 // Import halaman dari folder components
 import Wishlist from './component/profile/Wishlist';
@@ -24,6 +24,7 @@ import Step2 from './component/checkout/Step2';
 import Step3 from './component/checkout/Step3';
 import Success from './component/checkout/StepSuccess';
 import { ProductProvider } from './component/ProdutsContext';
+import AuthLayout from './component/auth/AuthLayout';
 
 
 
@@ -71,16 +72,26 @@ const router = createBrowserRouter([
     element: <Wishlist />,
   },
   {
-    path: "/auth/login",
-    element: <Login />,
-  },
-  {
-    path: "/auth/register",
-    element: <Register />,
-  },
-  {
-    path: "/auth/forgot-password",
-    element: <ForgotPassword />,
+    path: "/auth",
+    element: <AuthLayout />,
+    children: [
+      {
+        index: true,
+        element: <Navigate to="login" replace />,
+      },
+      {
+        path: "login",
+        element: <Login />,
+      },
+      {
+        path: "register",
+        element: <Register />,
+      },
+      {
+        path: "forgot-password",
+        element: <ForgotPassword />,
+      },
+    ],
   },
   {
     path: "/admin/list-products",
