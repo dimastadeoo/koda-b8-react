@@ -23,6 +23,7 @@ import Step1 from './component/checkout/Step1';
 import Step2 from './component/checkout/Step2';
 import Step3 from './component/checkout/Step3';
 import Success from './component/checkout/StepSuccess';
+import { ProductProvider } from './component/ProdutsContext';
 
 
 
@@ -38,7 +39,7 @@ const router = createBrowserRouter([
     element: <HomePage />,
   },
   {
-    path: "/main/detail-product", 
+    path: "/main/product/:id",
     element: <DetailPage />,
   },
   {
@@ -54,7 +55,7 @@ const router = createBrowserRouter([
     element: <AlamatSaya />,
   },
   {
-    path: "/profile/edit-profile", 
+    path: "/profile/edit-profile",
     element: <EditProfile />,
   },
   {
@@ -70,7 +71,7 @@ const router = createBrowserRouter([
     element: <Login />,
   },
   {
-    path: "/auth/register", 
+    path: "/auth/register",
     element: <Register />,
   },
   {
@@ -114,7 +115,11 @@ const router = createBrowserRouter([
 
 function App() {
   // Jalankan konfigurasi router ke dalam aplikasi React
-  return <RouterProvider router={router} />;
+  return (
+    <ProductProvider>
+      <RouterProvider router={router} />
+    </ProductProvider>
+  )
 }
 
 export default App;
