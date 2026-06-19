@@ -1,0 +1,269 @@
+ [
+  {
+    "id": 1,
+    "url": "#",
+    "badgeContent": 31,
+    "cartJenisContent": "SoundWave",
+    "kategori": 1,
+    "cartNameContent": "Headphone Wireless Premium",
+    "rateContent": 4.8,
+    "reviewContent": 512,
+    "price": 650000,
+    "image": [
+      "/src/img/item-1.png",
+      "/src/img/item-1a.png"
+    ]
+  },
+  {
+    "id": 2,
+    "url": "#",
+    "badgeContent": 16,
+    "cartJenisContent": "PhoneX",
+    "kategori": 1,
+    "cartNameContent": "Smartphone 5G Ultra",
+    "rateContent": 4.6,
+    "reviewContent": 890,
+    "price": 5000000,
+    "image": [
+      "/src/img/item-2.png"
+    ]
+  },
+  {
+    "id": 3,
+    "url": "#",
+    "badgeContent": 20,
+    "cartJenisContent": "WristTech",
+    "kategori": 1,
+    "cartNameContent": "Smartwatch Series 5",
+    "rateContent": 4.4,
+    "reviewContent": 324,
+    "price": 3500000,
+    "image": [
+      "/src/img/item-3.png"
+    ]
+  },
+  {
+    "id": 4,
+    "url": "#",
+    "badgeContent": 27,
+    "cartJenisContent": "SportPro",
+    "kategori": 5,
+    "cartNameContent": "Sneakers Sport Runfast",
+    "rateContent": 4.6,
+    "reviewContent": 445,
+    "price": 750000,
+    "image": [
+      "/src/img/item-4.png"
+    ]
+  },
+  {
+    "id": 5,
+    "url": "#",
+    "badgeContent": "Baru",
+    "cartJenisContent": "UrbanBag",
+    "kategori": 3,
+    "cartNameContent": "Tas Ransel Laptop Waterproof",
+    "rateContent": 4.5,
+    "reviewContent": 234,
+    "price": 350000,
+    "image": [
+      "/src/img/item-5.png"
+    ]
+  },
+  {
+    "id": 6,
+    "url": "#",
+    "badgeContent": "Baru",
+    "cartJenisContent": "BlendPro",
+    "kategori": 1,
+    "cartNameContent": "Blender Portable Mini",
+    "rateContent": 4.2,
+    "reviewContent": 567,
+    "price": 189000,
+    "image": [
+      "/src/img/item-6.png"
+    ]
+  },
+  {
+    "id": 7,
+    "url": "#",
+    "badgeContent": 20,
+    "cartJenisContent": "TabTech",
+    "kategori": 1,
+    "cartNameContent": "Tablet 10.5\" WiFi + 4G",
+    "rateContent": 4.5,
+    "reviewContent": 345,
+    "price": 4000000,
+    "image": [
+      "/src/img/item-7.png"
+    ]
+  },
+  {
+    "id": 8,
+    "url": "#",
+    "badgeContent": 25,
+    "cartJenisContent": "FashionID",
+    "kategori": 2,
+    "cartNameContent": "Dress Floral Midi",
+    "rateContent": 4.5,
+    "reviewContent": 312,
+    "price": 395000,
+    "image": [
+      "/src/img/item-8.png"
+    ]
+  },
+  {
+    "id": 9,
+    "url": "#",
+    "badgeContent": "Baru",
+    "cartJenisContent": "AromaWell",
+    "kategori": 3,
+    "cartNameContent": "Minyak Esensial Lavender Set",
+    "rateContent": 4.8,
+    "reviewContent": 456,
+    "price": 145000,
+    "image": [
+      "/src/img/item-9.png"
+    ]
+  },
+  {
+    "id": 10,
+    "url": "#",
+    "badgeContent": 19,
+    "cartJenisContent": "Gramedia",
+    "kategori": 6,
+    "cartNameContent": "Buku \"Atomic Habits",
+    "rateContent": 4.9,
+    "reviewContent": 1245,
+    "price": 110000,
+    "image": [
+      "/src/img/item-10.png"
+    ]
+  },
+  {
+    "id": 11,
+    "url": "#",
+    "badgeContent": 26,
+    "cartJenisContent": "GlowLab",
+    "kategori": 4,
+    "cartNameContent": "Serum Vitamin C Brightening",
+    "rateContent": 4.6,
+    "reviewContent": 892,
+    "price": 250000,
+    "image": [
+      "/src/img/item-11.png"
+    ]
+  },
+  {
+    "id": 12,
+    "url": "#",
+    "badgeContent": "",
+    "cartJenisContent": "FashionID",
+    "kategori": 2,
+    "cartNameContent": "Kaos Polos Premium Cotton",
+    "rateContent": 4.3,
+    "reviewContent": 678,
+    "price": 125000,
+    "image": [
+      "/src/img/item-12.png"
+    ]
+  },
+  {
+    "id": 13,
+    "url": "#",
+    "badgeContent": "Baru",
+    "cartJenisContent": "FitLife",
+    "kategori": 5,
+    "cartNameContent": "Matras Yoga Premium",
+    "rateContent": 4.5,
+    "reviewContent": 198,
+    "price": 280000,
+    "image": [
+      "/src/img/item-13.png"
+    ]
+  },
+  {
+    "id": 14,
+    "url": "#",
+    "badgeContent": "Baru",
+    "cartJenisContent": "AromaWell",
+    "kategori": 4,
+    "cartNameContent": "Minyak Esensial Lavender Set",
+    "rateContent": 4.8,
+    "reviewContent": 456,
+    "price": 145000,
+    "image": [
+      "/src/img/item-14.png"
+    ]
+  },
+  {
+    "id": 15,
+    "url": "#",
+    "badgeContent": 29,
+    "cartJenisContent": "SoundWave",
+    "kategori": 1,
+    "cartNameContent": "Speaker Bluetooth Portable",
+    "rateContent": 4.4,
+    "reviewContent": 389,
+    "price": 450000,
+    "image": [
+      "/src/img/item-15.png"
+    ]
+  },
+  {
+    "id": 16,
+    "url": "#",
+    "badgeContent": 20,
+    "cartJenisContent": "SmashKing",
+    "kategori": 5,
+    "cartNameContent": "Raket Badminton Carbon Pro",
+    "rateContent": 4.6,
+    "reviewContent": 143,
+    "price": 850000,
+    "image": [
+      "/src/img/item-16.png"
+    ]
+  },
+  {
+    "id": 17,
+    "url": "#",
+    "badgeContent": "Baru",
+    "cartJenisContent": "HomeDeco",
+    "kategori": 3,
+    "cartNameContent": "Set Peralatan Makan Keramik",
+    "rateContent": 4.7,
+    "reviewContent": 123,
+    "price": 450000,
+    "image": [
+      "/src/img/item-17.png"
+    ]
+  },
+  {
+    "id": 18,
+    "url": "#",
+    "badgeContent": "Baru",
+    "cartJenisContent": "TrailRunner",
+    "kategori": 5,
+    "cartNameContent": "Sepatu Lari Trail Ultra",
+    "rateContent": 4.7,
+    "reviewContent": 267,
+    "price": 780000,
+    "image": [
+      "/src/img/item-18.png"
+    ]
+  },
+  {
+    "id": 19,
+    "url": "#",
+    "badgeContent": 22,
+    "cartJenisContent": "BrewMaster",
+    "kategori": 3,
+    "cartNameContent": "Coffee Maker Otomatis",
+    "rateContent": 4.7,
+    "reviewContent": 123,
+    "price": 450000,
+    "image": [
+      "/src/img/item-19.png"
+    ]
+  }
+]
