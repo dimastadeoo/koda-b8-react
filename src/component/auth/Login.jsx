@@ -1,12 +1,80 @@
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
+import React from "react";
 import {
   FaEnvelope,
   FaLock,
   FaEye,
   FaSignInAlt,
+  FaEyeSlash,
 } from "react-icons/fa";
+import { makeModal } from "../ModalContext";
+import { makeAuth } from "../AuthContext";
 
 export default function Login() {
+  const navigate = useNavigate();
+
+  const { loginUser } = makeAuth();
+  const { showAlert, showConfirm } = makeModal();
+
+  const [showPassword, setShowPassword] = React.useState(false);
+  const [isLoading, setIsLoading] = React.useState(false);
+
+  const isValidEmail = (email) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+    return emailRegex.test(email);
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    if (isLoading) return;
+
+    const formElement = e.currentTarget;
+    const form = new FormData(formElement);
+
+    const data = Object.fromEntries(form.entries())
+    const {email, pass} = data
+
+    if (!isValidEmail(email)) {
+      await showAlert({
+        title: "Email tidak valid",
+        message: "Masukkan email dengan format yang benar, contoh: nama@email.com",
+      });
+      return;
+    }
+
+    const confirmed = await showConfirm({
+      title: "Masuk ke akun?",
+      message: `Kamu akan login menggunakan email ${email}. Lanjutkan?`,
+      confirmText: "Ya, Masuk",
+      cancelText: "Batal",
+    });
+
+    if (!confirmed) return;
+
+    setIsLoading(true);
+
+    try {
+      await new Promise((resolve) => setTimeout(resolve, 700));
+
+      const result = loginUser({
+        email: email,
+        password: pass,
+      });
+
+      await showAlert({
+        title: result.success ? "Berhasil" : "Gagal Login",
+        message: result.message,
+      });
+
+      if (result.success) {
+        formElement.reset();
+        navigate("/main");
+      }
+    } finally {
+      setIsLoading(false);
+    }
+  };
   return (
     <>
       <div className="grid gap-1">
@@ -48,7 +116,7 @@ export default function Login() {
         </span>
       </div>
 
-      <form className="grid gap-4" id="formLogin">
+      <form onSubmit={handleSubmit} className="grid gap-4" id="formLogin">
         <div className="grid gap-1">
           <label className="text-xs font-medium text-[#111827]" htmlFor="email">
             Email
@@ -90,7 +158,7 @@ export default function Login() {
             </span>
 
             <input
-              type="password"
+              type={showPassword ? "text" : "password"}
               placeholder="Masukkan kata sandi"
               required
               className="w-full py-2.5 pl-10 pr-10 bg-[#F1F1F3] border border-[#E5E5E5] rounded-lg text-sm outline-none transition-colors focus:border-[#1877F2] focus:bg-white"
@@ -98,9 +166,18 @@ export default function Login() {
               name="pass"
             />
 
-            <span className="absolute right-3.5 cursor-pointer text-[#8C8C8C]">
-              <FaEye className="w-3.5 h-3.5" />
-            </span>
+            <button
+              type="button"
+              onClick={() => setShowPassword((prev) => !prev)}
+              className="absolute right-3.5 cursor-pointer text-[#8C8C8C] hover:text-[#111827] transition-colors"
+              aria-label={showPassword ? "Sembunyikan password" : "Tampilkan password"}
+            >
+              {showPassword ? (
+                <FaEyeSlash className="w-3.5 h-3.5" />
+              ) : (
+                <FaEye className="w-3.5 h-3.5" />
+              )}
+            </button>
           </div>
         </div>
 
@@ -121,10 +198,23 @@ export default function Login() {
 
         <button
           type="submit"
-          className="w-full bg-[#1A73E8] hover:bg-[#1565C0] text-white border-none rounded-lg py-3 text-sm font-semibold cursor-pointer flex justify-center items-center gap-2 transition-colors mt-2 shadow-sm"
+          disabled={isLoading}
+          className={`w-full text-white border-none rounded-lg py-3 text-sm font-semibold flex justify-center items-center gap-2 transition-colors mt-2 shadow-sm ${isLoading
+            ? "bg-blue-300 cursor-not-allowed"
+            : "bg-[#1A73E8] hover:bg-[#1565C0] cursor-pointer"
+            }`}
         >
-          <FaSignInAlt className="w-4 h-4" />
-          Masuk
+          {isLoading ? (
+            <>
+              <span className="w-4 h-4 border-2 border-white/40 border-t-white rounded-full animate-spin"></span>
+              Memproses...
+            </>
+          ) : (
+            <>
+              <FaSignInAlt className="w-4 h-4" />
+              Masuk
+            </>
+          )}
         </button>
       </form>
 
