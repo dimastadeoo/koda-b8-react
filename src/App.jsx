@@ -24,7 +24,9 @@ import Step2 from './component/checkout/Step2';
 import Step3 from './component/checkout/Step3';
 import Success from './component/checkout/StepSuccess';
 import { ProductProvider } from './component/ProdutsContext';
+import { ModalProvider } from './component/ModalContext';
 import AuthLayout from './component/auth/AuthLayout';
+import { AuthProvider } from './component/AuthContext';
 
 
 
@@ -131,9 +133,13 @@ const router = createBrowserRouter([
 function App() {
   // Jalankan konfigurasi router ke dalam aplikasi React
   return (
-    <ProductProvider>
-      <RouterProvider router={router} />
-    </ProductProvider>
+    <ModalProvider>
+      <AuthProvider>
+        <ProductProvider>
+          <RouterProvider router={router} />
+        </ProductProvider>
+      </AuthProvider>
+    </ModalProvider>
   )
 }
 
