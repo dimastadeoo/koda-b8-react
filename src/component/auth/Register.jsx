@@ -1,13 +1,93 @@
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
+import React from "react";
+
 import {
   FaEnvelope,
   FaLock,
   FaUser,
   FaEye,
   FaArrowRight,
+  FaEyeSlash,
 } from "react-icons/fa";
+import { makeModal } from "../ModalContext";
+import { makeAuth } from "../AuthContext";
 
 export default function Register() {
+  const navigate = useNavigate();
+  const { registerUser } = makeAuth();
+  const { showAlert, showConfirm } = makeModal();
+  const [showPassword, setShowPassword] = React.useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = React.useState(false);
+  const [isLoading, setIsLoading] = React.useState(false);
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
+    const formElement = event.currentTarget
+    const form = new FormData(formElement);
+    const data = Object.fromEntries(form.entries())
+
+    const { name, email, pass, confirmPass } = data
+
+    const isValidEmail = (email) => {
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+      return emailRegex.test(email);
+    };
+
+    if (!isValidEmail(email)) {
+      await showAlert({
+        title: "Email tidak valid",
+        message: "Masukkan email dengan format yang benar, contoh: nama@email.com",
+      });
+      return;
+    }
+
+    if (pass.length < 6) {
+      await showAlert({
+        title: "Password terlalu pendek",
+        message: "Kata sandi minimal harus 6 karakter.",
+      });
+      return;
+    }
+
+    if (pass !== confirmPass) {
+      await showAlert({
+        title: "Password tidak sama",
+        message: "Kata sandi dan konfirmasi kata sandi harus sama.",
+      });
+      return;
+    }
+
+    const isConfirmed = await showConfirm({
+      title: "Buat akun baru?",
+      message: `Akun dengan email ${email} akan dibuat. Lanjutkan registrasi?`,
+      confirmText: "Ya, Daftar",
+      cancelText: "Batal",
+    });
+
+    if (!isConfirmed) return;
+
+    try {
+      const result = registerUser({
+        name: name,
+        email: email,
+        password: pass,
+      });
+
+      await showAlert({
+        title: result.success ? "Berhasil" : "Gagal",
+        message: result.message,
+      });
+
+      if (result.success) {
+        formElement.reset();
+        navigate("/auth/login");
+      }
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   return (
     <>
       <div className="grid gap-1">
@@ -49,7 +129,7 @@ export default function Register() {
         </span>
       </div>
 
-      <form className="grid gap-3.5" id="formReg">
+      <form onSubmit={handleSubmit} className="grid gap-3.5" id="formReg">
         <div className="grid gap-1">
           <label className="text-xs font-medium text-[#111827]" htmlFor="name">
             Nama Lengkap
@@ -103,7 +183,7 @@ export default function Register() {
             </span>
 
             <input
-              type="password"
+              type={showPassword ? "text" : "password"}
               placeholder="Minimal 6 karakter"
               required
               className="w-full py-2.5 pl-10 pr-10 bg-[#F1F1F3] border border-[#E5E5E5] rounded-lg text-sm outline-none transition-colors focus:border-[#1877F2] focus:bg-white"
@@ -111,9 +191,16 @@ export default function Register() {
               name="pass"
             />
 
-            <span className="absolute right-3.5 cursor-pointer text-[#8C8C8C]">
-              <FaEye className="w-3.5 h-3.5" />
-            </span>
+            <button type="button"
+              onClick={() => setShowPassword((prev) => !prev)}
+              className="absolute right-3.5 cursor-pointer text-[#8C8C8C]">
+
+              {showPassword ? (
+                <FaEyeSlash className="w-3.5 h-3.5" />
+              ) : (
+                <FaEye className="w-3.5 h-3.5" />
+              )}
+            </button>
           </div>
         </div>
 
@@ -131,7 +218,7 @@ export default function Register() {
             </span>
 
             <input
-              type="password"
+              type={showConfirmPassword ? "text" : "password"}
               placeholder="Ulangi kata sandi"
               required
               className="w-full py-2.5 pl-10 pr-10 bg-[#F1F1F3] border border-[#E5E5E5] rounded-lg text-sm outline-none transition-colors focus:border-[#1877F2] focus:bg-white"
@@ -139,9 +226,16 @@ export default function Register() {
               name="confirmPass"
             />
 
-            <span className="absolute right-3.5 cursor-pointer text-[#8C8C8C]">
-              <FaEye className="w-3.5 h-3.5" />
-            </span>
+            <button type="button"
+              onClick={() => setShowConfirmPassword((prev) => !prev)}
+              className="absolute right-3.5 cursor-pointer text-[#8C8C8C]">
+
+              {showConfirmPassword ? (
+                <FaEyeSlash className="w-3.5 h-3.5" />
+              ) : (
+                <FaEye className="w-3.5 h-3.5" />
+              )}
+            </button>
           </div>
         </div>
 
@@ -149,6 +243,7 @@ export default function Register() {
           <input
             type="checkbox"
             id="terms"
+            name="terms"
             className="w-4 h-4 rounded border-gray-300 mt-0.5 cursor-pointer shrink-0"
             required
           />
@@ -171,10 +266,23 @@ export default function Register() {
 
         <button
           type="submit"
-          className="w-full bg-[#F97316] hover:bg-[#EA580C] text-white border-none rounded-lg py-3 text-sm font-semibold cursor-pointer flex justify-center items-center gap-2 transition-colors mt-2 shadow-sm"
+          disabled={isLoading}
+          className={`w-full text-white border-none rounded-lg py-2.5 text-xs font-semibold flex justify-center items-center gap-2 transition-colors mt-1 shadow-sm ${isLoading
+              ? "bg-orange-300 cursor-not-allowed"
+              : "bg-[#F97316] hover:bg-[#EA580C] cursor-pointer"
+            }`}
         >
-          Daftar Sekarang
-          <FaArrowRight className="w-4 h-4" />
+          {isLoading ? (
+            <>
+              <span className="w-3.5 h-3.5 border-2 border-white/40 border-t-white rounded-full animate-spin"></span>
+              Memproses...
+            </>
+          ) : (
+            <>
+              Daftar Sekarang
+              <FaArrowRight className="w-3.5 h-3.5" />
+            </>
+          )}
         </button>
       </form>
 
