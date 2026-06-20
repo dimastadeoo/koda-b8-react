@@ -19,10 +19,6 @@ import ProductsList from './component/admin/ProductsList';
 import OrderList from './component/admin/OrderList';
 import Dashboard from './component/admin/Dashboard';
 import CustomerList from './component/admin/CustomerList';
-import Step1 from './component/checkout/Step1';
-import Step2 from './component/checkout/Step2';
-import Step3 from './component/checkout/Step3';
-import Success from './component/checkout/StepSuccess';
 import { ProductProvider } from './component/ProdutsContext';
 import { ModalProvider } from './component/ModalContext';
 import AuthLayout from './component/auth/AuthLayout';
@@ -30,6 +26,11 @@ import { AuthProvider } from './component/AuthContext';
 import { CartProvider } from './component/CartContext';
 import { ProfileProvider } from './component/ProfileContext';
 import ProfileLayout from './component/profile/ProfileLayout';
+import CheckoutLayout from './component/checkout/CheckoutLayout';
+import StepShipping from './component/checkout/StepShipping';
+import StepPayment from './component/checkout/StepPayment';
+import StepConfirm from './component/checkout/StepConfirm';
+import StepSuccess from './component/checkout/StepSuccess';
 
 
 
@@ -125,21 +126,31 @@ const router = createBrowserRouter([
     element: <CustomerList />,
   },
   {
-    path: "/checkout/step-1",
-    element: <Step1 />,
-  },
-  {
-    path: "/checkout/step-2",
-    element: <Step2 />,
-  },
-  {
-    path: "/checkout/step-3",
-    element: <Step3 />,
-  },
-  {
-    path: "/checkout/order-success",
-    element: <Success />,
-  },
+    path: "/main/checkout/:checkoutId",
+    element: <CheckoutLayout />,
+    children: [
+      {
+        index: true,
+        element: <Navigate to="shipping" replace />,
+      },
+      {
+        path: "shipping",
+        element: <StepShipping />,
+      },
+      {
+        path: "payment",
+        element: <StepPayment />,
+      },
+      {
+        path: "confirm",
+        element: <StepConfirm />,
+      },
+      {
+        path: "success",
+        element: <StepSuccess />,
+      },
+    ],
+  }
 
 ]);
 
