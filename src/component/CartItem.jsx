@@ -1,6 +1,6 @@
-import { useState } from "react";
 import { useNavigate } from "react-router";
 import { FaHeart, FaRegHeart, FaStar } from "react-icons/fa";
+import { makeProfile } from "./ProfileContext";
 
 const formatRupiah = (number) => {
   return new Intl.NumberFormat("id-ID", {
@@ -12,10 +12,9 @@ const formatRupiah = (number) => {
 
 function CartItem({ item }) {
   const navigate = useNavigate();
-  const [isWishlisted, setIsWishlisted] = useState(false);
+  const { toggleWishlist, isWishlisted } = makeProfile();
 
   if (!item) return null;
-
   const {
     id,
     badgeContent,
@@ -26,10 +25,9 @@ function CartItem({ item }) {
     price,
     image,
   } = item;
-
-
+  
+  const liked = isWishlisted(id);
   const isDiscount = typeof badgeContent === "number";
-
   const finalPrice = isDiscount
     ? price - (price * badgeContent) / 100
     : price;
@@ -40,7 +38,7 @@ function CartItem({ item }) {
 
   const handleWishlistClick = (event) => {
     event.stopPropagation();
-    setIsWishlisted((prev) => !prev);
+    toggleWishlist(item);
   };
 
   const handleKeyDown = (event) => {
@@ -70,9 +68,8 @@ function CartItem({ item }) {
               badgeContent !== null &&
               badgeContent !== undefined && (
                 <span
-                  className={`absolute top-2 left-2 ${
-                    isDiscount ? "bg-red-500" : "bg-blue-600"
-                  } text-white text-xs font-bold px-2 py-1 rounded-full`}
+                  className={`absolute top-2 left-2 ${isDiscount ? "bg-red-500" : "bg-blue-600"
+                    } text-white text-xs font-bold px-2 py-1 rounded-full`}
                 >
                   {isDiscount ? `-${badgeContent}%` : badgeContent}
                 </span>
@@ -85,7 +82,7 @@ function CartItem({ item }) {
             aria-label="Wishlist"
             className="absolute top-2 right-2 w-8 h-8 rounded-full bg-white/80 hover:bg-white backdrop-blur-sm flex items-center justify-center shadow-sm cursor-pointer z-10 transition-all duration-300"
           >
-            {isWishlisted ? (
+            {liked ? (
               <FaHeart className="text-red-500 text-lg transition-colors duration-300" />
             ) : (
               <FaRegHeart className="text-red-800 text-lg transition-colors duration-300 hover:text-red-500" />
@@ -139,4 +136,4 @@ function CartItem({ item }) {
 }
 
 // eslint-disable-next-line react-refresh/only-export-components
-export {CartItem, formatRupiah}
+export { CartItem, formatRupiah }
