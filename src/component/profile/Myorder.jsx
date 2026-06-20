@@ -7,16 +7,22 @@ import {
 } from "react-icons/fa";
 
 import { makeProfile } from "../ProfileContext";
+import { useNavigate } from "react-router";
+import { formatRupiah } from "../CartItem";
 
 export default function Myorder() {
   const { orders } = makeProfile();
+  const navigate = useNavigate();
 
-  const formatRupiah = (number) =>
-    new Intl.NumberFormat("id-ID", {
-      style: "currency",
-      currency: "IDR",
-      minimumFractionDigits: 0,
-    }).format(number || 0);
+  const handleContinueCheckout = (order) => {
+    const step = order.checkoutStep || "shipping";
+
+    navigate(`/main/checkout/${order.id}/${step}`, {
+      state: {
+        checkout: order,
+      },
+    });
+  };
 
   const getItemPrice = (item) => {
     const isDiscount = typeof item.badgeContent === "number";
@@ -41,6 +47,10 @@ export default function Myorder() {
 
     if (status === "Dikirim") {
       return "bg-blue-50 text-[#1A73E8]";
+    }
+
+    if (status === "Belum Selesai") {
+      return "bg-amber-50 text-amber-700 ring-1 ring-amber-600/20";
     }
 
     return "bg-gray-100 text-[#6B7280]";
@@ -124,27 +134,39 @@ export default function Myorder() {
               </p>
 
               <div className="flex flex-wrap gap-2">
-                <button
-                  type="button"
-                  className="flex items-center justify-center rounded-lg border border-[#1A73E8] px-3 py-1.5 text-xs font-normal text-[#1A73E8]"
-                >
-                  Lacak
-                </button>
+                {order.status === "Belum Selesai" ? (
+                  <button
+                    type="button"
+                    onClick={() => handleContinueCheckout(order)}
+                    className="cursor-pointer flex items-center justify-center rounded-lg border border-[#1A73E8] px-3 py-1.5 text-xs font-medium text-[#1A73E8]"
+                  >
+                    Lanjutkan Checkout
+                  </button>
+                ) : (
+                  <>
+                    <button
+                      type="button"
+                      className="flex items-center justify-center rounded-lg border border-[#1A73E8] px-3 py-1.5 text-xs font-normal text-[#1A73E8]"
+                    >
+                      Lacak
+                    </button>
 
-                <button
-                  type="button"
-                  className="flex items-center justify-center gap-1 rounded-lg border-none bg-[#F97316] px-3 py-1.5 text-xs font-medium text-white"
-                >
-                  <FaStar className="h-3.5 w-3.5" />
-                  Beri Ulasan
-                </button>
+                    <button
+                      type="button"
+                      className="flex items-center justify-center gap-1 rounded-lg border-none bg-[#F97316] px-3 py-1.5 text-xs font-medium text-white"
+                    >
+                      <FaStar className="h-3.5 w-3.5" />
+                      Beri Ulasan
+                    </button>
 
-                <button
-                  type="button"
-                  className="flex items-center justify-center rounded-lg border border-[#0000001A] px-3 py-1.5 text-xs font-medium text-[#6B7280]"
-                >
-                  Beli Lagi
-                </button>
+                    <button
+                      type="button"
+                      className="flex items-center justify-center rounded-lg border border-[#0000001A] px-3 py-1.5 text-xs font-medium text-[#6B7280]"
+                    >
+                      Beli Lagi
+                    </button>
+                  </>
+                )}
               </div>
             </div>
           </div>
