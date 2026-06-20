@@ -1,15 +1,18 @@
 import React from "react";
-import { Link, useParams } from "react-router";
+import { Link, useParams, useSearchParams } from "react-router";
 import { FaChevronRight, FaStar } from "react-icons/fa";
 
 import Header from "../Header";
 import Footer from "../Footer";
-import {CartItem, formatRupiah} from "../CartItem";
+import { CartItem, formatRupiah } from "../CartItem";
 import { makeProducts } from "../ProdutsContext";
 
 export default function BrowseProducts() {
+
   const { category } = useParams();
   const { products, loading, error, kategoriProducts } = makeProducts();
+  const [searchParams] = useSearchParams();
+  const q = searchParams.get("q")?.trim().toLowerCase() || "";
 
   const [maxPrice, setMaxPrice] = React.useState(20000000);
   const [selectedBrands, setSelectedBrands] = React.useState([]);
@@ -27,6 +30,20 @@ export default function BrowseProducts() {
     filteredProducts = filteredProducts.filter(
       (item) => item.kategori === kategoriSelected.id
     );
+  }
+  
+  if (q) {
+    filteredProducts = filteredProducts.filter((item) => {
+      const productName = item.cartNameContent?.toLowerCase() || "";
+      const brand = item.cartJenisContent?.toLowerCase() || "";
+      const productCategory = item.category?.toLowerCase() || "";
+
+      return (
+        productName.includes(q) ||
+        brand.includes(q) ||
+        productCategory.includes(q)
+      );
+    });
   }
 
   filteredProducts = filteredProducts.filter(
@@ -65,7 +82,7 @@ export default function BrowseProducts() {
     );
   };
 
-  
+
 
   if (loading) {
     return <p className="text-center py-10">Loading produk...</p>;
@@ -107,9 +124,9 @@ export default function BrowseProducts() {
             </li>
 
             {category && (
-              
+
               <>
-              
+
                 <li className="text-gray-400">
                   <FaChevronRight className="w-3.5 h-3.5" />
                 </li>
