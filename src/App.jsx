@@ -31,6 +31,7 @@ import StepShipping from './component/checkout/StepShipping';
 import StepPayment from './component/checkout/StepPayment';
 import StepConfirm from './component/checkout/StepConfirm';
 import StepSuccess from './component/checkout/StepSuccess';
+import ErrorPage from './component/ErorPage';
 
 
 
@@ -126,7 +127,7 @@ const router = createBrowserRouter([
     element: <CustomerList />,
   },
   {
-    path: "/main/checkout/:checkoutId",
+    path: "/checkout/:checkoutId",
     element: <CheckoutLayout />,
     children: [
       {
@@ -150,7 +151,11 @@ const router = createBrowserRouter([
         element: <StepSuccess />,
       },
     ],
-  }
+  },
+  {
+    path: "*",
+    element: <ErrorPage />,
+  },
 
 ]);
 
