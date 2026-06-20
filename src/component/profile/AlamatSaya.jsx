@@ -1,131 +1,264 @@
-import Header from "../Header"
-import Footer from "../Footer"
-import ProfileInfo from "../ProfileInfo"
-// import { Link } from "react-router"
-// import CartItem from "../CartItem"
+import { useState } from "react";
+import {
+  FaCheckCircle,
+  FaMapMarkerAlt,
+  FaPlus,
+  FaTrash,
+  FaTimes,
+} from "react-icons/fa";
 
-const urlW3 = "http://www.w3.org/2000/svg"
+import { makeProfile } from "../ProfileContext";
+import { makeModal } from "../ModalContext";
 
 export default function AlamatSaya() {
-    return (
-        <>
-            <header className="sticky top-0 z-50" id="header">
-                <Header />
-            </header>
+  const { addresses, addAddress, removeAddress, setPrimaryAddress } =
+    makeProfile();
 
-            <main className="mx-auto mb-16 flex w-full max-w-300 items-center justify-center">
-                <section className="flex gap-8 py-8">
-                    {/* LEFT PROFILE */}
-                    <div className="flex flex-col gap-4 pb-1">
-                        <ProfileInfo />
-                    </div>
+  const { showConfirm, showAlert } = makeModal();
 
-                    {/* RIGHT CONTENT */}
-                    <div className="grid min-w-125 auto-rows-max content-start gap-4">
-                        <div className="flex items-center justify-between">
-                            <h1 className="text-xl font-medium text-[#111827]">
-                                Alamat Saya
-                            </h1>
+  const [showForm, setShowForm] = useState(false);
 
-                            <button className="flex items-center justify-center gap-1 rounded-xl bg-[#1A73E8] px-4 py-2 text-sm font-normal text-white">
-                                <svg xmlns={urlW3} width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                                    <path d="M5 12h14" />
-                                    <path d="M12 5v14" />
-                                </svg>
-                                Tambah Alamat
-                            </button>
-                        </div>
+  const handleSubmit = async (event) => {
+    event.preventDefault();
 
-                        {/* ADDRESS CARD 1 */}
-                        <div className="grid w-full gap-3 rounded-2xl border border-[#0000001A] bg-white p-5">
-                            <div className="flex w-full items-center justify-between">
-                                <div className="flex items-center gap-2">
-                                    <h2 className="text-base font-semibold text-[#111827]">
-                                        Rumah (Utama)
-                                    </h2>
+    const form = new FormData(event.currentTarget);
+    const data = Object.fromEntries(form.entries());
 
-                                    <div className="flex items-center justify-center rounded-full bg-[#1A73E8] px-2 py-0.5 text-sm font-medium text-white">
-                                        Utama
-                                    </div>
-                                </div>
+    addAddress(data);
 
-                                <div className="flex items-center justify-center gap-2 text-[#6B7280]">
-                                    <svg className="cursor-pointer" xmlns={urlW3} width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                                        <path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" />
-                                        <path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z" />
-                                    </svg>
+    await showAlert({
+      title: "Berhasil",
+      message: "Alamat berhasil ditambahkan.",
+    });
 
-                                    <svg className="cursor-pointer" xmlns={urlW3} width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                                        <path d="M10 11v6" />
-                                        <path d="M14 11v6" />
-                                        <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6" />
-                                        <path d="M3 6h18" />
-                                        <path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
-                                    </svg>
-                                </div>
-                            </div>
+    event.currentTarget.reset();
+    setShowForm(false);
+  };
 
-                            <div className="grid gap-1">
-                                <p className="text-sm font-normal text-[#111827]">
-                                    Budi Santoso · 0812-3456-7890
-                                </p>
-                                <p className="text-xs font-normal text-[#6B7280]">
-                                    Jl. Kebon Jeruk No. 15, RT.003/RW.002
-                                </p>
-                                <p className="text-xs font-normal text-[#6B7280]">
-                                    Jakarta Barat, DKI Jakarta 11530
-                                </p>
-                            </div>
-                        </div>
+  const handleRemove = async (addressId) => {
+    const confirmed = await showConfirm({
+      title: "Hapus alamat?",
+      message: "Alamat ini akan dihapus dari akun kamu.",
+      confirmText: "Ya, Hapus",
+      cancelText: "Batal",
+    });
 
-                        {/* ADDRESS CARD 2 */}
-                        <div className="grid w-full gap-3 rounded-2xl border border-[#0000001A] bg-white p-5">
-                            <div className="flex w-full items-center justify-between">
-                                <div className="flex items-center gap-2">
-                                    <h2 className="text-base font-semibold text-[#111827]">
-                                        Kantor
-                                    </h2>
-                                </div>
+    if (!confirmed) return;
 
-                                <div className="flex items-center justify-center gap-2 text-[#6B7280]">
-                                    <svg className="cursor-pointer" xmlns={urlW3} width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                                        <path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" />
-                                        <path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z" />
-                                    </svg>
+    removeAddress(addressId);
 
-                                    <svg className="cursor-pointer" xmlns={urlW3} width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                                        <path d="M10 11v6" />
-                                        <path d="M14 11v6" />
-                                        <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6" />
-                                        <path d="M3 6h18" />
-                                        <path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
-                                    </svg>
-                                </div>
-                            </div>
+    await showAlert({
+      title: "Berhasil",
+      message: "Alamat berhasil dihapus.",
+    });
+  };
 
-                            <div className="grid gap-1">
-                                <p className="text-sm font-normal text-[#111827]">
-                                    Budi Santoso · 0812-3456-7890
-                                </p>
-                                <p className="text-xs font-normal text-[#6B7280]">
-                                    Jl. Sudirman Kav. 52-53
-                                </p>
-                                <p className="text-xs font-normal text-[#6B7280]">
-                                    Jakarta Selatan, DKI Jakarta 12190
-                                </p>
-                            </div>
+  const handleSetPrimary = async (addressId) => {
+    setPrimaryAddress(addressId);
 
-                            <a href="#" className="text-xs font-normal text-[#1A73E8]">
-                                Jadikan Alamat Utama
-                            </a>
-                        </div>
-                    </div>
-                </section>
-            </main>
+    await showAlert({
+      title: "Berhasil",
+      message: "Alamat utama berhasil diperbarui.",
+    });
+  };
 
-            <footer id="footer">
-                <Footer />
-            </footer>
-        </>
-    )
+  return (
+    <div className="grid w-full auto-rows-max content-start gap-4">
+      <div className="flex items-center justify-between">
+        <h1 className="text-xl font-medium text-[#111827]">Alamat Saya</h1>
+
+        <button
+          type="button"
+          onClick={() => setShowForm((prev) => !prev)}
+          className="flex items-center justify-center gap-1 rounded-xl bg-[#1A73E8] px-4 py-2 text-sm font-normal text-white transition-colors hover:bg-[#155FC0]"
+        >
+          {showForm ? (
+            <>
+              <FaTimes className="h-3.5 w-3.5" />
+              Tutup
+            </>
+          ) : (
+            <>
+              <FaPlus className="h-3.5 w-3.5" />
+              Tambah Alamat
+            </>
+          )}
+        </button>
+      </div>
+
+      {showForm && (
+        <form
+          onSubmit={handleSubmit}
+          className="grid w-full gap-3 rounded-2xl border border-[#0000001A] bg-white p-5"
+        >
+          <div className="grid gap-1">
+            <label className="text-xs text-[#6B7280]" htmlFor="label">
+              Label Alamat
+            </label>
+
+            <input
+              id="label"
+              name="label"
+              type="text"
+              placeholder="Contoh: Rumah, Kantor, Kos"
+              className="rounded-xl border border-[#0000001A] bg-[#F3F4F6] px-4 py-3 text-sm outline-none focus:border-[#1A73E8]"
+              required
+            />
+          </div>
+
+          <div className="grid gap-1">
+            <label className="text-xs text-[#6B7280]" htmlFor="receiverName">
+              Nama Penerima
+            </label>
+
+            <input
+              id="receiverName"
+              name="receiverName"
+              type="text"
+              placeholder="Nama penerima paket"
+              className="rounded-xl border border-[#0000001A] bg-[#F3F4F6] px-4 py-3 text-sm outline-none focus:border-[#1A73E8]"
+              required
+            />
+          </div>
+
+          <div className="grid gap-1">
+            <label className="text-xs text-[#6B7280]" htmlFor="phone">
+              Nomor Telepon
+            </label>
+
+            <input
+              id="phone"
+              name="phone"
+              type="tel"
+              placeholder="Contoh: 081234567890"
+              className="rounded-xl border border-[#0000001A] bg-[#F3F4F6] px-4 py-3 text-sm outline-none focus:border-[#1A73E8]"
+              required
+            />
+          </div>
+
+          <div className="grid gap-1">
+            <label className="text-xs text-[#6B7280]" htmlFor="detail">
+              Alamat Lengkap
+            </label>
+
+            <textarea
+              id="detail"
+              name="detail"
+              placeholder="Nama jalan, nomor rumah, RT/RW, patokan, dan detail lainnya"
+              className="min-h-24 resize-none rounded-xl border border-[#0000001A] bg-[#F3F4F6] px-4 py-3 text-sm outline-none focus:border-[#1A73E8]"
+              required
+            />
+          </div>
+
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+            <div className="grid gap-1">
+              <label className="text-xs text-[#6B7280]" htmlFor="city">
+                Kota / Kabupaten
+              </label>
+
+              <input
+                id="city"
+                name="city"
+                type="text"
+                placeholder="Contoh: Jakarta Selatan"
+                className="rounded-xl border border-[#0000001A] bg-[#F3F4F6] px-4 py-3 text-sm outline-none focus:border-[#1A73E8]"
+                required
+              />
+            </div>
+
+            <div className="grid gap-1">
+              <label className="text-xs text-[#6B7280]" htmlFor="postalCode">
+                Kode Pos
+              </label>
+
+              <input
+                id="postalCode"
+                name="postalCode"
+                type="text"
+                placeholder="Contoh: 12190"
+                className="rounded-xl border border-[#0000001A] bg-[#F3F4F6] px-4 py-3 text-sm outline-none focus:border-[#1A73E8]"
+                required
+              />
+            </div>
+          </div>
+
+          <button
+            type="submit"
+            className="mt-1 rounded-xl bg-[#1A73E8] px-4 py-2.5 text-sm font-medium text-white transition-colors hover:bg-[#155FC0]"
+          >
+            Simpan Alamat
+          </button>
+        </form>
+      )}
+
+      {addresses.length === 0 ? (
+        <div className="rounded-2xl border border-[#0000001A] bg-white p-8 text-center">
+          <FaMapMarkerAlt className="mx-auto mb-3 h-10 w-10 text-[#6B7280]" />
+
+          <h2 className="text-base font-semibold text-[#111827]">
+            Belum ada alamat
+          </h2>
+
+          <p className="mt-2 text-sm text-[#6B7280]">
+            Tambahkan alamat untuk mempermudah proses checkout.
+          </p>
+        </div>
+      ) : (
+        addresses.map((address) => (
+          <div
+            key={address.id}
+            className="grid w-full gap-3 rounded-2xl border border-[#0000001A] bg-white p-5"
+          >
+            <div className="flex w-full items-center justify-between gap-4">
+              <div className="flex items-center gap-2">
+                <h2 className="text-base font-semibold text-[#111827]">
+                  {address.label}
+                </h2>
+
+                {address.isPrimary && (
+                  <div className="rounded-full bg-[#1A73E8] px-2 py-0.5 text-sm font-medium text-white">
+                    Utama
+                  </div>
+                )}
+              </div>
+
+              <button
+                type="button"
+                onClick={() => handleRemove(address.id)}
+                className="text-[#6B7280] transition-colors hover:text-red-500"
+                aria-label="Hapus alamat"
+              >
+                <FaTrash className="h-4 w-4" />
+              </button>
+            </div>
+
+            <div className="grid gap-1">
+              <p className="text-sm font-normal text-[#111827]">
+                {address.receiverName} · {address.phone}
+              </p>
+
+              <p className="text-xs font-normal text-[#6B7280]">
+                {address.detail}
+              </p>
+
+              <p className="text-xs font-normal text-[#6B7280]">
+                {address.city}, {address.postalCode}
+              </p>
+            </div>
+
+            {!address.isPrimary && (
+              <button
+                type="button"
+                onClick={() => handleSetPrimary(address.id)}
+                className="flex w-fit items-center gap-1 text-xs font-normal text-[#1A73E8]"
+              >
+                <FaCheckCircle className="h-3.5 w-3.5" />
+                Jadikan Alamat Utama
+              </button>
+            )}
+          </div>
+        ))
+      )}
+    </div>
+  );
 }
