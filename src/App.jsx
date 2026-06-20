@@ -28,6 +28,8 @@ import { ModalProvider } from './component/ModalContext';
 import AuthLayout from './component/auth/AuthLayout';
 import { AuthProvider } from './component/AuthContext';
 import { CartProvider } from './component/CartContext';
+import { ProfileProvider } from './component/ProfileContext';
+import ProfileLayout from './component/profile/ProfileLayout';
 
 
 
@@ -59,20 +61,30 @@ const router = createBrowserRouter([
     element: <BrowseProducts />,
   },
   {
-    path: "/profile/address",
-    element: <AlamatSaya />,
-  },
-  {
-    path: "/profile/edit-profile",
-    element: <EditProfile />,
-  },
-  {
-    path: "/profile/my-orders",
-    element: <Myorder />,
-  },
-  {
-    path: "/profile/wishlists",
-    element: <Wishlist />,
+    path: "/profile",
+    element: <ProfileLayout />,
+    children: [
+      {
+        index: true,
+        element: <Navigate to="edit-profile" replace />,
+      },
+      {
+        path: "edit-profile",
+        element: <EditProfile />,
+      },
+      {
+        path: "wishlists",
+        element: <Wishlist />,
+      },
+      {
+        path: "address",
+        element: <AlamatSaya />,
+      },
+      {
+        path: "my-orders",
+        element: <Myorder />,
+      },
+    ],
   },
   {
     path: "/auth",
@@ -136,11 +148,13 @@ function App() {
   return (
     <ModalProvider>
       <AuthProvider>
-        <CartProvider>
-          <ProductProvider>
-            <RouterProvider router={router} />
-          </ProductProvider>
-        </CartProvider>
+        <ProductProvider>
+          <ProfileProvider>
+            <CartProvider>
+              <RouterProvider router={router} />
+            </CartProvider>
+          </ProfileProvider>
+        </ProductProvider>
       </AuthProvider>
     </ModalProvider>
   )
