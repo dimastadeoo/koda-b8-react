@@ -7,6 +7,8 @@ import { CartItem, formatRupiah } from "../CartItem";
 import { makeProducts } from "../ProdutsContext";
 import { makeCart } from "../CartContext";
 import { makeModal } from "../ModalContext";
+import { makeProfile } from "../ProfileContext";
+import { makeAuth } from "../AuthContext";
 
 import {
   FaChevronRight,
@@ -25,6 +27,8 @@ export default function DetailPage() {
   const { showAlert } = makeModal();
   const { id } = useParams();
   const { products, loading, error, kategoriProducts } = makeProducts();
+  const { isLoggedIn, currentUser } = makeAuth();
+  const { createCheckout } = makeProfile();
 
   const [quantity, setQuantity] = React.useState(1);
   const [selectedImage, setSelectedImage] = React.useState("");
@@ -138,6 +142,47 @@ export default function DetailPage() {
     await showAlert({
       title: "Berhasil",
       message: result.message,
+    });
+  };
+
+  const handleBuyNow = () => {
+    if (!isLoggedIn) {
+      navigate("/auth/login");
+      return;
+    }
+
+    const isDiscount = typeof product.badgeContent === "number";
+    const finalPrice = isDiscount
+      ? product.price - (product.price * product.badgeContent) / 100
+      : product.price;
+
+    const checkoutItem = {
+      productId: product.id,
+      userEmail: currentUser.email,
+      quantity,
+      cartNameContent: product.cartNameContent,
+      cartJenisContent: product.cartJenisContent,
+      price: finalPrice,
+      originalPrice: product.price,
+      badgeContent: product.badgeContent,
+      image: product.image,
+    };
+
+    const result = createCheckout({
+      source: "detail",
+      items: [checkoutItem],
+      total: finalPrice * quantity,
+    });
+
+    if (result.requireLogin) {
+      navigate("/auth/login");
+      return;
+    }
+
+    navigate(`/main/checkout/${result.checkout.id}/shipping`, {
+      state: {
+        checkout: result.checkout,
+      },
     });
   };
 
@@ -368,6 +413,7 @@ export default function DetailPage() {
               </button>
 
               <button
+                onClick={handleBuyNow}
                 type="button"
                 className="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-4 rounded-xl transition-colors shadow-md shadow-blue-100 cursor-pointer text-sm"
               >

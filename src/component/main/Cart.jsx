@@ -12,21 +12,24 @@ import {
 
 import Header from "../Header";
 import Footer from "../Footer";
-import {CartItem} from "../CartItem";
+import { CartItem, formatRupiah } from "../CartItem";
 import { makeAuth } from "../AuthContext"
 import { makeCart } from "../CartContext";
 import { makeProducts } from "../ProdutsContext";
 import { makeModal } from "../ModalContext";
+import { makeProfile } from "../ProfileContext";
 
 export default function Cart() {
   const navigate = useNavigate();
 
   const { isLoggedIn } = makeAuth();
+  const { createCheckout } = makeProfile();
   const {
     cartItems,
     increaseQuantity,
     decreaseQuantity,
     removeFromCart,
+    removeCheckedOutCartItems
   } = makeCart();
 
   const { products } = makeProducts();
@@ -38,12 +41,6 @@ export default function Cart() {
     }
   }, [isLoggedIn, navigate]);
 
-  const formatRupiah = (number) =>
-    new Intl.NumberFormat("id-ID", {
-      style: "currency",
-      currency: "IDR",
-      minimumFractionDigits: 0,
-    }).format(number);
 
   const getFinalPrice = (item) => {
     const isDiscount = typeof item.badgeContent === "number";
@@ -86,9 +83,33 @@ export default function Cart() {
   };
 
   const handleCheckout = () => {
+    if (!isLoggedIn) {
+      navigate("/auth/login");
+      return;
+    }
+
     if (cartItems.length === 0) return;
 
-    navigate("/main/checkout");
+    const result = createCheckout({
+      source: "cart",
+      items: cartItems,
+      total: subtotal,
+    });
+
+    if (result.requireLogin) {
+      navigate("/auth/login");
+      return;
+    }
+
+    if (result.success) {
+      removeCheckedOutCartItems(cartItems);
+
+      navigate(`/main/checkout/${result.checkout.id}/shipping`, {
+        state: {
+          checkout: result.checkout,
+        },
+      });
+    }
   };
 
   if (!isLoggedIn) {
@@ -280,11 +301,10 @@ export default function Cart() {
               type="button"
               onClick={handleCheckout}
               disabled={cartItems.length === 0}
-              className={`w-full text-white font-bold py-3.5 px-4 rounded-xl shadow-md flex items-center justify-center gap-2 transition-all active:scale-[0.99] ${
-                cartItems.length === 0
-                  ? "bg-orange-300 cursor-not-allowed"
-                  : "bg-orange-500 hover:bg-orange-600 shadow-orange-100"
-              }`}
+              className={`w-full text-white font-bold py-3.5 px-4 rounded-xl shadow-md flex items-center justify-center gap-2 transition-all active:scale-[0.99] ${cartItems.length === 0
+                ? "bg-orange-300 cursor-not-allowed"
+                : "bg-orange-500 hover:bg-orange-600 shadow-orange-100"
+                }`}
             >
               <FaShieldAlt className="w-4 h-4" />
               Checkout Aman
