@@ -30,7 +30,7 @@ export default function StepShipping() {
       status: "Belum Selesai",
     });
 
-    navigate(`/main/checkout/${checkoutId}/payment`, {
+    navigate(`/checkout/${checkoutId}/payment`, {
       state: {
         checkout: updatedCheckout,
       },

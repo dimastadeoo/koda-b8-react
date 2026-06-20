@@ -21,7 +21,7 @@ export default function StepConfirm() {
   if (!activeCheckout.shipping) {
     return (
       <Navigate
-        to={`/main/checkout/${checkoutId}/shipping`}
+        to={`/checkout/${checkoutId}/shipping`}
         state={{ checkout: activeCheckout }}
         replace
       />
@@ -31,7 +31,7 @@ export default function StepConfirm() {
   if (!activeCheckout.payment) {
     return (
       <Navigate
-        to={`/main/checkout/${checkoutId}/payment`}
+        to={`/checkout/${checkoutId}/payment`}
         state={{ checkout: activeCheckout }}
         replace
       />
@@ -50,7 +50,7 @@ export default function StepConfirm() {
 
     const updatedCheckout = completeCheckout(checkoutId);
 
-    navigate(`/main/checkout/${checkoutId}/success`, {
+    navigate(`/checkout/${checkoutId}/success`, {
       state: {
         checkout: updatedCheckout,
       },
@@ -157,7 +157,7 @@ export default function StepConfirm() {
             <button
               type="button"
               onClick={() =>
-                navigate(`/main/checkout/${checkoutId}/payment`, {
+                navigate(`/checkout/${checkoutId}/payment`, {
                   state: { checkout: activeCheckout },
                 })
               }

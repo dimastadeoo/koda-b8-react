@@ -104,7 +104,7 @@ export default function Cart() {
     if (result.success) {
       removeCheckedOutCartItems(cartItems);
 
-      navigate(`/main/checkout/${result.checkout.id}/shipping`, {
+      navigate(`/checkout/${result.checkout.id}/shipping`, {
         state: {
           checkout: result.checkout,
         },

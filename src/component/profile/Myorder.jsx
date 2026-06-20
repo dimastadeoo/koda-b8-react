@@ -17,7 +17,7 @@ export default function Myorder() {
   const handleContinueCheckout = (order) => {
     const step = order.checkoutStep || "shipping";
 
-    navigate(`/main/checkout/${order.id}/${step}`, {
+    navigate(`/checkout/${order.id}/${step}`, {
       state: {
         checkout: order,
       },

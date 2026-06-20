@@ -179,7 +179,7 @@ export default function DetailPage() {
       return;
     }
 
-    navigate(`/main/checkout/${result.checkout.id}/shipping`, {
+    navigate(`/checkout/${result.checkout.id}/shipping`, {
       state: {
         checkout: result.checkout,
       },

@@ -18,7 +18,7 @@ export default function StepPayment() {
   if (!activeCheckout.shipping) {
     return (
       <Navigate
-        to={`/main/checkout/${checkoutId}/shipping`}
+        to={`/checkout/${checkoutId}/shipping`}
         state={{ checkout: activeCheckout }}
         replace
       />
@@ -37,7 +37,7 @@ export default function StepPayment() {
       status: "Belum Selesai",
     });
 
-    navigate(`/main/checkout/${checkoutId}/confirm`, {
+    navigate(`/checkout/${checkoutId}/confirm`, {
       state: {
         checkout: updatedCheckout,
       },
@@ -123,7 +123,7 @@ export default function StepPayment() {
             <button
               type="button"
               onClick={() =>
-                navigate(`/main/checkout/${checkoutId}/shipping`, {
+                navigate(`/checkout/${checkoutId}/shipping`, {
                   state: { checkout: activeCheckout },
                 })
               }
