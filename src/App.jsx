@@ -27,6 +27,7 @@ import { ProductProvider } from './component/ProdutsContext';
 import { ModalProvider } from './component/ModalContext';
 import AuthLayout from './component/auth/AuthLayout';
 import { AuthProvider } from './component/AuthContext';
+import { CartProvider } from './component/CartContext';
 
 
 
@@ -135,9 +136,11 @@ function App() {
   return (
     <ModalProvider>
       <AuthProvider>
-        <ProductProvider>
-          <RouterProvider router={router} />
-        </ProductProvider>
+        <CartProvider>
+          <ProductProvider>
+            <RouterProvider router={router} />
+          </ProductProvider>
+        </CartProvider>
       </AuthProvider>
     </ModalProvider>
   )
