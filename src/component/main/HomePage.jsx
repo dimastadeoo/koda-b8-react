@@ -150,7 +150,7 @@ export default function HomePage() {
                 key={item.id}
                 className="bg-white border border-gray-200 rounded-2xl p-4 flex flex-col items-center justify-center text-center shadow-sm hover:shadow-md hover:border-blue-500/50 transition-all group"
               >
-                <Link to={`/main/all-products/${item.title.toLowerCase}`} className="no-underline w-full flex flex-col items-center">
+                <Link to={`/main/all-products/${item.title.toLowerCase()}`} className="no-underline w-full flex flex-col items-center">
                   <img
                     className="max-w-full max-h-full object-contain mix-blend-multiply transition-transform group-hover:scale-105 duration-300"
                     src={item.image}
