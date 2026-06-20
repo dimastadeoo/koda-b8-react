@@ -6,6 +6,7 @@ import Header from "../Header";
 import Footer from "../Footer";
 import { CartItem, formatRupiah } from "../CartItem";
 import { makeProducts } from "../ProdutsContext";
+import ErrorPage from "../ErorPage";
 
 export default function BrowseProducts() {
 
@@ -18,20 +19,41 @@ export default function BrowseProducts() {
   const [selectedBrands, setSelectedBrands] = React.useState([]);
   const [minimumRating, setMinimumRating] = React.useState("");
   const [sortBy, setSortBy] = React.useState("popular");
+  const isValidSearchQuery = (value) => {
+    if (!value) return true;
 
-  const kategoriSelected = kategoriProducts.find((item) => item.title.toLowerCase() === category)
+    const searchRegex = /^[\p{L}\p{N}\s._-]+$/u;
+
+    return searchRegex.test(value);
+  };
+
+  const kategoriSelected = category
+    ? kategoriProducts.find((item) => item.title.toLowerCase() === category)
+    : null
   const currentCategoryTitle = kategoriSelected?.title || "Semua Produk";
 
   const brands = [...new Set(products.map((item) => item.cartJenisContent))];
 
   let filteredProducts = [...products];
 
+  const isInvalidCategory = category && !kategoriSelected;
+
+  const isInvalidSearchQuery = q.trim() && !isValidSearchQuery(q.trim());
+
+  if (isInvalidSearchQuery) {
+    return <ErrorPage />;
+  }
+
+  if (isInvalidCategory) {
+    return <ErrorPage />;
+  }
+
   if (category) {
     filteredProducts = filteredProducts.filter(
       (item) => item.kategori === kategoriSelected.id
     );
   }
-  
+
   if (q) {
     filteredProducts = filteredProducts.filter((item) => {
       const productName = item.cartNameContent?.toLowerCase() || "";
