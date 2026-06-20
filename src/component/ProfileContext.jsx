@@ -44,13 +44,13 @@ export function ProfileProvider({ children }) {
     profileData.profiles.find((item) => item.userEmail === userEmail) ||
     (currentUser
       ? {
-          userEmail,
-          name: currentUser.name || "",
-          email: currentUser.email || "",
-          noTelp: "",
-          birth: "",
-          gender: "",
-        }
+        userEmail,
+        name: currentUser.name || "",
+        email: currentUser.email || "",
+        noTelp: "",
+        birth: "",
+        gender: "",
+      }
       : null);
 
   const addresses = profileData.addresses.filter(
@@ -93,8 +93,8 @@ export function ProfileProvider({ children }) {
         ...prev,
         profiles: exists
           ? prev.profiles.map((item) =>
-              item.userEmail === userEmail ? updatedProfile : item
-            )
+            item.userEmail === userEmail ? updatedProfile : item
+          )
           : [...prev.profiles, updatedProfile],
       };
     });
@@ -204,25 +204,49 @@ export function ProfileProvider({ children }) {
       addresses: prev.addresses.map((item) =>
         item.userEmail === userEmail
           ? {
-              ...item,
-              isPrimary: item.id === addressId,
-            }
+            ...item,
+            isPrimary: item.id === addressId,
+          }
           : item
       ),
     }));
   };
 
-  const addOrder = ({ items, total }) => {
-    if (!isLoggedIn || !userEmail) return;
+  const getOrderById = (orderId) => {
+    return profileData.orders.find(
+      (item) => item.userEmail === userEmail && item.id === orderId
+    );
+  };
+
+  const createCheckout = ({ source = "cart", items = [], total = 0 }) => {
+    if (!isLoggedIn || !userEmail) {
+      return {
+        success: false,
+        requireLogin: true,
+        message: "Silakan login terlebih dahulu.",
+      };
+    }
+
+    const now = new Date();
 
     const newOrder = {
       id: `BM${Date.now()}`,
       userEmail,
+      source,
       items,
       total,
-      status: "Dikirim",
-      createdAt: new Date().toISOString(),
-      createdAtText: formatDateTime(),
+      subtotal: total,
+      shippingCost: 0,
+      shipping: null,
+      payment: null,
+      status: "Belum Selesai",
+      checkoutStep: "shipping",
+      paymentStatus: "unpaid",
+      createdAt: now.toISOString(),
+      createdAtText: new Intl.DateTimeFormat("id-ID", {
+        dateStyle: "medium",
+        timeStyle: "short",
+      }).format(now),
     };
 
     setProfileData((prev) => ({
@@ -230,7 +254,53 @@ export function ProfileProvider({ children }) {
       orders: [newOrder, ...prev.orders],
     }));
 
-    return newOrder;
+    return {
+      success: true,
+      message: "Checkout berhasil dibuat.",
+      checkout: newOrder,
+    };
+  };
+
+  const updateCheckout = (orderId, updatedData) => {
+    let updatedCheckout = null;
+
+    setProfileData((prev) => {
+      const updatedOrders = prev.orders.map((order) => {
+        if (order.userEmail === userEmail && order.id === orderId) {
+          updatedCheckout = {
+            ...order,
+            ...updatedData,
+            updatedAt: new Date().toISOString(),
+          };
+
+          return updatedCheckout;
+        }
+
+        return order;
+      });
+
+      return {
+        ...prev,
+        orders: updatedOrders,
+      };
+    });
+
+    return updatedCheckout;
+  };
+
+  const completeCheckout = (orderId) => {
+    const now = new Date();
+
+    return updateCheckout(orderId, {
+      status: "Diproses",
+      checkoutStep: "success",
+      paymentStatus: "paid",
+      paidAt: now.toISOString(),
+      paidAtText: new Intl.DateTimeFormat("id-ID", {
+        dateStyle: "medium",
+        timeStyle: "short",
+      }).format(now),
+    });
   };
 
   return (
@@ -246,7 +316,10 @@ export function ProfileProvider({ children }) {
         addAddress,
         removeAddress,
         setPrimaryAddress,
-        addOrder,
+        getOrderById,
+        createCheckout,
+        updateCheckout,
+        completeCheckout,
       }}
     >
       {children}
