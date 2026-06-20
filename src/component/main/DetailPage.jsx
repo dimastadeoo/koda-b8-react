@@ -1,10 +1,12 @@
 import React from "react";
-import { Link, useParams } from "react-router";
+import { Link, useParams, useNavigate } from "react-router";
 
 import Header from "../Header";
 import Footer from "../Footer";
 import { CartItem, formatRupiah } from "../CartItem";
 import { makeProducts } from "../ProdutsContext";
+import { makeCart } from "../CartContext";
+import { makeModal } from "../ModalContext";
 
 import {
   FaChevronRight,
@@ -18,16 +20,16 @@ import {
 } from "react-icons/fa";
 
 export default function DetailPage() {
+  const navigate = useNavigate();
+  const { addToCart } = makeCart();
+  const { showAlert } = makeModal();
   const { id } = useParams();
   const { products, loading, error, kategoriProducts } = makeProducts();
 
   const [quantity, setQuantity] = React.useState(1);
   const [selectedImage, setSelectedImage] = React.useState("");
-
   const productId = Number(id);
-
   const product = products.find((item) => item.id === productId);
-
 
   React.useEffect(() => {
     if (product?.image?.[0]) {
@@ -118,6 +120,25 @@ export default function DetailPage() {
 
   const handlePlusQuantity = () => {
     setQuantity((prev) => prev + 1);
+  };
+
+  const handleAddToCart = async () => {
+    const result = addToCart(product, quantity);
+
+    if (result.requireLogin) {
+      await showAlert({
+        title: "Login diperlukan",
+        message: result.message,
+      });
+
+      navigate("/auth/login");
+      return;
+    }
+
+    await showAlert({
+      title: "Berhasil",
+      message: result.message,
+    });
   };
 
   return (
@@ -338,6 +359,7 @@ export default function DetailPage() {
 
             <div className="flex flex-col sm:flex-row gap-3 border-t border-gray-100 pt-5">
               <button
+                onClick={handleAddToCart}
                 className="flex-1 bg-white border border-blue-600 text-blue-600 hover:bg-blue-50 font-semibold py-3 px-4 rounded-xl transition-colors flex items-center justify-center gap-2 cursor-pointer text-sm"
                 type="button"
               >
