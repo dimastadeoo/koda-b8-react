@@ -52,9 +52,9 @@ export function CartProvider({ children }) {
         return prev.map((item) =>
           item.userEmail === cleanEmail && item.productId === product.id
             ? {
-                ...item,
-                quantity: item.quantity + quantity,
-              }
+              ...item,
+              quantity: item.quantity + quantity,
+            }
             : item
         );
       }
@@ -86,9 +86,9 @@ export function CartProvider({ children }) {
       prev.map((item) =>
         item.userEmail === userEmail && item.productId === productId
           ? {
-              ...item,
-              quantity: item.quantity + 1,
-            }
+            ...item,
+            quantity: item.quantity + 1,
+          }
           : item
       )
     );
@@ -99,9 +99,9 @@ export function CartProvider({ children }) {
       prev.map((item) =>
         item.userEmail === userEmail && item.productId === productId
           ? {
-              ...item,
-              quantity: item.quantity > 1 ? item.quantity - 1 : 1,
-            }
+            ...item,
+            quantity: item.quantity > 1 ? item.quantity - 1 : 1,
+          }
           : item
       )
     );
@@ -116,11 +116,23 @@ export function CartProvider({ children }) {
     );
   };
 
-  const clearMyCart = () => {
+  const removeCheckedOutCartItems = (checkoutItems = []) => {
+    const checkoutProductIds = checkoutItems.map((item) =>
+      Number(item.productId)
+    );
+
     setAllCartItems((prev) =>
-      prev.filter((item) => item.userEmail !== userEmail)
+      prev.filter((cartItem) => {
+        const sameUser = cartItem.userEmail === userEmail;
+        const isCheckedOutItem = checkoutProductIds.includes(
+          Number(cartItem.productId)
+        );
+
+        return !(sameUser && isCheckedOutItem);
+      })
     );
   };
+
 
   return (
     <CartContext.Provider
@@ -130,7 +142,7 @@ export function CartProvider({ children }) {
         increaseQuantity,
         decreaseQuantity,
         removeFromCart,
-        clearMyCart,
+        removeCheckedOutCartItems
       }}
     >
       {children}
