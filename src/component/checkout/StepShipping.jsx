@@ -38,7 +38,7 @@ export default function StepShipping() {
   };
 
   return (
-    <section className="grid w-full gap-10 px-8 py-10 mx-auto mb-16 max-w-[1200px] max-lg:px-4">
+    <section className="grid w-full gap-10 px-8 py-10 mx-auto mb-16 max-w-300 max-lg:px-4">
       <div className="flex justify-center items-center mb-2">
         <div className="flex flex-col items-center gap-2">
           <div className="w-10 h-10 rounded-2xl bg-[#1A73E8] text-white flex items-center justify-center text-sm font-semibold">
@@ -49,7 +49,7 @@ export default function StepShipping() {
           </span>
         </div>
 
-        <div className="w-30 max-sm:w-[60px] mb-5 border-t-2 border-solid border-[#E5E7EB]" />
+        <div className="w-30 max-sm:w-15 mb-5 border-t-2 border-solid border-[#E5E7EB]" />
 
         <div className="flex flex-col items-center gap-2">
           <div className="w-10 h-10 rounded-2xl bg-[#E5E7EB] text-[#6B7280] flex items-center justify-center text-sm font-semibold">
@@ -60,7 +60,7 @@ export default function StepShipping() {
           </span>
         </div>
 
-        <div className="w-[120px] max-sm:w-[60px] mb-5 border-t-2 border-solid border-[#E5E7EB]" />
+        <div className="w-30 max-sm:w-15 mb-5 border-t-2 border-solid border-[#E5E7EB]" />
 
         <div className="flex flex-col items-center gap-2">
           <div className="w-10 h-10 rounded-2xl bg-[#E5E7EB] text-[#6B7280] flex items-center justify-center text-sm font-semibold">
@@ -215,7 +215,7 @@ export default function StepShipping() {
                       ? shipping.shippingMethod === item
                       : index === 0
                   }
-                  className="w-[18px] h-[18px] accent-[#1877f2]"
+                  className="w-4.5 h-4.5 accent-[#1877f2]"
                 />
 
                 <div className="flex flex-col gap-1 flex-1">
