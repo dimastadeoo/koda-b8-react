@@ -32,6 +32,7 @@ import StepPayment from './component/checkout/StepPayment';
 import StepConfirm from './component/checkout/StepConfirm';
 import StepSuccess from './component/checkout/StepSuccess';
 import ErrorPage from './component/ErorPage';
+import RootLayout from './component/RootLayout';
 
 
 
@@ -40,123 +41,129 @@ const router = createBrowserRouter([
 
   {
     path: "/",
-    element: <HomePage />,
-  },
-  {
-    path: "/main",
-    element: <HomePage />,
-  },
-  {
-    path: "/main/product/:id",
-    element: <DetailPage />,
-  },
-  {
-    path: "/main/cart",
-    element: <Cart />,
-  },
-  {
-    path: "/main/all-products",
-    element: <BrowseProducts />,
-  },
-  {
-    path: "/main/all-products/:category",
-    element: <BrowseProducts />,
-  },
-  {
-    path: "/profile",
-    element: <ProfileLayout />,
+    element: <RootLayout />,
     children: [
       {
-        index: true,
-        element: <Navigate to="edit-profile" replace />,
+        path: "/",
+        element: <HomePage />,
       },
       {
-        path: "edit-profile",
-        element: <EditProfile />,
+        path: "/main",
+        element: <HomePage />,
       },
       {
-        path: "wishlists",
-        element: <Wishlist />,
+        path: "/main/product/:id",
+        element: <DetailPage />,
       },
       {
-        path: "address",
-        element: <AlamatSaya />,
+        path: "/main/cart",
+        element: <Cart />,
       },
       {
-        path: "my-orders",
-        element: <Myorder />,
-      },
-    ],
-  },
-  {
-    path: "/auth",
-    element: <AuthLayout />,
-    children: [
-      {
-        index: true,
-        element: <Navigate to="login" replace />,
+        path: "/main/all-products",
+        element: <BrowseProducts />,
       },
       {
-        path: "login",
-        element: <Login />,
+        path: "/main/all-products/:category",
+        element: <BrowseProducts />,
       },
       {
-        path: "register",
-        element: <Register />,
+        path: "/profile",
+        element: <ProfileLayout />,
+        children: [
+          {
+            index: true,
+            element: <Navigate to="edit-profile" replace />,
+          },
+          {
+            path: "edit-profile",
+            element: <EditProfile />,
+          },
+          {
+            path: "wishlists",
+            element: <Wishlist />,
+          },
+          {
+            path: "address",
+            element: <AlamatSaya />,
+          },
+          {
+            path: "my-orders",
+            element: <Myorder />,
+          },
+        ],
       },
       {
-        path: "forgot-password",
-        element: <ForgotPassword />,
-      },
-    ],
-  },
-  {
-    path: "/admin/list-products",
-    element: <ProductsList />,
-  },
-  {
-    path: "/admin/list-orders",
-    element: <OrderList />,
-  },
-  {
-    path: "/admin/dashboard",
-    element: <Dashboard />,
-  },
-  {
-    path: "/admin/list-customers",
-    element: <CustomerList />,
-  },
-  {
-    path: "/checkout/:checkoutId",
-    element: <CheckoutLayout />,
-    children: [
-      {
-        index: true,
-        element: <Navigate to="shipping" replace />,
+        path: "/auth",
+        element: <AuthLayout />,
+        children: [
+          {
+            index: true,
+            element: <Navigate to="login" replace />,
+          },
+          {
+            path: "login",
+            element: <Login />,
+          },
+          {
+            path: "register",
+            element: <Register />,
+          },
+          {
+            path: "forgot-password",
+            element: <ForgotPassword />,
+          },
+        ],
       },
       {
-        path: "shipping",
-        element: <StepShipping />,
+        path: "/admin/list-products",
+        element: <ProductsList />,
       },
       {
-        path: "payment",
-        element: <StepPayment />,
+        path: "/admin/list-orders",
+        element: <OrderList />,
       },
       {
-        path: "confirm",
-        element: <StepConfirm />,
+        path: "/admin/dashboard",
+        element: <Dashboard />,
       },
       {
-        path: "success",
-        element: <StepSuccess />,
+        path: "/admin/list-customers",
+        element: <CustomerList />,
       },
-    ],
-  },
-  {
-    path: "*",
-    element: <ErrorPage />,
-  },
+      {
+        path: "/checkout/:checkoutId",
+        element: <CheckoutLayout />,
+        children: [
+          {
+            index: true,
+            element: <Navigate to="shipping" replace />,
+          },
+          {
+            path: "shipping",
+            element: <StepShipping />,
+          },
+          {
+            path: "payment",
+            element: <StepPayment />,
+          },
+          {
+            path: "confirm",
+            element: <StepConfirm />,
+          },
+          {
+            path: "success",
+            element: <StepSuccess />,
+          },
+        ],
+      },
+      {
+        path: "*",
+        element: <ErrorPage />,
+      },
 
+    ],
+  },
 ]);
 
 function App() {
