@@ -8,11 +8,11 @@ import AlamatSaya from './component/profile/AlamatSaya';
 
 import HomePage from './component/main/HomePage';
 import DetailPage from './component/main/DetailPage';
-import Cart from './component/main/cart';
+import Cart from './component/main/Cart';
 import BrowseProducts from './component/main/BrowseProducts';
 
-import Register from './component/auth/register';
-import Login from './component/auth/login';
+import Register from './component/auth/Register';
+import Login from './component/auth/Login';
 import ForgotPassword from './component/auth/ForgotPassword';
 
 import ProductsList from './component/admin/ProductsList';
