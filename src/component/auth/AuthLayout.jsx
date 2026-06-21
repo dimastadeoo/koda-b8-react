@@ -17,21 +17,21 @@ export default function AuthLayout() {
 
   const authContent = {
     "/auth/login": {
-      image: "/src/img/bg-auth.jpg",
+      image: "/img/bg-auth.jpg",
       title: "Belanja lebih mudah, hidup lebih praktis",
       description:
         "Ribuan produk pilihan dengan harga terbaik, pengiriman cepat, dan pembayaran yang aman.",
       type: "login",
     },
     "/auth/register": {
-      image: "/src/img/bg-auth-regis.jpg",
+      image: "/img/bg-auth-regis.jpg",
       title: "Bergabung dengan 500.000+ pelanggan puas",
       description:
         "Buat akun gratis dan nikmati pengalaman belanja yang lebih cepat, aman, dan praktis.",
       type: "register",
     },
     "/auth/forgot-password": {
-      image: "/src/img/bg-auth-forgorpass.jpg",
+      image: "/img/bg-auth-forgorpass.jpg",
       title: "Akun kamu aman bersama kami",
       description:
         "Kami menggunakan keamanan berlapis untuk menjaga data akun dan transaksi kamu tetap aman.",

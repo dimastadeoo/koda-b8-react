@@ -7,7 +7,7 @@ export default function Footer() {
         <div className="max-w-5xl mx-auto px-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 mb-10">
           <div className="flex items-center gap-4">
             <div className="w-12 h-12 rounded-full bg-blue-600/10 flex items-center justify-center shrink-0">
-              <img className="w-6 h-6 object-contain text-blue-500" src="/src/img/van.svg" alt="Icon Van Ekspedisi" />
+              <img className="w-6 h-6 object-contain text-blue-500" src="/img/van.svg" alt="Icon Van Ekspedisi" />
             </div>
             <div>
               <h4 className="text-white font-semibold text-sm">Gratis Ongkir</h4>
@@ -16,7 +16,7 @@ export default function Footer() {
           </div>
           <div className="flex items-center gap-4">
             <div className="w-12 h-12 rounded-full bg-blue-600/10 flex items-center justify-center shrink-0">
-              <img className="w-6 h-6 object-contain text-blue-500" src="/src/img/shield.svg" alt="Icon shield" />
+              <img className="w-6 h-6 object-contain text-blue-500" src="/img/shield.svg" alt="Icon shield" />
             </div>
             <div>
               <h4 className="text-white font-semibold text-sm">Pembayaran Aman</h4>
@@ -25,7 +25,7 @@ export default function Footer() {
           </div>
           <div className="flex items-center gap-4">
             <div className="w-12 h-12 rounded-full bg-blue-600/10 flex items-center justify-center shrink-0">
-              <img className="w-6 h-6 object-contain text-blue-500" src="/src/img/refresh-ccw.svg" alt="Icon Return" />
+              <img className="w-6 h-6 object-contain text-blue-500" src="/img/refresh-ccw.svg" alt="Icon Return" />
             </div>
             <div>
               <h4 className="text-white font-semibold text-sm">Pengembalian Mudah</h4>
@@ -34,7 +34,7 @@ export default function Footer() {
           </div>
           <div className="flex items-center gap-4">
             <div className="w-12 h-12 rounded-full bg-blue-600/10 flex items-center justify-center shrink-0">
-              <img className="w-6 h-6 object-contain text-blue-500" src="/src/img/headset.svg" alt="Icon Call Center" />
+              <img className="w-6 h-6 object-contain text-blue-500" src="/img/headset.svg" alt="Icon Call Center" />
             </div>
             <div>
               <h4 className="text-white font-semibold text-sm">Dukungan 24/7</h4>
@@ -87,15 +87,15 @@ export default function Footer() {
           <div className="md:col-span-4 flex flex-col gap-3">
             <h3 className="text-white font-semibold text-sm tracking-wide mb-1">Kontak</h3>
             <div className="flex items-start gap-2.5 text-xs">
-              <img className="w-4 h-4 object-contain mt-0.5 shrink-0" src="/src/img/map-icon.png" alt="Icon Map" />
+              <img className="w-4 h-4 object-contain mt-0.5 shrink-0" src="/img/map-icon.png" alt="Icon Map" />
               <p className="m-0 leading-relaxed">Jl. Sudirman No. 1, Jakarta Selatan, DKI Jakarta 12190</p>
             </div>
             <div className="flex items-center gap-2.5 text-xs">
-              <img className="w-4 h-4 object-contain shrink-0" src="/src/img/phone.svg" alt="Icon Phone" />
+              <img className="w-4 h-4 object-contain shrink-0" src="/img/phone.svg" alt="Icon Phone" />
               <p className="m-0">0800-1234-5678 (Gratis)</p>
             </div>
             <div className="flex items-center gap-2.5 text-xs mb-3">
-              <img className="w-4 h-4 object-contain shrink-0" src="/src/img/mail.svg" alt="Icon Mail" />
+              <img className="w-4 h-4 object-contain shrink-0" src="/img/mail.svg" alt="Icon Mail" />
               <p className="m-0">bantuan@belimudah.id</p>
             </div>
 

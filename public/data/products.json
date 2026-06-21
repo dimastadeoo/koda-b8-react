@@ -10,8 +10,8 @@
     "reviewContent": 512,
     "price": 650000,
     "image": [
-      "/src/img/item-1.png",
-      "/src/img/item-1a.png"
+      "/img/item-1.png",
+      "/img/item-1a.png"
     ]
   },
   {
@@ -25,7 +25,7 @@
     "reviewContent": 890,
     "price": 5000000,
     "image": [
-      "/src/img/item-2.png"
+      "/img/item-2.png"
     ]
   },
   {
@@ -39,7 +39,7 @@
     "reviewContent": 324,
     "price": 3500000,
     "image": [
-      "/src/img/item-3.png"
+      "/img/item-3.png"
     ]
   },
   {
@@ -53,7 +53,7 @@
     "reviewContent": 445,
     "price": 750000,
     "image": [
-      "/src/img/item-4.png"
+      "/img/item-4.png"
     ]
   },
   {
@@ -67,7 +67,7 @@
     "reviewContent": 234,
     "price": 350000,
     "image": [
-      "/src/img/item-5.png"
+      "/img/item-5.png"
     ]
   },
   {
@@ -81,7 +81,7 @@
     "reviewContent": 567,
     "price": 189000,
     "image": [
-      "/src/img/item-6.png"
+      "/img/item-6.png"
     ]
   },
   {
@@ -95,7 +95,7 @@
     "reviewContent": 345,
     "price": 4000000,
     "image": [
-      "/src/img/item-7.png"
+      "/img/item-7.png"
     ]
   },
   {
@@ -109,7 +109,7 @@
     "reviewContent": 312,
     "price": 395000,
     "image": [
-      "/src/img/item-8.png"
+      "/img/item-8.png"
     ]
   },
   {
@@ -123,7 +123,7 @@
     "reviewContent": 456,
     "price": 145000,
     "image": [
-      "/src/img/item-9.png"
+      "/img/item-9.png"
     ]
   },
   {
@@ -137,7 +137,7 @@
     "reviewContent": 1245,
     "price": 110000,
     "image": [
-      "/src/img/item-10.png"
+      "/img/item-10.png"
     ]
   },
   {
@@ -151,7 +151,7 @@
     "reviewContent": 892,
     "price": 250000,
     "image": [
-      "/src/img/item-11.png"
+      "/img/item-11.png"
     ]
   },
   {
@@ -165,7 +165,7 @@
     "reviewContent": 678,
     "price": 125000,
     "image": [
-      "/src/img/item-12.png"
+      "/img/item-12.png"
     ]
   },
   {
@@ -179,7 +179,7 @@
     "reviewContent": 198,
     "price": 280000,
     "image": [
-      "/src/img/item-13.png"
+      "/img/item-13.png"
     ]
   },
   {
@@ -193,7 +193,7 @@
     "reviewContent": 456,
     "price": 145000,
     "image": [
-      "/src/img/item-14.png"
+      "/img/item-14.png"
     ]
   },
   {
@@ -207,7 +207,7 @@
     "reviewContent": 389,
     "price": 450000,
     "image": [
-      "/src/img/item-15.png"
+      "/img/item-15.png"
     ]
   },
   {
@@ -221,7 +221,7 @@
     "reviewContent": 143,
     "price": 850000,
     "image": [
-      "/src/img/item-16.png"
+      "/img/item-16.png"
     ]
   },
   {
@@ -235,7 +235,7 @@
     "reviewContent": 123,
     "price": 450000,
     "image": [
-      "/src/img/item-17.png"
+      "/img/item-17.png"
     ]
   },
   {
@@ -249,7 +249,7 @@
     "reviewContent": 267,
     "price": 780000,
     "image": [
-      "/src/img/item-18.png"
+      "/img/item-18.png"
     ]
   },
   {
@@ -263,7 +263,7 @@
     "reviewContent": 123,
     "price": 450000,
     "image": [
-      "/src/img/item-19.png"
+      "/img/item-19.png"
     ]
   }
 ]

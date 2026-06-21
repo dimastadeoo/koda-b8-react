@@ -212,7 +212,7 @@ export default function HomePage() {
         </section>
 
         <section className="w-full max-w-5xl mx-auto font-sans grid lg:grid-cols-2 sm:grid-cols-1 gap-3">
-          <div className="relative min-h-45 sm:min-h-55 rounded-3xl overflow-hidden bg-cover bg-center bg-no-repeat flex items-center p-6 sm:p-10 text-white shadow-md bg-[linear-gradient(90deg,rgba(0,0,0,0.7)_0%,rgba(0,0,0,0.2)_100%),url('/src/img/kat-1.png')]">
+          <div className="relative min-h-45 sm:min-h-55 rounded-3xl overflow-hidden bg-cover bg-center bg-no-repeat flex items-center p-6 sm:p-10 text-white shadow-md bg-[linear-gradient(90deg,rgba(0,0,0,0.7)_0%,rgba(0,0,0,0.2)_100%),url('/img/kat-1.png')]">
             <div className="flex flex-col items-start gap-3 sm:gap-4 z-10">
               <span className="text-sm sm:text-base font-medium opacity-90 tracking-wide">
                 Fashion Wanita
@@ -228,7 +228,7 @@ export default function HomePage() {
             </div>
           </div>
 
-          <div className="relative min-h-45 sm:min-h-55 rounded-3xl overflow-hidden bg-cover bg-center bg-no-repeat flex items-center p-6 sm:p-10 text-white shadow-md bg-[linear-gradient(90deg,rgba(28,57,142,0.8)_0%,rgba(28,57,142,0.2)_100%),url('/src/img/kat2.png')]">
+          <div className="relative min-h-45 sm:min-h-55 rounded-3xl overflow-hidden bg-cover bg-center bg-no-repeat flex items-center p-6 sm:p-10 text-white shadow-md bg-[linear-gradient(90deg,rgba(28,57,142,0.8)_0%,rgba(28,57,142,0.2)_100%),url('/img/kat2.png')]">
             <div className="flex flex-col items-start gap-3 sm:gap-4 z-10">
               <span className="text-sm sm:text-base font-medium opacity-90 tracking-wide">
                 Elektronik Pilihan
