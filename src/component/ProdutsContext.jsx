@@ -54,7 +54,7 @@ export function ProductProvider({ children }) {
   React.useEffect(() => {
     async function fetchProducts() {
       try {
-        const response = await fetch("/src/data/products.json");
+        const response = await fetch("/data/products.json");
 
         if (!response.ok) {
           throw new Error("Gagal mengambil data produk");
