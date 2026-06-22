@@ -23,6 +23,8 @@ export default function Register() {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
+    if (isLoading) return;
+
     const formElement = event.currentTarget
     const form = new FormData(formElement);
     const data = Object.fromEntries(form.entries())
@@ -67,7 +69,10 @@ export default function Register() {
 
     if (!isConfirmed) return;
 
+    setIsLoading(true);
+
     try {
+      await new Promise((resolve) => setTimeout(resolve, 3000));
       const result = registerUser({
         name: name,
         email: email,
@@ -268,8 +273,8 @@ export default function Register() {
           type="submit"
           disabled={isLoading}
           className={`w-full text-white border-none rounded-lg py-2.5 text-xs font-semibold flex justify-center items-center gap-2 transition-colors mt-1 shadow-sm ${isLoading
-              ? "bg-orange-300 cursor-not-allowed"
-              : "bg-[#F97316] hover:bg-[#EA580C] cursor-pointer"
+            ? "bg-orange-300 cursor-not-allowed"
+            : "bg-[#F97316] hover:bg-[#EA580C] cursor-pointer"
             }`}
         >
           {isLoading ? (

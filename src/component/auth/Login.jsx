@@ -55,7 +55,7 @@ export default function Login() {
     setIsLoading(true);
 
     try {
-      await new Promise((resolve) => setTimeout(resolve, 700));
+      await new Promise((resolve) => setTimeout(resolve, 3000));
 
       const result = loginUser({
         email: email,
