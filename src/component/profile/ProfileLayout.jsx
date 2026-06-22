@@ -22,6 +22,34 @@ export default function ProfileLayout() {
   const { profile, orders = [], wishlistItems = [] } = makeProfile();
   const { showConfirm, showAlert } = makeModal();
 
+  const profileMenus = [
+    {
+      label: "Pesanan Saya",
+      to: "/profile/my-orders",
+      icon: FaBoxOpen,
+    },
+    {
+      label: "Wishlist",
+      to: "/profile/wishlists",
+      icon: FaHeart,
+    },
+    {
+      label: "Alamat Saya",
+      to: "/profile/address",
+      icon: FaMapMarkerAlt,
+    },
+    {
+      label: "Metode Pembayaran",
+      to: "/profile/payment-methods",
+      icon: FaCreditCard,
+    },
+    {
+      label: "Pengaturan Profil",
+      to: "/profile/edit-profile",
+      icon: FaCog,
+    },
+  ];
+
   if (!isLoggedIn) {
     return <Navigate to="/auth/login" replace />;
   }
@@ -104,35 +132,21 @@ export default function ProfileLayout() {
             </div>
 
             <div className="mt-4 grid overflow-hidden rounded-2xl border border-[#0000001A] bg-white">
-              <NavLink to="/profile/my-orders" className={menuClass}>
-                <FaBoxOpen className="h-4 w-4" />
-                Pesanan Saya
-                <FaChevronRight className="ml-auto h-4 w-4" />
-              </NavLink>
+              {profileMenus.map((menu) => {
+                const Icon = menu.icon;
 
-              <NavLink to="/profile/wishlists" className={menuClass}>
-                <FaHeart className="h-4 w-4" />
-                Wishlist
-                <FaChevronRight className="ml-auto h-4 w-4" />
-              </NavLink>
-
-              <NavLink to="/profile/address" className={menuClass}>
-                <FaMapMarkerAlt className="h-4 w-4" />
-                Alamat Saya
-                <FaChevronRight className="ml-auto h-4 w-4" />
-              </NavLink>
-
-              <NavLink to="/profile/payment-methods" className={menuClass}>
-                <FaCreditCard className="h-4 w-4" />
-                Metode Pembayaran
-                <FaChevronRight className="ml-auto h-4 w-4" />
-              </NavLink>
-
-              <NavLink to="/profile/edit-profile" className={menuClass}>
-                <FaCog className="h-4 w-4" />
-                Pengaturan Profil
-                <FaChevronRight className="ml-auto h-4 w-4" />
-              </NavLink>
+                return (
+                  <NavLink
+                    key={menu.to}
+                    to={menu.to}
+                    className={menuClass}
+                  >
+                    <Icon className="h-4 w-4" />
+                    {menu.label}
+                    <FaChevronRight className="ml-auto h-4 w-4" />
+                  </NavLink>
+                );
+              })}
 
               <button
                 type="button"
