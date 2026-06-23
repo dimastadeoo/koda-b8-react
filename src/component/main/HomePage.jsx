@@ -81,8 +81,8 @@ export default function HomePage() {
       </header>
 
       <main className="grid gap-7">
-        <section className="relative w-full bg-linear-to-r from-[#4F39F6] from-50% to-[#8200DB] to-50% overflow-hidden min-h-110 flex items-center group">
-          <div className="absolute inset-y-0 right-0 w-1/2 h-full opacity-60 md:opacity-90 mix-blend-multiply pointer-events-none">
+        <section className="relative w-full md:bg-linear-to-r md:from-[#4F39F6] md:from-50% md:to-[#8200DB] md:to-50% bg-[#8200DB] overflow-hidden min-h-110 flex items-center group">
+          <div className="w-full absolute inset-y-0 md:right-0 md:w-1/2 h-full opacity-60 md:opacity-90 mix-blend-multiply pointer-events-none">
             <img
               key={activeKategori?.id}
               className="w-full h-full object-cover object-center transition-all duration-500"
@@ -132,7 +132,7 @@ export default function HomePage() {
         <section className="w-full max-w-5xl mx-auto font-sans">
           <div className="flex justify-between items-center mb-6">
             <h2 className="text-xl md:text-2xl font-bold text-gray-900 tracking-tight">
-              Belanja Berdasarkan Kategori
+              <span className="max-sm:hidden">Belanja Berdasarkan</span> Kategori
             </h2>
 
             <Link
@@ -171,7 +171,7 @@ export default function HomePage() {
         </section>
 
         <section className="w-full max-w-5xl mx-auto font-sans">
-          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
+          <div className="flex justify-between items-start sm:items-center gap-4 mb-6">
             <div className="flex flex-wrap items-center gap-4">
               <span className="inline-flex items-center gap-1.5 bg-[#db2777] text-white text-sm font-bold px-3 py-1.5 rounded-lg shadow-sm">
                 <FaBolt className="w-4 h-4" />
@@ -181,7 +181,7 @@ export default function HomePage() {
               <span className="flex items-center gap-2 text-gray-900 text-sm font-medium">
                 <FaClock className="w-4 h-4 text-gray-500" />
 
-                <span className="text-gray-500 font-normal">
+                <span className="text-gray-500 font-normal max-sm:hidden">
                   Berakhir dalam:
                 </span>
 
@@ -204,7 +204,7 @@ export default function HomePage() {
             </Link>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6" id="flash-sale-item">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6" id="flash-sale-item">
             {flashSaleProducts.map((item) => (
               <CartItem key={item.id} item={item} />
             ))}
@@ -246,7 +246,7 @@ export default function HomePage() {
         </section>
 
         <section className="w-full max-w-5xl mx-auto font-sans">
-          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
+          <div className="flex justify-between items-start sm:items-center gap-4 mb-6">
             <div className="flex flex-wrap items-center gap-4">
               <span className="flex items-center gap-3 font-semibold text-gray-900">
                 <FaChartLine className="w-5 h-5 text-blue-600" />
@@ -263,7 +263,7 @@ export default function HomePage() {
             </Link>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6" id="new-sale-item">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6" id="new-sale-item">
             {newProducts.map((item) => (
               <CartItem key={item.id} item={item} />
             ))}
@@ -271,7 +271,7 @@ export default function HomePage() {
         </section>
 
         <section className="w-full max-w-5xl mx-auto font-sans">
-          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
+          <div className="flex justify-between items-start sm:items-center gap-4 mb-6">
             <span className="flex flex-wrap items-center gap-4 font-semibold text-gray-900">
               Produk Unggulan
             </span>
@@ -285,7 +285,7 @@ export default function HomePage() {
             </Link>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6" id="super-sale-item">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6" id="super-sale-item">
             {bestProducts.map((item) => (
               <CartItem key={item.id} item={item} />
             ))}

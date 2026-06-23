@@ -113,12 +113,12 @@ function CartItem({ item }) {
               {rateContent}
             </span>
 
-            <span className="text-gray-400">
+            <span className="text-gray-400 max-sm:hidden">
               ({reviewContent})
             </span>
           </div>
 
-          <div className="pt-1 flex items-baseline justify-between">
+          <div className="pt-1 flex max-sm:flex-col items-baseline justify-between">
             <span className="text-sm font-bold text-blue-600">
               {formatRupiah(finalPrice)}
             </span>

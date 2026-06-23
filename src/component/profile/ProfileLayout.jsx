@@ -90,9 +90,9 @@ export default function ProfileLayout() {
         <Header />
       </header>
 
-      <main className="mx-auto mb-16 flex w-full max-w-5xl items-start justify-center px-4">
-        <section className="flex w-full gap-8 py-8">
-          <aside className="w-64 shrink-0">
+      <main className="mx-auto mb-16 w-full max-w-5xl px-4">
+        <section className="flex w-full flex-col gap-6 py-6 md:flex-row md:gap-8 md:py-8">
+          <aside className="w-full md:w-64 md:shrink-0">
             <div className="grid gap-3 rounded-2xl border border-[#0000001A] bg-white p-5">
               <div className="flex h-16 w-16 place-self-center items-center justify-center rounded-full bg-[#1A73E81A] text-xl font-bold text-[#1A73E8]">
                 {initialName}
@@ -102,7 +102,6 @@ export default function ProfileLayout() {
                 <h2 className="place-self-center text-base font-bold text-[#111827]">
                   {userName}
                 </h2>
-
                 <p className="place-self-center text-xs font-normal text-[#6B7280]">
                   {userEmail}
                 </p>
@@ -113,17 +112,14 @@ export default function ProfileLayout() {
                   <h2 className="place-self-center text-base font-semibold text-[#111827]">
                     {orders.length}
                   </h2>
-
                   <p className="place-self-center text-xs font-normal text-[#6B7280]">
                     Pesanan
                   </p>
                 </div>
-
                 <div className="grid">
                   <h2 className="place-self-center text-base font-semibold text-[#111827]">
                     {wishlistItems.length}
                   </h2>
-
                   <p className="place-self-center text-xs font-normal text-[#6B7280]">
                     Wishlist
                   </p>
@@ -131,16 +127,12 @@ export default function ProfileLayout() {
               </div>
             </div>
 
+            {/* Menu list - di mobile akan full width, tetap di dalam sidebar */}
             <div className="mt-4 grid overflow-hidden rounded-2xl border border-[#0000001A] bg-white">
               {profileMenus.map((menu) => {
                 const Icon = menu.icon;
-
                 return (
-                  <NavLink
-                    key={menu.to}
-                    to={menu.to}
-                    className={menuClass}
-                  >
+                  <NavLink key={menu.to} to={menu.to} className={menuClass}>
                     <Icon className="h-4 w-4" />
                     {menu.label}
                     <FaChevronRight className="ml-auto h-4 w-4" />

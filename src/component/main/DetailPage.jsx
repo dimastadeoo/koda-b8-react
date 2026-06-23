@@ -263,7 +263,7 @@ export default function DetailPage() {
               />
             </div>
 
-            <div className="flex gap-3 flex-wrap">
+            <div className="flex gap-3 flex-wrap max-sm:hidden">
               {image?.map((img, index) => (
                 <button
                   key={img}
@@ -507,7 +507,7 @@ export default function DetailPage() {
           </div>
 
           <div
-            className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"
+            className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"
             id="terkait-sale-item"
           >
             {relatedProducts.map((item) => (
