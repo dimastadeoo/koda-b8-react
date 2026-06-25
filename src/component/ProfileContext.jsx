@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import { makeAuth } from "./AuthContext";
+import { useAuth } from "./custom_hooks/useAuth.js";
 
 const ProfileContext = createContext(null);
 const PROFILE_DATA_KEY = "belimudah_profile_data";
@@ -28,7 +28,7 @@ function formatDateTime() {
 }
 
 export function ProfileProvider({ children }) {
-  const { isLoggedIn, currentUser } = makeAuth();
+  const { isLoggedIn, currentUser } = useAuth()
 
   const [profileData, setProfileData] = useState(() =>
     getLocalStorageData(PROFILE_DATA_KEY, defaultProfileData)

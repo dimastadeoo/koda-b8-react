@@ -11,14 +11,14 @@ import {
 
 import Header from "../Header";
 import Footer from "../Footer";
-import { makeAuth } from "../AuthContext"
+import { useAuth } from "../custom_hooks/useAuth.js"
 import { makeProfile } from "../ProfileContext";
 import { makeModal } from "../ModalContext";
 
 export default function ProfileLayout() {
   const navigate = useNavigate();
+  const {isLoggedIn, currentUser, logoutUser} = useAuth()
 
-  const { isLoggedIn, currentUser, logoutUser } = makeAuth();
   const { profile, orders = [], wishlistItems = [] } = makeProfile();
   const { showConfirm, showAlert } = makeModal();
 

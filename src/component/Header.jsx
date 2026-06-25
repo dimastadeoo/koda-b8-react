@@ -26,19 +26,18 @@ import {
   FaUserPlus,
 } from "react-icons/fa";
 
-import { makeAuth } from "./AuthContext";
+import { useAuth } from "./custom_hooks/useAuth.js";
 import { makeModal } from "./ModalContext";
 import { makeProducts } from "./ProdutsContext";
 
 export default function Header() {
   const navigate = useNavigate();
+  const {isLoggedIn, currentUser, logoutUser} = useAuth()
   const { kategoriProducts } = makeProducts();
   const [searchParams] = useSearchParams();
 
   const [searchKeyword, setSearchKeyword] = React.useState("");
   const [isSearchTouched, setIsSearchTouched] = React.useState(false);
-
-  const { isLoggedIn, currentUser, logoutUser } = makeAuth();
   const { showConfirm, showAlert } = makeModal();
 
   const trimmedSearchKeyword = searchKeyword.trim();

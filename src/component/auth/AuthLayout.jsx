@@ -1,5 +1,5 @@
 import { Link, Outlet, useLocation, Navigate } from "react-router";
-import { makeAuth } from "../AuthContext";
+import { useAuth } from "../custom_hooks/useAuth";
 import {
   FaCheckCircle,
   FaLock,
@@ -8,8 +8,8 @@ import {
 } from "react-icons/fa";
 
 export default function AuthLayout() {
-  const { isLoggedIn } = makeAuth();
   const location = useLocation();
+  const {isLoggedIn} = useAuth()
 
   if (isLoggedIn) {
     return <Navigate to="/main" replace />;

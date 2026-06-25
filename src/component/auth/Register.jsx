@@ -7,7 +7,7 @@ import { FaUser, FaEnvelope, FaLock } from 'react-icons/fa';
 import FormInput from '../FormInputLayout';
 import { useFormBuilder } from '../custom_hooks/useFormBuilder.js';
 import { makeModal } from '../ModalContext';
-import { makeAuth } from '../AuthContext';
+import { useAuth } from '../custom_hooks/useAuth.js';
 
 // --- 1. Konfigurasi field (sesuai kebutuhan Register) ---
 const fieldConfigs = [
@@ -48,8 +48,8 @@ const fieldConfigs = [
 ];
 
 export default function Register() {
+  const {registerUser} = useAuth()
   const navigate = useNavigate();
-  const { registerUser } = makeAuth();
   const { showAlert, showConfirm } = makeModal();
   // const [isLoading, setIsLoading] = React.useState(false);
 

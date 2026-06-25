@@ -6,7 +6,7 @@ import {
   FaSignInAlt,
 } from "react-icons/fa";
 import { makeModal } from "../ModalContext";
-import { makeAuth } from "../AuthContext";
+import { useAuth } from "../custom_hooks/useAuth.js";
 import { FormProvider } from "react-hook-form";
 import { useFormBuilder } from "../custom_hooks/useFormBuilder";
 import FormInput from "../FormInputLayout";
@@ -32,8 +32,8 @@ const fieldConfigs = [
 ]
 
 export default function Login() {
+  const {loginUser} = useAuth()
   const navigate = useNavigate();
-  const { loginUser } = makeAuth();
   const { showAlert, showConfirm } = makeModal();
 
   // const [showPassword, setShowPassword] = React.useState(false);

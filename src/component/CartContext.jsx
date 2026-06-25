@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import { makeAuth } from "./AuthContext";
+import { useAuth } from "./custom_hooks/useAuth.js";
 
 const CartContext = createContext(null);
 const CART_KEY = "belimudah_cart";
@@ -14,7 +14,7 @@ function getLocalStorageData(key, defaultValue) {
 }
 
 export function CartProvider({ children }) {
-  const { isLoggedIn, currentUser } = makeAuth();
+  const {isLoggedIn, currentUser} = useAuth()
 
   const [allCartItems, setAllCartItems] = useState(() =>
     getLocalStorageData(CART_KEY, [])

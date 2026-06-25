@@ -1,12 +1,12 @@
 import { Navigate, Outlet, useLocation, useParams } from "react-router";
 import Header from "../Header";
 import Footer from "../Footer";
-import { makeAuth } from "../AuthContext";
+import { useAuth } from "../custom_hooks/useAuth.js";
 import { makeProfile } from "../ProfileContext";
 
 export default function CheckoutLayout() {
-  const { isLoggedIn } = makeAuth();
   const { getOrderById } = makeProfile();
+  const {isLoggedIn} = useAuth()
 
   const { checkoutId } = useParams();
   const location = useLocation();

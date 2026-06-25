@@ -8,7 +8,7 @@ import { makeProducts } from "../ProdutsContext";
 import { makeCart } from "../CartContext";
 import { makeModal } from "../ModalContext";
 import { makeProfile } from "../ProfileContext";
-import { makeAuth } from "../AuthContext";
+import { useAuth } from "../custom_hooks/useAuth.js";
 
 import {
   FaChevronRight,
@@ -27,7 +27,7 @@ export default function DetailPage() {
   const { showAlert } = makeModal();
   const { id } = useParams();
   const { products, loading, error, kategoriProducts } = makeProducts();
-  const { isLoggedIn, currentUser } = makeAuth();
+  const { isLoggedIn, currentUser } = useAuth();
   const { createCheckout } = makeProfile();
 
   const [quantity, setQuantity] = React.useState(1);

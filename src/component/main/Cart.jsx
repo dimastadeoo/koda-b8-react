@@ -13,7 +13,7 @@ import {
 import Header from "../Header";
 import Footer from "../Footer";
 import { CartItem, formatRupiah } from "../CartItem";
-import { makeAuth } from "../AuthContext"
+import { useAuth } from "../custom_hooks/useAuth.js"
 import { makeCart } from "../CartContext";
 import { makeProducts } from "../ProdutsContext";
 import { makeModal } from "../ModalContext";
@@ -21,8 +21,8 @@ import { makeProfile } from "../ProfileContext";
 
 export default function Cart() {
   const navigate = useNavigate();
+  const {isLoggedIn} = useAuth()
 
-  const { isLoggedIn } = makeAuth();
   const { createCheckout } = makeProfile();
   const {
     cartItems,
