@@ -138,8 +138,8 @@ export default function Register() {
       {/* FORM dengan submit langsung */}
       <form onSubmit={submit} className="grid gap-2.5" id="formReg">
         {fieldConfigs.map((field) => (
-          <div className="grid gap-1">
-            <FormInput key={field.name} {...field} />
+          <div key={field.name} className="grid gap-1">
+            <FormInput {...field} />
           </div>
         ))}
 
