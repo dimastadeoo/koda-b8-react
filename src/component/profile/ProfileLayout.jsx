@@ -60,8 +60,8 @@ export default function ProfileLayout() {
 
   const menuClass = ({ isActive }) =>
     `flex items-center gap-3 px-4 py-3.5 text-sm font-medium transition-colors ${isActive
-      ? "bg-[#EFF6FF] text-[#1A73E8]"
-      : "text-[#6B7280] hover:bg-gray-50 hover:text-[#1A73E8]"
+      ? "bg-green-100 text-green-600"
+      : "text-[#6B7280] hover:bg-green-100 hover:text-green-600"
     }`;
 
   const handleLogout = async () => {
@@ -90,11 +90,11 @@ export default function ProfileLayout() {
         <Header />
       </header>
 
-      <main className="mx-auto mb-16 w-full max-w-5xl px-4">
+      <main className="bg-green-50 mx-auto mb-16 w-full max-w-5xl px-4">
         <section className="flex w-full flex-col gap-6 py-6 md:flex-row md:gap-8 md:py-8">
           <aside className="w-full md:w-64 md:shrink-0">
             <div className="grid gap-3 rounded-2xl border border-[#0000001A] bg-white p-5">
-              <div className="flex h-16 w-16 place-self-center items-center justify-center rounded-full bg-[#1A73E81A] text-xl font-bold text-[#1A73E8]">
+              <div className="flex h-16 w-16 place-self-center items-center justify-center rounded-full bg-green-100 text-xl font-bold text-green-600">
                 {initialName}
               </div>
 

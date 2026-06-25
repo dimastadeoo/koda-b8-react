@@ -12,8 +12,8 @@ export default function ErrorPage() {
         <Header />
       </header>
       <main className="min-h-screen bg-slate-50 flex items-center justify-center px-4 py-10">
-        <section className="w-full max-w-xl rounded-3xl border border-slate-100 bg-white p-8 text-center shadow-sm">
-          <div className="mx-auto mb-6 flex h-24 w-24 items-center justify-center rounded-full bg-blue-50 text-blue-600">
+        <section className="w-full max-w-xl rounded-3xl border border-slate-100 bg-green-50 p-8 text-center shadow-sm">
+          <div className="mx-auto mb-6 flex h-24 w-24 items-center justify-center rounded-full bg-green-50 text-blue-600">
             <span className="text-4xl font-bold">404</span>
           </div>
 
@@ -30,7 +30,7 @@ export default function ErrorPage() {
             <button
               type="button"
               onClick={() => navigate(-1)}
-              className="inline-flex items-center justify-center gap-2 rounded-xl border border-slate-200 bg-white px-5 py-3 text-sm font-semibold text-slate-700 transition-colors hover:bg-slate-50"
+              className="cursor-pointer inline-flex items-center justify-center gap-2 rounded-xl border border-slate-200 bg-green-50 px-5 py-3 text-sm font-semibold text-slate-700 transition-colors hover:bg-slate-50"
             >
               <FaArrowLeft className="h-4 w-4" />
               Kembali
@@ -38,7 +38,7 @@ export default function ErrorPage() {
 
             <Link
               to="/main"
-              className="inline-flex items-center justify-center gap-2 rounded-xl bg-blue-600 px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-blue-700"
+              className="inline-flex items-center justify-center gap-2 rounded-xl bg-green-600 px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-green-700"
             >
               <FaHome className="h-4 w-4" />
               Ke Beranda

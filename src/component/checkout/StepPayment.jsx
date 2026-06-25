@@ -57,10 +57,10 @@ export default function StepPayment() {
         <div className="w-30 max-sm:w-15 mb-5 border-t-2 border-solid border-[#00C950]" />
 
         <div className="flex flex-col items-center gap-2">
-          <div className="w-10 h-10 rounded-2xl bg-[#1A73E8] text-white flex items-center justify-center text-sm font-semibold">
+          <div className="w-10 h-10 rounded-2xl bg-green-600 text-white flex items-center justify-center text-sm font-semibold">
             2
           </div>
-          <span className="text-xs font-normal text-[#1A73E8]">Pembayaran</span>
+          <span className="text-xs font-normal text-green-600">Pembayaran</span>
         </div>
 
         <div className="w-30 max-sm:w-15 mb-5 border-t-2 border-solid border-[#E5E7EB]" />
@@ -79,7 +79,7 @@ export default function StepPayment() {
           className="grid gap-6 bg-white border border-[#eef0f2] rounded-2xl p-6"
         >
           <h2 className="text-xl font-medium flex items-center gap-2 text-[#111827]">
-            <FaCreditCard className="text-[#1A73E8]" />
+            <FaCreditCard className="text-green-600" />
             Metode Pembayaran
           </h2>
 
@@ -94,7 +94,7 @@ export default function StepPayment() {
             ].map((payment, index) => (
               <label
                 key={payment}
-                className="flex items-center gap-2 p-3 rounded-xl border-2 border-black/10 text-[#111827] text-xs font-medium cursor-pointer hover:border-[#1A73E8] hover:bg-[#EFF6FF]"
+                className="flex items-center gap-2 p-3 rounded-xl border-2 border-black/10 text-[#111827] text-xs font-medium cursor-pointer hover:border-green-600 hover:bg-[#EFF6FF]"
               >
                 <input
                   type="radio"
@@ -105,7 +105,7 @@ export default function StepPayment() {
                       ? activeCheckout.payment === payment
                       : index === 0
                   }
-                  className="accent-[#1A73E8]"
+                  className="accent-green-600"
                 />
                 <p>{payment}</p>
               </label>
@@ -134,7 +134,7 @@ export default function StepPayment() {
 
             <button
               type="submit"
-              className="flex flex-1 justify-center items-center gap-2 bg-[#1A73E8] hover:bg-[#1557B0] text-white border-none rounded-xl p-4 text-base font-medium cursor-pointer"
+              className="flex flex-1 justify-center items-center gap-2 bg-green-600 hover:bg-green-800 text-white border-none rounded-xl p-4 text-base font-medium cursor-pointer"
             >
               Lanjut ke Konfirmasi
               <FaChevronRight />

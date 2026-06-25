@@ -37,14 +37,14 @@ export default function ForgotPassword() {
               type="email"
               placeholder="email@contoh.com"
               required
-              className="w-full py-2.5 pl-10 pr-3.5 bg-[#F1F1F3] border border-[#E5E5E5] rounded-lg text-sm outline-none transition-colors focus:border-[#1A73E8] focus:bg-white"
+              className="w-full py-2.5 pl-10 pr-3.5 bg-[#F1F1F3] border border-[#E5E5E5] rounded-lg text-sm outline-none transition-colors focus:border-green-600 focus:bg-white"
             />
           </div>
         </div>
 
         <button
           type="submit"
-          className="w-full bg-[#1A73E8] hover:bg-[#1565C0] text-white border-none rounded-lg py-3 text-sm font-semibold cursor-pointer flex justify-center items-center gap-2 transition-colors mt-1 shadow-sm"
+          className="w-full bg-green-600 hover:bg-green-800 text-white border-none rounded-lg py-3 text-sm font-semibold cursor-pointer flex justify-center items-center gap-2 transition-colors mt-1 shadow-sm"
         >
           <FaPaperPlane className="w-4 h-4" />
           Kirim Tautan Reset
@@ -79,7 +79,7 @@ export default function ForgotPassword() {
         Ingat kata sandi kamu?{" "}
         <Link
           to="/auth/login"
-          className="text-[#1A73E8] font-medium hover:underline"
+          className="text-green-600 font-medium hover:underline"
         >
           Masuk sekarang
         </Link>

@@ -31,7 +31,7 @@ export default function CheckoutLayout() {
         <Header />
       </header>
 
-      <main className="min-h-screen bg-slate-50">
+      <main className="min-h-screen bg-green-50 pb-10">
         <Outlet context={{ checkout, checkoutId }} />
       </main>
 

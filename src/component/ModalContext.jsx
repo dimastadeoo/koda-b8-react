@@ -77,7 +77,7 @@ export function ModalProvider({ children }) {
                 className={`mx-auto mb-4 w-12 h-12 rounded-full flex items-center justify-center text-xl ${
                   modal.type === "confirm"
                     ? "bg-orange-100 text-orange-600"
-                    : "bg-blue-100 text-blue-600"
+                    : "bg-green-100 text-green-600"
                 }`}
               >
                 {modal.type === "confirm" ? "?" : "i"}
@@ -108,8 +108,8 @@ export function ModalProvider({ children }) {
                 onClick={modal.onConfirm}
                 className={`flex-1 py-3 text-sm font-semibold transition-colors ${
                   modal.type === "confirm"
-                    ? "bg-blue-600 hover:bg-blue-700 text-white"
-                    : "bg-blue-600 hover:bg-blue-700 text-white"
+                    ? "bg-green-600 hover:bg-green-700 text-white"
+                    : "bg-green-600 hover:bg-green-700 text-white"
                 }`}
               >
                 {modal.confirmText}

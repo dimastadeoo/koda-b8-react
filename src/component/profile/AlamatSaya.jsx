@@ -70,7 +70,7 @@ export default function AlamatSaya() {
         <button
           type="button"
           onClick={() => setShowForm((prev) => !prev)}
-          className="flex items-center justify-center gap-1 rounded-xl bg-[#1A73E8] px-4 py-2 text-sm font-normal text-white transition-colors hover:bg-[#155FC0]"
+          className="flex items-center justify-center gap-1 rounded-xl bg-green-600 px-4 py-2 text-sm font-normal text-white transition-colors hover:bg-green-800"
         >
           {showForm ? (
             <>
@@ -101,7 +101,7 @@ export default function AlamatSaya() {
               name="label"
               type="text"
               placeholder="Contoh: Rumah, Kantor, Kos"
-              className="rounded-xl border border-[#0000001A] bg-[#F3F4F6] px-4 py-3 text-sm outline-none focus:border-[#1A73E8]"
+              className="rounded-xl border border-[#0000001A] bg-[#F3F4F6] px-4 py-3 text-sm outline-none focus:border-green-600"
               required
             />
           </div>
@@ -116,7 +116,7 @@ export default function AlamatSaya() {
               name="receiverName"
               type="text"
               placeholder="Nama penerima paket"
-              className="rounded-xl border border-[#0000001A] bg-[#F3F4F6] px-4 py-3 text-sm outline-none focus:border-[#1A73E8]"
+              className="rounded-xl border border-[#0000001A] bg-[#F3F4F6] px-4 py-3 text-sm outline-none focus:border-green-600"
               required
             />
           </div>
@@ -131,7 +131,7 @@ export default function AlamatSaya() {
               name="phone"
               type="tel"
               placeholder="Contoh: 081234567890"
-              className="rounded-xl border border-[#0000001A] bg-[#F3F4F6] px-4 py-3 text-sm outline-none focus:border-[#1A73E8]"
+              className="rounded-xl border border-[#0000001A] bg-[#F3F4F6] px-4 py-3 text-sm outline-none focus:border-green-600"
               required
             />
           </div>
@@ -145,7 +145,7 @@ export default function AlamatSaya() {
               id="detail"
               name="detail"
               placeholder="Nama jalan, nomor rumah, RT/RW, patokan, dan detail lainnya"
-              className="min-h-24 resize-none rounded-xl border border-[#0000001A] bg-[#F3F4F6] px-4 py-3 text-sm outline-none focus:border-[#1A73E8]"
+              className="min-h-24 resize-none rounded-xl border border-[#0000001A] bg-[#F3F4F6] px-4 py-3 text-sm outline-none focus:border-green-600"
               required
             />
           </div>
@@ -161,7 +161,7 @@ export default function AlamatSaya() {
                 name="city"
                 type="text"
                 placeholder="Contoh: Jakarta Selatan"
-                className="rounded-xl border border-[#0000001A] bg-[#F3F4F6] px-4 py-3 text-sm outline-none focus:border-[#1A73E8]"
+                className="rounded-xl border border-[#0000001A] bg-[#F3F4F6] px-4 py-3 text-sm outline-none focus:border-green-600"
                 required
               />
             </div>
@@ -176,7 +176,7 @@ export default function AlamatSaya() {
                 name="postalCode"
                 type="text"
                 placeholder="Contoh: 12190"
-                className="rounded-xl border border-[#0000001A] bg-[#F3F4F6] px-4 py-3 text-sm outline-none focus:border-[#1A73E8]"
+                className="rounded-xl border border-[#0000001A] bg-[#F3F4F6] px-4 py-3 text-sm outline-none focus:border-green-600"
                 required
               />
             </div>
@@ -184,7 +184,7 @@ export default function AlamatSaya() {
 
           <button
             type="submit"
-            className="mt-1 rounded-xl bg-[#1A73E8] px-4 py-2.5 text-sm font-medium text-white transition-colors hover:bg-[#155FC0]"
+            className="mt-1 rounded-xl bg-green-600 px-4 py-2.5 text-sm font-medium text-white transition-colors hover:bg-green-800"
           >
             Simpan Alamat
           </button>
@@ -216,7 +216,7 @@ export default function AlamatSaya() {
                 </h2>
 
                 {address.isPrimary && (
-                  <div className="rounded-full bg-[#1A73E8] px-2 py-0.5 text-sm font-medium text-white">
+                  <div className="rounded-full bg-green-600 px-2 py-0.5 text-sm font-medium text-white">
                     Utama
                   </div>
                 )}
@@ -250,7 +250,7 @@ export default function AlamatSaya() {
               <button
                 type="button"
                 onClick={() => handleSetPrimary(address.id)}
-                className="flex w-fit items-center gap-1 text-xs font-normal text-[#1A73E8]"
+                className="flex w-fit items-center gap-1 text-xs font-normal text-green-600"
               >
                 <FaCheckCircle className="h-3.5 w-3.5" />
                 Jadikan Alamat Utama

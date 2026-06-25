@@ -54,7 +54,7 @@ function CartItem({ item }) {
       onKeyDown={handleKeyDown}
       role="button"
       tabIndex={0}
-      className="bg-white border border-gray-100 rounded-2xl flex flex-col justify-between shadow-sm hover:shadow-md transition-all group cursor-pointer outline-none focus:ring-2 focus:ring-blue-500"
+      className="bg-green-50 border border-gray-100 rounded-2xl flex flex-col justify-between shadow-sm hover:shadow-md transition-all group cursor-pointer outline-none focus:ring-2 focus:ring-green-500"
     >
       <div className="block">
         <div className="relative overflow-hidden rounded-xl">
@@ -68,7 +68,7 @@ function CartItem({ item }) {
               badgeContent !== null &&
               badgeContent !== undefined && (
                 <span
-                  className={`absolute top-2 left-2 ${isDiscount ? "bg-red-500" : "bg-blue-600"
+                  className={`absolute top-2 left-2 ${isDiscount ? "bg-red-500" : "bg-green-600"
                     } text-white text-xs font-bold px-2 py-1 rounded-full`}
                 >
                   {isDiscount ? `-${badgeContent}%` : badgeContent}
@@ -95,7 +95,7 @@ function CartItem({ item }) {
             {cartJenisContent}
           </div>
 
-          <div className="text-sm font-semibold text-gray-900 line-clamp-1 group-hover:text-blue-600 transition-colors">
+          <div className="text-sm font-semibold text-gray-900 line-clamp-1 group-hover:text-green-600 transition-colors">
             {cartNameContent}
           </div>
 
@@ -119,7 +119,7 @@ function CartItem({ item }) {
           </div>
 
           <div className="pt-1 flex max-sm:flex-col items-baseline justify-between">
-            <span className="text-sm font-bold text-blue-600">
+            <span className="text-sm font-bold text-green-600">
               {formatRupiah(finalPrice)}
             </span>
 

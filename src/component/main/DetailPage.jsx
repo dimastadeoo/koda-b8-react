@@ -69,7 +69,7 @@ export default function DetailPage() {
 
               <Link
                 to="/main/"
-                className="inline-flex items-center justify-center bg-blue-600 text-white px-5 py-3 rounded-xl font-semibold"
+                className="inline-flex items-center justify-center bg-green-600 text-white px-5 py-3 rounded-xl font-semibold"
               >
                 Kembali ke Beranda
               </Link>
@@ -198,7 +198,7 @@ export default function DetailPage() {
             <li>
               <Link
                 to="/main/"
-                className="hover:text-blue-600 transition-colors"
+                className="hover:text-green-600 transition-colors"
               >
                 Beranda
               </Link>
@@ -211,7 +211,7 @@ export default function DetailPage() {
             <li>
               <Link
                 to={`/main/all-products/${kategoriName.title.toLowerCase()}`}
-                className="hover:text-blue-600 transition-colors"
+                className="hover:text-green-600 transition-colors"
               >
                 {kategoriName.title}
               </Link>
@@ -224,7 +224,7 @@ export default function DetailPage() {
             <li>
               <Link
                 to="#"
-                className="hover:text-blue-600 transition-colors"
+                className="hover:text-green-600 transition-colors"
               >
                 {cartJenisContent}
               </Link>
@@ -249,7 +249,7 @@ export default function DetailPage() {
                 badgeContent !== null &&
                 badgeContent !== undefined && (
                   <span className={`absolute top-4 left-4 
-                    ${isDiscount ? "bg-red-500" : "bg-blue-600"} 
+                    ${isDiscount ? "bg-red-500" : "bg-green-600"} 
                     text-white text-xs font-bold px-2.5 py-1 rounded-full z-10`}>
                     {isDiscount ? `-${badgeContent}%` : badgeContent}
                   </span>
@@ -317,7 +317,7 @@ export default function DetailPage() {
 
               <div className="bg-gray-50 rounded-xl p-4 mb-5 border border-gray-100">
                 <div className="flex items-center gap-3 flex-wrap">
-                  <span className="text-3xl font-black text-blue-600">
+                  <span className="text-3xl font-black text-green-600">
                     {formatRupiah(finalPrice)}
                   </span>
 
@@ -350,7 +350,7 @@ export default function DetailPage() {
                 </div>
 
                 <div className="flex gap-2">
-                  <button className="px-4 py-2 text-sm font-medium border-2 border-blue-600 text-blue-600 bg-blue-50/50 rounded-xl transition-all">
+                  <button className="px-4 py-2 text-sm font-medium border-2 border-blue-600 text-green-600 bg-green-50/50 rounded-xl transition-all">
                     Hitam
                   </button>
 
@@ -405,7 +405,7 @@ export default function DetailPage() {
             <div className="flex flex-col sm:flex-row gap-3 border-t border-gray-100 pt-5">
               <button
                 onClick={handleAddToCart}
-                className="flex-1 bg-white border border-blue-600 text-blue-600 hover:bg-blue-50 font-semibold py-3 px-4 rounded-xl transition-colors flex items-center justify-center gap-2 cursor-pointer text-sm"
+                className="flex-1 bg-white border border-blue-600 text-green-600 hover:bg-green-50 font-semibold py-3 px-4 rounded-xl transition-colors flex items-center justify-center gap-2 cursor-pointer text-sm"
                 type="button"
               >
                 <FaShoppingCart className="w-4 h-4" />
@@ -415,7 +415,7 @@ export default function DetailPage() {
               <button
                 onClick={handleBuyNow}
                 type="button"
-                className="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-4 rounded-xl transition-colors shadow-md shadow-blue-100 cursor-pointer text-sm"
+                className="flex-1 bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-4 rounded-xl transition-colors shadow-md shadow-blue-100 cursor-pointer text-sm"
               >
                 Beli Sekarang
               </button>
@@ -430,7 +430,7 @@ export default function DetailPage() {
 
             <div className="grid grid-cols-3 gap-2 mt-6 pt-4 border-t border-gray-100 text-center sm:text-left">
               <div className="flex flex-col sm:flex-row items-center gap-2">
-                <FaTruck className="text-2xl text-blue-600" />
+                <FaTruck className="text-2xl text-green-600" />
 
                 <div>
                   <div className="text-xs font-bold text-gray-800">
@@ -444,7 +444,7 @@ export default function DetailPage() {
               </div>
 
               <div className="flex flex-col sm:flex-row items-center gap-2 border-x border-gray-100 px-2">
-                <FaShieldAlt className="text-2xl text-blue-600" />
+                <FaShieldAlt className="text-2xl text-green-600" />
 
                 <div>
                   <div className="text-xs font-bold text-gray-800">
@@ -458,7 +458,7 @@ export default function DetailPage() {
               </div>
 
               <div className="flex flex-col sm:flex-row items-center gap-2">
-                <FaSyncAlt className="text-2xl text-blue-600" />
+                <FaSyncAlt className="text-2xl text-green-600" />
 
                 <div>
                   <div className="text-xs font-bold text-gray-800">
@@ -477,7 +477,7 @@ export default function DetailPage() {
         <section className="w-full max-w-5xl mx-auto font-sans px-4 mb-8">
           <div className="bg-white border border-gray-200 rounded-2xl shadow-sm overflow-hidden">
             <div className="flex border-b border-gray-200 bg-gray-50/70 p-2 gap-1">
-              <button className="px-5 py-2.5 text-sm font-semibold rounded-xl text-blue-600 bg-white shadow-sm transition-all cursor-pointer">
+              <button className="px-5 py-2.5 text-sm font-semibold rounded-xl text-green-600 bg-white shadow-sm transition-all cursor-pointer">
                 Deskripsi
               </button>
 

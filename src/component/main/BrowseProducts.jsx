@@ -120,13 +120,13 @@ export default function BrowseProducts() {
         <Header />
       </header>
 
-      <main className="bg-gray-50 min-h-screen text-gray-800 font-sans antialiased">
+      <main className="bg-green-50 min-h-screen pb-10 text-gray-800 font-sans antialiased">
         <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 pb-2">
           <ul className="flex items-center gap-2 text-xs sm:text-sm text-gray-500 font-medium">
             <li>
               <Link
                 to="/main"
-                className="hover:text-blue-600 transition-colors"
+                className="hover:text-green-600 transition-colors"
               >
                 Beranda
               </Link>
@@ -139,7 +139,7 @@ export default function BrowseProducts() {
             <li>
               <Link
                 to="/main/all-products"
-                className="hover:text-blue-600 transition-colors"
+                className="hover:text-green-600 transition-colors"
               >
                 Toko
               </Link>
@@ -182,7 +182,7 @@ export default function BrowseProducts() {
                     onChange={(event) =>
                       setMaxPrice(Number(event.target.value))
                     }
-                    className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-blue-600"
+                    className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-green-600"
                   />
                 </div>
 
@@ -213,7 +213,7 @@ export default function BrowseProducts() {
                         id={`brand-${brand}`}
                         checked={selectedBrands.includes(brand)}
                         onChange={() => handleBrandChange(brand)}
-                        className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500 cursor-pointer"
+                        className="w-4 h-4 text-green-600 border-gray-300 rounded focus:ring-blue-500 cursor-pointer"
                       />
 
                       <label
@@ -242,7 +242,7 @@ export default function BrowseProducts() {
                       id="rating4"
                       checked={minimumRating === "4"}
                       onChange={() => setMinimumRating("4")}
-                      className="w-4 h-4 text-blue-600 border-gray-300 focus:ring-blue-500 cursor-pointer"
+                      className="w-4 h-4 text-green-600 border-gray-300 focus:ring-blue-500 cursor-pointer"
                     />
 
                     <span className="flex text-amber-400">
@@ -267,7 +267,7 @@ export default function BrowseProducts() {
                       id="rating3"
                       checked={minimumRating === "3"}
                       onChange={() => setMinimumRating("3")}
-                      className="w-4 h-4 text-blue-600 border-gray-300 focus:ring-blue-500 cursor-pointer"
+                      className="w-4 h-4 text-green-600 border-gray-300 focus:ring-blue-500 cursor-pointer"
                     />
 
                     <span className="flex text-amber-400">
@@ -294,7 +294,7 @@ export default function BrowseProducts() {
                     <button
                       type="button"
                       onClick={() => setMinimumRating("")}
-                      className="text-xs text-blue-600 hover:text-blue-700 font-semibold"
+                      className="text-xs text-green-600 hover:text-green-700 font-semibold"
                     >
                       Reset rating
                     </button>

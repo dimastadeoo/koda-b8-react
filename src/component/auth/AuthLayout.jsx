@@ -42,10 +42,10 @@ export default function AuthLayout() {
   const currentAuth = authContent[location.pathname] || authContent["/auth/login"];
 
   return (
-    <main className="bg-[#f8f9fa] font-sans min-h-screen w-full flex items-center justify-center p-3 md:p-4">
+    <main className="bg-green-50 font-sans min-h-screen w-full flex items-center justify-center p-3 md:p-4">
       <div className="w-full max-w-5xl h-[calc(100vh-1.5rem)] md:h-[calc(100vh-2rem)] md:max-h-190 bg-white md:rounded-2xl md:shadow-lg overflow-hidden flex flex-col md:flex-row">
 
-        <section className="relative flex-1 bg-linear-to-br from-[#1447E6] to-[#312C85] p-6 lg:p-8 text-white hidden md:flex flex-col justify-between overflow-hidden">
+        <section className="relative flex-1 bg-linear-to-br from-green-700 to-green-950 p-6 lg:p-8 text-white hidden md:flex flex-col justify-between overflow-hidden">
 
           <img
             src={currentAuth.image}
@@ -56,10 +56,10 @@ export default function AuthLayout() {
           <div className="z-20 flex flex-col h-full justify-between min-h-130">
             <Link to="/main" className="no-underline inline-block self-start">
               <div className="font-semibold text-base flex items-center gap-2 text-white">
-                <span className="bg-white/15 backdrop-blur-md px-3 py-1.5 flex justify-center items-center font-normal rounded-xl text-base">
-                  B
+                <span className="bg-white/15 backdrop-blur-md px-4 py-2 flex justify-center items-center font-normal rounded-xl text-base">
+                  E
                 </span>
-                <span>BeliMudah</span>
+                <span>EShop</span>
               </div>
             </Link>
 
@@ -142,7 +142,7 @@ export default function AuthLayout() {
             </div>
 
             <p className="font-normal text-xs text-white/40">
-              © 2026 BeliMudah. Seluruh hak cipta dilindungi.
+              © 2026 EShop. Seluruh hak cipta dilindungi.
             </p>
           </div>
         </section>

@@ -79,10 +79,10 @@ export default function StepConfirm() {
         <div className="w-30 max-sm:w-15 mb-5 border-t-2 border-solid border-[#00C950]" />
 
         <div className="flex flex-col items-center gap-2">
-          <div className="w-10 h-10 rounded-2xl bg-[#1A73E8] text-white flex items-center justify-center text-sm font-semibold">
+          <div className="w-10 h-10 rounded-2xl bg-green-600 text-white flex items-center justify-center text-sm font-semibold">
             3
           </div>
-          <span className="text-xs font-normal text-[#1A73E8]">Konfirmasi</span>
+          <span className="text-xs font-normal text-green-600">Konfirmasi</span>
         </div>
       </div>
 
@@ -139,7 +139,7 @@ export default function StepConfirm() {
                   </p>
                 </div>
 
-                <span className="ml-auto text-sm font-normal text-[#1A73E8]">
+                <span className="ml-auto text-sm font-normal text-green-600">
                   {formatRupiah(item.price * item.quantity)}
                 </span>
               </div>

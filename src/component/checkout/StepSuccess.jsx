@@ -114,14 +114,14 @@ export default function StepSuccess() {
       <div className="flex justify-start items-center gap-3 px-3 max-md:flex-wrap max-sm:flex-col max-sm:items-stretch">
         <Link
           to="/profile/my-orders"
-          className="flex justify-center items-center gap-2 bg-[#1A73E8] hover:bg-[#1565c0] text-white border-none px-6 py-3 rounded-xl text-base font-normal cursor-pointer"
+          className="flex justify-center items-center gap-2 bg-green-600 hover:bg-green-800 text-white border-none px-6 py-3 rounded-xl text-base font-normal cursor-pointer"
         >
           Lihat Riwayat Pesanan
         </Link>
 
         <Link
           to="/main"
-          className="ml-auto flex items-center justify-center gap-2 text-[#1A73E8] no-underline font-normal text-base px-6 py-3 hover:underline max-md:ml-0"
+          className="ml-auto flex items-center justify-center gap-2 text-green-500 no-underline font-normal text-base px-6 py-3 hover:underline max-md:ml-0"
         >
           Lanjut Belanja
         </Link>

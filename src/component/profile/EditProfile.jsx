@@ -34,7 +34,7 @@ export default function EditProfile() {
 
         <button
           type="submit"
-          className="flex items-center justify-center gap-1 rounded-xl border border-[#1A73E8] bg-transparent px-4 py-2 text-sm font-medium text-[#1A73E8] transition-colors hover:bg-[#EFF6FF]"
+          className="cursor-pointer flex items-center justify-center gap-1 rounded-xl border border-green-400 bg-transparent px-4 py-2 text-sm font-medium text-green-500 transition-colors hover:bg-green-100"
         >
           <FaSave className="h-4 w-4" />
           Simpan
@@ -43,13 +43,13 @@ export default function EditProfile() {
 
       <div className="grid w-full gap-5 rounded-2xl border border-[#0000001A] bg-white p-6">
         <div className="flex items-center gap-4">
-          <div className="flex h-16 w-16 items-center justify-center rounded-full bg-[#1A73E81A] text-xl font-bold text-[#1A73E8]">
+          <div className="flex h-16 w-16 items-center justify-center rounded-full bg-green-100 text-xl font-bold text-green-600">
             {profile.name?.charAt(0)?.toUpperCase() || "U"}
           </div>
 
           <button
             type="button"
-            className="cursor-pointer text-xs font-normal text-[#1A73E8]"
+            className="cursor-pointer text-xs font-normal text-green-500"
           >
             Ganti Foto Profil
           </button>

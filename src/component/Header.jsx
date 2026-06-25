@@ -126,7 +126,7 @@ export default function Header() {
 
   return (
     <>
-      <div className="bg-blue-600 text-white py-2">
+      <div className="bg-green-600 text-white py-2">
         <div className="container mx-auto max-w-5xl px-4 flex justify-between items-center text-xs">
           <div className="flex items-center gap-1.5">
             <FaMapMarkerAlt className="w-3.5 h-3.5" />
@@ -149,18 +149,18 @@ export default function Header() {
         </div>
       </div>
 
-      <div className="border-b border-gray-200 bg-white py-4 relative">
+      <div className="border-b border-gray-200 bg-green-50 py-4 relative">
         <div className="container mx-auto max-w-5xl px-4 flex items-center justify-between gap-4">
           <Link
             to="/main"
             className="flex items-center gap-2 no-underline shrink-0"
           >
-            <div className="w-10 h-10 bg-blue-600 text-white flex justify-center items-center text-xl font-bold rounded-lg">
-              B
+            <div className="w-10 h-10 bg-green-600 text-white flex justify-center items-center text-xl font-bold rounded-lg">
+              E
             </div>
 
             <div className="text-xl font-semibold text-gray-800 tracking-tight">
-              BeliMudah
+              EShop
             </div>
           </Link>
 
@@ -170,7 +170,7 @@ export default function Header() {
               className={`flex items-center bg-gray-100 rounded-lg overflow-hidden border transition-all ${
                 showSearchError
                   ? "border-red-500 focus-within:border-red-500 focus-within:ring-1 focus-within:ring-red-500"
-                  : "border-gray-200 focus-within:border-blue-500 focus-within:ring-1 focus-within:ring-blue-500"
+                  : "border-gray-200 focus-within:border-green-500 focus-within:ring-1 focus-within:ring-green-500"
               }`}
             >
               <input
@@ -194,7 +194,7 @@ export default function Header() {
                 className={`w-12 h-10 flex justify-center items-center transition-colors shrink-0 ${
                   isSearchInvalid
                     ? "bg-gray-300 text-gray-500 cursor-not-allowed"
-                    : "bg-blue-600 hover:bg-blue-700 text-white cursor-pointer"
+                    : "bg-green-600 hover:bg-green-700 text-white cursor-pointer"
                 }`}
                 aria-label="Cari produk"
               >
@@ -215,7 +215,7 @@ export default function Header() {
           <div className="flex items-center gap-4 shrink-0 text-gray-600 relative">
             <button
               type="button"
-              className="cursor-pointer hover:text-blue-600 transition-colors relative"
+              className="cursor-pointer hover:text-green-600 transition-colors relative"
               aria-label="Notifikasi"
             >
               <FaBell className="w-5 h-5" />
@@ -224,13 +224,13 @@ export default function Header() {
             <button
               type="button"
               onClick={() => setIsAccountOpen((prev) => !prev)}
-              className="flex items-center gap-1.5 cursor-pointer hover:text-blue-600 transition-colors relative"
+              className="flex items-center gap-1.5 cursor-pointer hover:text-green-600 transition-colors relative"
               aria-label="Menu akun"
             >
               <FaUserCircle className="w-6 h-6" />
 
               {isLoggedIn && (
-                <span className="hidden md:inline text-sm font-medium text-gray-700">
+                <span className="hidden md:inline hover:text-green-600 text-sm font-medium text-gray-700">
                   {firstName}
                 </span>
               )}
@@ -239,7 +239,7 @@ export default function Header() {
             <button
               type="button"
               onClick={handleWishlistClick}
-              className="cursor-pointer hover:text-blue-600 transition-colors"
+              className="cursor-pointer hover:text-green-600 transition-colors"
               aria-label="Wishlist"
             >
               <FaHeart className="w-5 h-5" />
@@ -248,14 +248,14 @@ export default function Header() {
             <button
               type="button"
               onClick={() => navigate("/main/cart")}
-              className="cursor-pointer hover:text-blue-600 transition-colors"
+              className="cursor-pointer hover:text-green-600 transition-colors"
               aria-label="Keranjang"
             >
               <FaShoppingCart className="w-5 h-5" />
             </button>
 
             {isAccountOpen && (
-              <div className="absolute right-0 top-10 w-72 bg-white rounded-xl shadow-xl border border-gray-100 p-4 z-50">
+              <div className="absolute right-0 top-10 w-72 bg-green-50 rounded-xl shadow-xl border border-gray-100 p-4 z-50">
                 {isLoggedIn ? (
                   <>
                     <div className="flex items-center gap-3 border-b border-gray-100 pb-3 mb-3">
@@ -278,7 +278,7 @@ export default function Header() {
                         onClick={() =>
                           handleProfileMenuClick("/profile/edit-profile")
                         }
-                        className="w-full flex items-center gap-2 bg-gray-50 hover:bg-gray-100 text-gray-700 text-xs font-medium py-2.5 px-3 rounded-lg transition-colors cursor-pointer text-left"
+                        className="w-full flex items-center gap-2 bg-gray-50 hover:bg-green-300 text-gray-700 text-xs font-medium py-2.5 px-3 rounded-lg transition-colors cursor-pointer text-left"
                       >
                         <FaUserEdit className="w-3.5 h-3.5" />
                         Lihat / Edit Profil
@@ -289,7 +289,7 @@ export default function Header() {
                         onClick={() =>
                           handleProfileMenuClick("/profile/my-orders")
                         }
-                        className="w-full flex items-center gap-2 bg-gray-50 hover:bg-gray-100 text-gray-700 text-xs font-medium py-2.5 px-3 rounded-lg transition-colors cursor-pointer text-left"
+                        className="w-full flex items-center gap-2 bg-gray-50 hover:bg-green-300 text-gray-700 text-xs font-medium py-2.5 px-3 rounded-lg transition-colors cursor-pointer text-left"
                       >
                         <FaBoxOpen className="w-3.5 h-3.5" />
                         Pesanan Saya
@@ -300,7 +300,7 @@ export default function Header() {
                         onClick={() =>
                           handleProfileMenuClick("/profile/address")
                         }
-                        className="w-full flex items-center gap-2 bg-gray-50 hover:bg-gray-100 text-gray-700 text-xs font-medium py-2.5 px-3 rounded-lg transition-colors cursor-pointer text-left"
+                        className="w-full flex items-center gap-2 bg-gray-50 hover:bg-green-300 text-gray-700 text-xs font-medium py-2.5 px-3 rounded-lg transition-colors cursor-pointer text-left"
                       >
                         <FaMapMarkedAlt className="w-3.5 h-3.5" />
                         Alamat Saya
@@ -311,7 +311,7 @@ export default function Header() {
                         onClick={() =>
                           handleProfileMenuClick("/profile/wishlists")
                         }
-                        className="w-full flex items-center gap-2 bg-gray-50 hover:bg-gray-100 text-gray-700 text-xs font-medium py-2.5 px-3 rounded-lg transition-colors cursor-pointer text-left"
+                        className="w-full flex items-center gap-2 bg-gray-50 hover:bg-green-300 text-gray-700 text-xs font-medium py-2.5 px-3 rounded-lg transition-colors cursor-pointer text-left"
                       >
                         <FaHeart className="w-3.5 h-3.5" />
                         Wishlist
@@ -347,7 +347,7 @@ export default function Header() {
                       <button
                         type="button"
                         onClick={() => handleProfileMenuClick("/auth/login")}
-                        className="w-full flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold py-2.5 rounded-lg transition-colors cursor-pointer"
+                        className="w-full flex items-center justify-center gap-2 bg-green-600 hover:bg-green-700 text-white text-xs font-semibold py-2.5 rounded-lg transition-colors cursor-pointer"
                       >
                         <FaSignInAlt className="w-3.5 h-3.5" />
                         Login
@@ -370,12 +370,12 @@ export default function Header() {
         </div>
       </div>
 
-      <nav className="bg-white border-b border-gray-100 shadow-sm py-3">
-        <div className="container mx-auto max-w-5xl px-4">
+      <nav className="bg-green-50 border-b border-gray-100 shadow-sm py-3">
+        <div className="mx-auto max-w-5xl px-4">
           <button
             type="button"
             onClick={() => setIsMenuOpen((prev) => !prev)}
-            className="flex lg:hidden items-center gap-1.5 font-semibold text-gray-900 cursor-pointer hover:text-blue-600 transition-colors w-full justify-between"
+            className="flex lg:hidden items-center gap-1.5 font-semibold text-gray-900 cursor-pointer hover:text-green-600 transition-colors w-full justify-between"
           >
             <div className="flex items-center gap-1.5 text-sm">
               <FaBars className="w-4 h-4" />
@@ -392,7 +392,7 @@ export default function Header() {
           <div
             className={`${
               isMenuOpen ? "flex" : "hidden"
-            } lg:flex flex-col lg:flex-row flex-wrap items-start lg:items-center gap-4 lg:gap-6 text-sm text-gray-600 mt-3 lg:mt-0`}
+            } lg:flex flex-col lg:flex-row flex-wrap lg:justify-self-center items-start lg:items-center gap-4 lg:gap-6 text-sm text-gray-600 mt-3 lg:mt-0`}
           >
             {kategoriProducts.map((item) => {
               const Icon = iconMap[item.id] || FaLaptop;
@@ -402,7 +402,7 @@ export default function Header() {
                   key={item.id}
                   to={`/main/all-products/${item.title.toLowerCase()}`}
                   onClick={() => setIsMenuOpen(false)}
-                  className="no-underline transition-colors cursor-pointer flex items-center gap-1 w-full lg:w-auto py-1 lg:py-0 text-gray-600 hover:text-blue-600"
+                  className="no-underline transition-colors cursor-pointer flex items-center gap-1 w-full lg:w-auto py-1 lg:py-0 text-gray-600 hover:text-green-600"
                 >
                   <Icon className="w-4 h-4" />
                   {item.title}

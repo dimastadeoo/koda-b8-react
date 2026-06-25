@@ -200,8 +200,8 @@ export default function Login() {
           type="submit"
           disabled={isLoading}
           className={`w-full text-white border-none rounded-lg py-3 text-sm font-semibold flex justify-center items-center gap-2 transition-colors mt-2 shadow-sm ${isLoading
-            ? "bg-blue-300 cursor-not-allowed"
-            : "bg-[#1A73E8] hover:bg-[#1565C0] cursor-pointer"
+            ? "bg-green-300 cursor-not-allowed"
+            : "bg-green-600 hover:bg-green-800 cursor-pointer"
             }`}
         >
           {isLoading ? (

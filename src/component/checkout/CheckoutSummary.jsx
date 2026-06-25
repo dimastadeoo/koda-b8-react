@@ -43,7 +43,7 @@ export default function CheckoutSummary({ checkout }) {
 
         <div className="flex justify-between border-t border-black/10 pt-2 text-sm font-semibold text-[#1a202c]">
           <span>Total</span>
-          <span className="text-[#1A73E8]">
+          <span className="text-green-600">
             {formatRupiah(checkout.total)}
           </span>
         </div>

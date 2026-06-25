@@ -122,7 +122,7 @@ export default function Cart() {
         <Header />
       </header>
 
-      <main className="min-h-screen bg-slate-50 py-10 text-slate-800 antialiased">
+      <main className="min-h-screen bg-green-50 py-10 text-slate-800 antialiased">
         <div className="max-w-full mx-auto px-20 max-sm:p-4 space-y-8">
 
           {/* Section 1: Judul */}
@@ -147,7 +147,7 @@ export default function Cart() {
                     <button
                       type="button"
                       onClick={() => navigate("/main/all-products")}
-                      className="mt-5 bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold px-5 py-2.5 rounded-xl transition-colors"
+                      className="mt-5 bg-green-600 hover:bg-green-700 text-white text-sm font-semibold px-5 py-2.5 rounded-xl transition-colors"
                     >
                       Belanja Sekarang
                     </button>
@@ -219,7 +219,7 @@ export default function Cart() {
                                 {formatRupiah(item.price)}
                               </p>
                             )}
-                            <p className="text-lg font-bold text-blue-600">
+                            <p className="text-lg font-bold text-green-600">
                               {formatRupiah(finalPrice * item.quantity)}
                             </p>
                           </div>
@@ -233,7 +233,7 @@ export default function Cart() {
               {/* Promo Code */}
               <div className="bg-white p-5 rounded-2xl border border-slate-100 shadow-sm space-y-3">
                 <h3 className="text-sm sm:text-base font-bold flex items-center gap-2">
-                  <FaTag className="text-blue-600" />
+                  <FaTag className="text-green-600" />
                   Kode Promo
                 </h3>
                 <div className="flex gap-2 w-full max-w-md">
@@ -244,7 +244,7 @@ export default function Cart() {
                   />
                   <button
                     type="button"
-                    className="bg-blue-600 hover:bg-blue-700 text-white font-semibold text-sm px-5 py-2.5 rounded-xl shadow-sm shadow-blue-200 transition-colors active:scale-95 shrink-0"
+                    className="bg-green-600 hover:bg-green-700 text-white font-semibold text-sm px-5 py-2.5 rounded-xl shadow-sm shadow-blue-200 transition-colors active:scale-95 shrink-0"
                   >
                     Terapkan
                   </button>
@@ -275,7 +275,7 @@ export default function Cart() {
                 <hr className="border-slate-100 my-4" />
                 <div className="flex justify-between items-center text-base font-bold">
                   <span>Total</span>
-                  <span className="text-lg text-blue-600">{formatRupiah(subtotal)}</span>
+                  <span className="text-lg text-green-600">{formatRupiah(subtotal)}</span>
                 </div>
               </div>
               <button

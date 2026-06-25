@@ -80,8 +80,8 @@ export default function HomePage() {
         <Header />
       </header>
 
-      <main className="grid gap-7">
-        <section className="relative w-full md:bg-linear-to-r md:from-[#4F39F6] md:from-50% md:to-[#8200DB] md:to-50% bg-[#8200DB] overflow-hidden min-h-110 flex items-center group">
+      <main className="grid gap-7 pb-10 bg-green-50">
+        <section className="relative w-full md:bg-linear-to-r md:from-[#288a17] md:from-50% md:to-[#05a2d1] md:to-50% bg-[#05a2d1] overflow-hidden min-h-110 flex items-center group">
           <div className="w-full absolute inset-y-0 md:right-0 md:w-1/2 h-full opacity-60 md:opacity-90 mix-blend-multiply pointer-events-none">
             <img
               key={activeKategori?.id}
@@ -101,7 +101,7 @@ export default function HomePage() {
                 Temukan produk terbaik dari kategori {activeKategori?.title || "pilihan"} dengan promo menarik setiap hari
               </p>
 
-              <button onClick={handleNavigate} className="bg-white hover:bg-purple-50 text-blue-600 font-medium text-sm px-6 py-3 rounded-xl flex items-center gap-2 shadow-md hover:shadow-lg transition-all transform hover:-translate-y-0.5 cursor-pointer">
+              <button onClick={handleNavigate} className="bg-green-100 hover:bg-purple-50 text-green-600 font-medium text-sm px-6 py-3 rounded-xl flex items-center gap-2 shadow-md hover:shadow-lg transition-all transform hover:-translate-y-0.5 cursor-pointer">
                 <span>Lihat Promo</span>
                 <FaArrowRight className="w-4 h-4" />
               </button>
@@ -109,23 +109,23 @@ export default function HomePage() {
           </div>
 
           <button
-            className="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/20 hover:bg-white/30 backdrop-blur-sm flex items-center justify-center cursor-pointer transition-all text-white border border-white/10 opacity-0 group-hover:opacity-100 focus:opacity-100"
+            className="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-green-100/20 hover:bg-green-100/30 backdrop-blur-sm flex items-center justify-center cursor-pointer transition-all text-white border border-white/10 opacity-0 group-hover:opacity-100 focus:opacity-100"
             aria-label="Previous Slide" onClick={prevSlide}
           >
             <FaChevronLeft className="w-5 h-5" />
           </button>
 
           <button
-            className="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/20 hover:bg-white/30 backdrop-blur-sm flex items-center justify-center cursor-pointer transition-all text-white border border-white/10 opacity-0 group-hover:opacity-100 focus:opacity-100"
+            className="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-green-100/20 hover:bg-green-100/30 backdrop-blur-sm flex items-center justify-center cursor-pointer transition-all text-white border border-white/10 opacity-0 group-hover:opacity-100 focus:opacity-100"
             aria-label="Next Slide" onClick={nextSlide}
           >
             <FaChevronRight className="w-5 h-5" />
           </button>
 
           <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex items-center gap-2 z-20">
-            <span className="w-2 h-2 rounded-full bg-white/40 transition-all"></span>
-            <span className="w-6 h-2 rounded-full bg-white transition-all"></span>
-            <span className="w-2 h-2 rounded-full bg-white/40 transition-all"></span>
+            <span className="w-2 h-2 rounded-full bg-green-100/40 transition-all"></span>
+            <span className="w-6 h-2 rounded-full bg-green-100 transition-all"></span>
+            <span className="w-2 h-2 rounded-full bg-green-100/40 transition-all"></span>
           </div>
         </section>
 
@@ -137,7 +137,7 @@ export default function HomePage() {
 
             <Link
               to="/main/all-products"
-              className="flex items-center gap-1 text-sm font-medium text-blue-600 hover:text-blue-700 transition-colors no-underline group"
+              className="flex items-center gap-1 text-sm font-medium text-green-600 hover:text-gren-700 transition-colors no-underline group"
             >
               <span>Lihat Semua</span>
               <FaArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
@@ -148,7 +148,7 @@ export default function HomePage() {
             {kategoriProducts.map((item) => (
               <div
                 key={item.id}
-                className="bg-white border border-gray-200 rounded-2xl p-4 flex flex-col items-center justify-center text-center shadow-sm hover:shadow-md hover:border-blue-500/50 transition-all group"
+                className="bg-green-100 border border-gray-200 rounded-2xl p-4 flex flex-col items-center justify-center text-center shadow-sm hover:shadow-md hover:border-blue-500/50 transition-all group"
               >
                 <Link to={`/main/all-products/${item.title.toLowerCase()}`} className="no-underline w-full flex flex-col items-center">
                   <img
@@ -157,7 +157,7 @@ export default function HomePage() {
                     alt={`Icon ` + item.title}
                   />
 
-                  <div className="text-sm font-semibold text-gray-900 mb-1 group-hover:text-blue-600 transition-colors">
+                  <div className="text-sm font-semibold text-gray-900 mb-1 group-hover:text-green-600 transition-colors">
                     {item.title}
                   </div>
 
@@ -178,10 +178,10 @@ export default function HomePage() {
                 Flash Deal
               </span>
 
-              <span className="flex items-center gap-2 text-gray-900 text-sm font-medium">
+              <span className="max-sm:hidden flex items-center gap-2 text-gray-900 text-sm font-medium">
                 <FaClock className="w-4 h-4 text-gray-500" />
 
-                <span className="text-gray-500 font-normal max-sm:hidden">
+                <span className="text-gray-500 font-normal">
                   Berakhir dalam:
                 </span>
 
@@ -197,7 +197,7 @@ export default function HomePage() {
 
             <Link
               to="/main/all-products"
-              className="flex items-center gap-1 text-sm font-medium text-blue-600 hover:text-blue-700 transition-colors no-underline group/link"
+              className="flex items-center gap-1 text-sm font-medium text-green-600 hover:text-green-700 transition-colors no-underline group/link"
             >
               <span>Lihat Semua</span>
               <FaArrowRight className="w-4 h-4 transition-transform group-hover/link:translate-x-1" />
@@ -222,9 +222,9 @@ export default function HomePage() {
                 Diskon s/d 50%
               </h2>
 
-              <button className="text-xs sm:text-sm font-medium border border-white/80 rounded-xl px-4 py-2 hover:bg-white hover:text-black transition-all duration-300 cursor-pointer">
+              <Link to="/main/all-products/fashion" className="text-xs sm:text-sm font-medium border border-white/80 rounded-xl px-4 py-2 hover:bg-green-100 hover:text-black transition-all duration-300 cursor-pointer">
                 Belanja Sekarang
-              </button>
+              </Link>
             </div>
           </div>
 
@@ -238,9 +238,9 @@ export default function HomePage() {
                 Harga Terbaik
               </h2>
 
-              <button className="text-xs sm:text-sm font-medium border border-white/80 rounded-xl px-4 py-2 hover:bg-white hover:text-black transition-all duration-300 cursor-pointer">
+              <Link to="/main/all-products/elektronik" className="text-xs sm:text-sm font-medium border border-white/80 rounded-xl px-4 py-2 hover:bg-green-100 hover:text-black transition-all duration-300 cursor-pointer">
                 Lihat Produk
-              </button>
+              </Link>
             </div>
           </div>
         </section>
@@ -249,14 +249,14 @@ export default function HomePage() {
           <div className="flex justify-between items-start sm:items-center gap-4 mb-6">
             <div className="flex flex-wrap items-center gap-4">
               <span className="flex items-center gap-3 font-semibold text-gray-900">
-                <FaChartLine className="w-5 h-5 text-blue-600" />
+                <FaChartLine className="w-5 h-5 text-green-600" />
                 Produk Terbaru
               </span>
             </div>
 
             <Link
               to="/main/all-products"
-              className="flex items-center gap-1 text-sm font-medium text-blue-600 hover:text-blue-700 transition-colors no-underline group/link"
+              className="flex items-center gap-1 text-sm font-medium text-green-600 hover:text-green-700 transition-colors no-underline group/link"
             >
               <span>Lihat Semua</span>
               <FaArrowRight className="w-4 h-4 transition-transform group-hover/link:translate-x-1" />
@@ -278,7 +278,7 @@ export default function HomePage() {
 
             <Link
               to="/main/all-products"
-              className="flex items-center gap-1 text-sm font-medium text-blue-600 hover:text-blue-700 transition-colors no-underline group/link"
+              className="flex items-center gap-1 text-sm font-medium text-green-600 hover:text-green-700 transition-colors no-underline group/link"
             >
               <span>Lihat Semua</span>
               <FaArrowRight className="w-4 h-4 transition-transform group-hover/link:translate-x-1" />
@@ -292,7 +292,7 @@ export default function HomePage() {
           </div>
         </section>
 
-        <section className="w-full mb-10 bg-white border border-gray-100 py-2 shadow-xs">
+        <section className="max-sm:hidden w-full bg-green-100 border border-gray-100 py-2 shadow-xs">
           <div className="max-w-5xl mx-auto font-sans text-center">
             <h2 className="text-xl sm:text-2xl font-semibold text-gray-800 mb-10 tracking-wide">
               Kenapa Belanja di BeliMudah?
@@ -300,7 +300,7 @@ export default function HomePage() {
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-6">
               <div className="flex flex-col items-center p-4">
-                <FaTruck className="text-4xl sm:text-5xl mb-4 text-blue-600 transform hover:scale-110 transition-transform duration-200" />
+                <FaTruck className="text-4xl sm:text-5xl mb-4 text-green-600 transform hover:scale-110 transition-transform duration-200" />
 
                 <h3 className="text-base sm:text-lg font-bold text-gray-900 mb-2">
                   Gratis Ongkir
@@ -312,7 +312,7 @@ export default function HomePage() {
               </div>
 
               <div className="flex flex-col items-center p-4">
-                <FaLock className="text-4xl sm:text-5xl mb-4 text-blue-600 transform hover:scale-110 transition-transform duration-200" />
+                <FaLock className="text-4xl sm:text-5xl mb-4 text-green-600 transform hover:scale-110 transition-transform duration-200" />
 
                 <h3 className="text-base sm:text-lg font-bold text-gray-900 mb-2">
                   Pembayaran Aman
@@ -324,7 +324,7 @@ export default function HomePage() {
               </div>
 
               <div className="flex flex-col items-center p-4">
-                <FaUndoAlt className="text-4xl sm:text-5xl mb-4 text-blue-600 transform hover:scale-110 transition-transform duration-200" />
+                <FaUndoAlt className="text-4xl sm:text-5xl mb-4 text-green-600 transform hover:scale-110 transition-transform duration-200" />
 
                 <h3 className="text-base sm:text-lg font-bold text-gray-900 mb-2">
                   Retur Mudah
@@ -336,7 +336,7 @@ export default function HomePage() {
               </div>
 
               <div className="flex flex-col items-center p-4">
-                <FaComments className="text-4xl sm:text-5xl mb-4 text-blue-600 transform hover:scale-110 transition-transform duration-200" />
+                <FaComments className="text-4xl sm:text-5xl mb-4 text-green-600 transform hover:scale-110 transition-transform duration-200" />
 
                 <h3 className="text-base sm:text-lg font-bold text-gray-900 mb-2">
                   CS 24/7

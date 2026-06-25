@@ -41,10 +41,10 @@ export default function StepShipping() {
     <section className="grid w-full gap-10 px-8 py-10 mx-auto mb-16 max-w-300 max-lg:px-4">
       <div className="flex justify-center items-center mb-2">
         <div className="flex flex-col items-center gap-2">
-          <div className="w-10 h-10 rounded-2xl bg-[#1A73E8] text-white flex items-center justify-center text-sm font-semibold">
+          <div className="w-10 h-10 rounded-2xl bg-green-600 text-white flex items-center justify-center text-sm font-semibold">
             1
           </div>
-          <span className="text-xs font-normal text-[#1A73E8]">
+          <span className="text-xs font-normal text-green-600">
             Pengiriman
           </span>
         </div>
@@ -78,7 +78,7 @@ export default function StepShipping() {
           className="bg-white border border-[#eef0f2] rounded-2xl p-6 grid gap-6"
         >
           <h2 className="text-xl font-medium flex items-center gap-2 text-[#111827]">
-            <FaTruck className="text-[#1A73E8]" />
+            <FaTruck className="text-green-600" />
             Alamat Pengiriman
           </h2>
 
@@ -111,7 +111,7 @@ export default function StepShipping() {
               />
             </div>
 
-            <div className="flex flex-col gap-1.5 col-span-2 max-sm:col-span-1">
+            <div className="hidden">
               <label htmlFor="email" className="text-xs text-[#6B7280] font-medium">
                 Email *
               </label>
@@ -204,7 +204,7 @@ export default function StepShipping() {
             {["JNE Reguler", "JNE Express", "Same Day Delivery"].map((item, index) => (
               <label
                 key={item}
-                className="flex items-center gap-4 p-4 border border-[#e2e8f0] rounded-lg cursor-pointer transition-all hover:border-[#1877f2] hover:bg-[#f0f7ff]"
+                className="flex items-center gap-4 p-4 border border-[#e2e8f0] rounded-lg cursor-pointer transition-all hover:border-green-600 hover:bg-[#f0f7ff]"
               >
                 <input
                   type="radio"
@@ -215,7 +215,7 @@ export default function StepShipping() {
                       ? shipping.shippingMethod === item
                       : index === 0
                   }
-                  className="w-4.5 h-4.5 accent-[#1877f2]"
+                  className="w-4.5 h-4.5 accent-green-600"
                 />
 
                 <div className="flex flex-col gap-1 flex-1">
@@ -236,7 +236,7 @@ export default function StepShipping() {
 
           <button
             type="submit"
-            className="flex flex-1 justify-center items-center gap-2 bg-[#1A73E8] hover:bg-[#1557B0] text-white border-none rounded-xl p-4 text-base font-medium cursor-pointer"
+            className="flex flex-1 justify-center items-center gap-2 bg-green-600 hover:bg-green-800 text-white border-none rounded-xl p-4 text-base font-medium cursor-pointer"
           >
             Lanjut ke Pembayaran
             <FaChevronRight />

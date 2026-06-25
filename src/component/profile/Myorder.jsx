@@ -80,7 +80,7 @@ export default function Myorder() {
           >
             <div className="flex w-full justify-between gap-4">
               <div className="grid">
-                <h2 className="text-base font-semibold text-[#111827]">
+                <h2 className="text-base font-semibold text-blue-600">
                   #{order.id}
                 </h2>
 
@@ -138,7 +138,7 @@ export default function Myorder() {
                   <button
                     type="button"
                     onClick={() => handleContinueCheckout(order)}
-                    className="cursor-pointer flex items-center justify-center rounded-lg border border-[#1A73E8] px-3 py-1.5 text-xs font-medium text-[#1A73E8]"
+                    className="cursor-pointer flex items-center justify-center rounded-lg border border-green-400 px-3 py-1.5 text-xs font-medium text-green-600"
                   >
                     Lanjutkan Checkout
                   </button>
@@ -146,14 +146,14 @@ export default function Myorder() {
                   <>
                     <button
                       type="button"
-                      className="flex items-center justify-center rounded-lg border border-[#1A73E8] px-3 py-1.5 text-xs font-normal text-[#1A73E8]"
+                      className="cursor-pointer flex items-center justify-center rounded-lg border border-green-400 px-3 py-1.5 text-xs font-normal text-green-600"
                     >
                       Lacak
                     </button>
 
                     <button
                       type="button"
-                      className="flex items-center justify-center gap-1 rounded-lg border-none bg-[#F97316] px-3 py-1.5 text-xs font-medium text-white"
+                      className="cursor-pointer flex items-center justify-center gap-1 rounded-lg border-none bg-[#F97316] px-3 py-1.5 text-xs font-medium text-white"
                     >
                       <FaStar className="h-3.5 w-3.5" />
                       Beri Ulasan
@@ -161,7 +161,7 @@ export default function Myorder() {
 
                     <button
                       type="button"
-                      className="flex items-center justify-center rounded-lg border border-[#0000001A] px-3 py-1.5 text-xs font-medium text-[#6B7280]"
+                      className="cursor-pointer flex items-center justify-center rounded-lg border border-[#0000001A] px-3 py-1.5 text-xs font-medium text-[#6B7280]"
                     >
                       Beli Lagi
                     </button>
