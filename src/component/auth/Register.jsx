@@ -1,111 +1,113 @@
-import { Link, useNavigate } from "react-router";
-import React from "react";
+// import React from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { FormProvider } from 'react-hook-form';
+import { FaArrowRight } from 'react-icons/fa';
 
-import {
-  FaEnvelope,
-  FaLock,
-  FaUser,
-  FaEye,
-  FaArrowRight,
-  FaEyeSlash,
-} from "react-icons/fa";
-import { makeModal } from "../ModalContext";
-import { makeAuth } from "../AuthContext";
+import { FaUser, FaEnvelope, FaLock } from 'react-icons/fa';
+import FormInput from '../FormInputLayout';
+import { useFormBuilder } from '../custom_hooks/useFormBuilder.js';
+import { makeModal } from '../ModalContext';
+import { makeAuth } from '../AuthContext';
+
+// --- 1. Konfigurasi field (sesuai kebutuhan Register) ---
+const fieldConfigs = [
+  {
+    name: 'name',
+    label: 'Nama Lengkap',
+    type: 'text',
+    placeholder: 'Input Nama Lengkap Kamu',
+    required: true,
+    leftIcon: <FaUser className="w-3.5 h-3.5" />,
+  },
+  {
+    name: 'email',
+    label: 'Email',
+    type: 'email',
+    placeholder: 'email@contoh.com',
+    required: true,
+    leftIcon: <FaEnvelope className="w-3.5 h-3.5" />,
+  },
+  {
+    name: 'pass',
+    label: 'Kata Sandi',
+    type: 'password',
+    placeholder: 'Minimal 6 karakter',
+    required: true,
+    minLength: 6,
+    leftIcon: <FaLock className="w-3.5 h-3.5" />,
+  },
+  {
+    name: 'confirmPass',
+    label: 'Masukkan Kembali Kata Sandi',
+    type: 'password',
+    placeholder: 'Konfirmasi Kata Sandi',
+    minLength: 6,
+    required: true,
+    leftIcon: <FaLock className="w-3.5 h-3.5" />,
+  },
+];
 
 export default function Register() {
   const navigate = useNavigate();
   const { registerUser } = makeAuth();
   const { showAlert, showConfirm } = makeModal();
-  const [showPassword, setShowPassword] = React.useState(false);
-  const [showConfirmPassword, setShowConfirmPassword] = React.useState(false);
-  const [isLoading, setIsLoading] = React.useState(false);
+  // const [isLoading, setIsLoading] = React.useState(false);
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
+  // --- Gunakan useFormBuilder dengan onSubmit langsung ---
+  const methods = useFormBuilder(fieldConfigs, {
+    mode: 'onSubmit', // atau 'onChange' untuk validasi real-time
+    onSubmit: async (data) => {
+      const { name, email, pass, confirmPass } = data;
 
-    if (isLoading) return;
-
-    const formElement = event.currentTarget
-    const form = new FormData(formElement);
-    const data = Object.fromEntries(form.entries())
-
-    const { name, email, pass, confirmPass } = data
-
-    const isValidEmail = (email) => {
-      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
-      return emailRegex.test(email);
-    };
-
-    if (!isValidEmail(email)) {
-      await showAlert({
-        title: "Email tidak valid",
-        message: "Masukkan email dengan format yang benar, contoh: nama@email.com",
-      });
-      return;
-    }
-
-    if (pass.length < 6) {
-      await showAlert({
-        title: "Password terlalu pendek",
-        message: "Kata sandi minimal harus 6 karakter.",
-      });
-      return;
-    }
-
-    if (pass !== confirmPass) {
-      await showAlert({
-        title: "Password tidak sama",
-        message: "Kata sandi dan konfirmasi kata sandi harus sama.",
-      });
-      return;
-    }
-
-    const isConfirmed = await showConfirm({
-      title: "Buat akun baru?",
-      message: `Akun dengan email ${email} akan dibuat. Lanjutkan registrasi?`,
-      confirmText: "Ya, Daftar",
-      cancelText: "Batal",
-    });
-
-    if (!isConfirmed) return;
-
-    setIsLoading(true);
-
-    try {
-      await new Promise((resolve) => setTimeout(resolve, 3000));
-      const result = registerUser({
-        name: name,
-        email: email,
-        password: pass,
-      });
-
-      await showAlert({
-        title: result.success ? "Berhasil" : "Gagal",
-        message: result.message,
-      });
-
-      if (result.success) {
-        formElement.reset();
-        navigate("/auth/login");
+      if (pass !== confirmPass) {
+        await showAlert({
+          title: 'Password tidak sama',
+          message: 'Kata sandi dan konfirmasi kata sandi harus sama.',
+        });
+        return;
       }
-    } finally {
-      setIsLoading(false);
-    }
-  };
+
+      const isConfirmed = await showConfirm({
+        title: 'Buat akun baru?',
+        message: `Akun dengan email ${email} akan dibuat. Lanjutkan registrasi?`,
+        confirmText: 'Ya, Daftar',
+        cancelText: 'Batal',
+      });
+      if (!isConfirmed) return;
+
+      try {
+        await new Promise((resolve) => setTimeout(resolve, 3000));
+        const result = registerUser({ name, email, password: pass });
+
+        await showAlert({
+          title: result.success ? 'Berhasil' : 'Gagal',
+          message: result.message,
+        });
+
+        if (result.success) {
+          methods.reset();
+          navigate('/auth/login');
+        }
+      } catch (err) {
+        await showAlert({
+          title: 'Gagal Membuat Akun karena ', err,
+          message: "Silahkan Coba Lagi",
+        });
+      }
+    },
+  });
+
+  const { submit, formState } = methods;
 
   return (
-    <>
+    <FormProvider {...methods}>
       <div className="grid gap-1">
         <h2 className="text-xl lg:text-2xl font-bold text-[#111827]">
           Buat Akun Baru
         </h2>
-
         <p className="text-sm text-[#6B7280]">
-          Sudah punya akun?{" "}
-          <Link
-            to="/auth/login"
-            className="text-[#1A73E8] font-medium hover:underline"
-          >
+          Sudah punya akun?{' '}
+          <Link to="/auth/login" className="text-[#1A73E8] font-medium hover:underline">
             Masuk
           </Link>
         </p>
@@ -113,15 +115,14 @@ export default function Register() {
 
       <div className="flex gap-3">
         <button
-          className="flex-1 flex items-center justify-center font-medium text-xs lg:text-sm px-3 py-2.5 rounded-xl border border-black/10 text-[#6B7280] bg-white hover:bg-gray-50 transition-colors"
           type="button"
+          className="flex-1 flex items-center justify-center font-medium text-xs lg:text-sm px-3 py-2.5 rounded-xl border border-black/10 text-[#6B7280] bg-white hover:bg-gray-50 transition-colors"
         >
           Google
         </button>
-
         <button
-          className="flex-1 flex items-center justify-center font-medium text-xs lg:text-sm px-3 py-2.5 rounded-xl border border-black/10 text-[#6B7280] bg-white hover:bg-gray-50 transition-colors"
           type="button"
+          className="flex-1 flex items-center justify-center font-medium text-xs lg:text-sm px-3 py-2.5 rounded-xl border border-black/10 text-[#6B7280] bg-white hover:bg-gray-50 transition-colors"
         >
           Facebook
         </button>
@@ -134,117 +135,15 @@ export default function Register() {
         </span>
       </div>
 
-      <form onSubmit={handleSubmit} className="grid gap-3.5" id="formReg">
-        <div className="grid gap-1">
-          <label className="text-xs font-medium text-[#111827]" htmlFor="name">
-            Nama Lengkap
-          </label>
-
-          <div className="relative flex items-center">
-            <span className="absolute left-3.5 text-[#6B7280]">
-              <FaUser className="w-3.5 h-3.5" />
-            </span>
-
-            <input
-              type="text"
-              placeholder="Input Nama Lengkap Kamu"
-              required
-              className="w-full py-2.5 pl-10 pr-3.5 bg-[#F1F1F3] border border-[#E5E5E5] rounded-lg text-sm outline-none transition-colors focus:border-[#1877F2] focus:bg-white"
-              id="name"
-              name="name"
-            />
+      {/* FORM dengan submit langsung */}
+      <form onSubmit={submit} className="grid gap-2.5" id="formReg">
+        {fieldConfigs.map((field) => (
+          <div className="grid gap-1">
+            <FormInput key={field.name} {...field} />
           </div>
-        </div>
+        ))}
 
-        <div className="grid gap-1">
-          <label className="text-xs font-medium text-[#111827]" htmlFor="email">
-            Email
-          </label>
-
-          <div className="relative flex items-center">
-            <span className="absolute left-3.5 text-[#6B7280]">
-              <FaEnvelope className="w-3.5 h-3.5" />
-            </span>
-
-            <input
-              type="email"
-              placeholder="email@contoh.com"
-              required
-              className="w-full py-2.5 pl-10 pr-3.5 bg-[#F1F1F3] border border-[#E5E5E5] rounded-lg text-sm outline-none transition-colors focus:border-[#1877F2] focus:bg-white"
-              id="email"
-              name="email"
-            />
-          </div>
-        </div>
-
-        <div className="grid gap-1">
-          <label className="text-xs font-medium text-[#111827]" htmlFor="pass">
-            Kata Sandi
-          </label>
-
-          <div className="relative flex items-center">
-            <span className="absolute left-3.5 text-[#6B7280]">
-              <FaLock className="w-3.5 h-3.5" />
-            </span>
-
-            <input
-              type={showPassword ? "text" : "password"}
-              placeholder="Minimal 6 karakter"
-              required
-              className="w-full py-2.5 pl-10 pr-10 bg-[#F1F1F3] border border-[#E5E5E5] rounded-lg text-sm outline-none transition-colors focus:border-[#1877F2] focus:bg-white"
-              id="pass"
-              name="pass"
-            />
-
-            <button type="button"
-              onClick={() => setShowPassword((prev) => !prev)}
-              className="absolute right-3.5 cursor-pointer text-[#8C8C8C]">
-
-              {showPassword ? (
-                <FaEyeSlash className="w-3.5 h-3.5" />
-              ) : (
-                <FaEye className="w-3.5 h-3.5" />
-              )}
-            </button>
-          </div>
-        </div>
-
-        <div className="grid gap-1">
-          <label
-            className="text-xs font-medium text-[#111827]"
-            htmlFor="confirmPass"
-          >
-            Masukkan Kembali Kata Sandi
-          </label>
-
-          <div className="relative flex items-center">
-            <span className="absolute left-3.5 text-[#6B7280]">
-              <FaLock className="w-3.5 h-3.5" />
-            </span>
-
-            <input
-              type={showConfirmPassword ? "text" : "password"}
-              placeholder="Ulangi kata sandi"
-              required
-              className="w-full py-2.5 pl-10 pr-10 bg-[#F1F1F3] border border-[#E5E5E5] rounded-lg text-sm outline-none transition-colors focus:border-[#1877F2] focus:bg-white"
-              id="confirmPass"
-              name="confirmPass"
-            />
-
-            <button type="button"
-              onClick={() => setShowConfirmPassword((prev) => !prev)}
-              className="absolute right-3.5 cursor-pointer text-[#8C8C8C]">
-
-              {showConfirmPassword ? (
-                <FaEyeSlash className="w-3.5 h-3.5" />
-              ) : (
-                <FaEye className="w-3.5 h-3.5" />
-              )}
-            </button>
-          </div>
-        </div>
-
-        <div className="flex items-start gap-2 mt-1">
+        <div className="flex items-start gap-2 mt-0.5">
           <input
             type="checkbox"
             id="terms"
@@ -252,32 +151,31 @@ export default function Register() {
             className="w-4 h-4 rounded border-gray-300 mt-0.5 cursor-pointer shrink-0"
             required
           />
-
           <label
             htmlFor="terms"
             className="text-[11px] text-[#6B7280] cursor-pointer select-none leading-tight"
           >
-            Saya menyetujui{" "}
+            Saya menyetujui{' '}
             <Link to="#" className="text-[#1877F2] hover:underline">
               Syarat & Ketentuan
-            </Link>{" "}
-            dan{" "}
+            </Link>{' '}
+            dan{' '}
             <Link to="#" className="text-[#1877F2] hover:underline">
               Kebijakan Privasi
-            </Link>{" "}
+            </Link>{' '}
             BeliMudah
           </label>
         </div>
 
         <button
           type="submit"
-          disabled={isLoading}
-          className={`w-full text-white border-none rounded-lg py-2.5 text-xs font-semibold flex justify-center items-center gap-2 transition-colors mt-1 shadow-sm ${isLoading
-            ? "bg-orange-300 cursor-not-allowed"
-            : "bg-[#F97316] hover:bg-[#EA580C] cursor-pointer"
+          disabled={formState.isSubmitting}
+          className={`w-full text-white border-none rounded-lg py-2.5 text-xs font-semibold flex justify-center items-center gap-2 transition-colors mt-0.5 shadow-sm ${formState.isSubmitting
+            ? 'bg-orange-300 cursor-not-allowed'
+            : 'bg-[#F97316] hover:bg-[#EA580C] cursor-pointer'
             }`}
         >
-          {isLoading ? (
+          {formState.isSubmitting ? (
             <>
               <span className="w-3.5 h-3.5 border-2 border-white/40 border-t-white rounded-full animate-spin"></span>
               Memproses...
@@ -291,9 +189,9 @@ export default function Register() {
         </button>
       </form>
 
-      <div className="text-center text-[11px] text-[#8C8C8C]">
+      <div className="text-center text-[11px] text-[#8C8C8C] mt-0.5">
         🔒 Data kamu aman dan terenkripsi
       </div>
-    </>
+    </FormProvider>
   );
 }

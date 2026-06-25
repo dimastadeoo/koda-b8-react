@@ -44,9 +44,8 @@ export default function AuthLayout() {
   return (
     <main className="bg-green-50 font-sans min-h-screen w-full flex items-center justify-center p-3 md:p-4">
       <div className="w-full max-w-5xl h-[calc(100vh-1.5rem)] md:h-[calc(100vh-2rem)] md:max-h-190 bg-white md:rounded-2xl md:shadow-lg overflow-hidden flex flex-col md:flex-row">
-
+        {/* Bagian kiri */}
         <section className="relative flex-1 bg-linear-to-br from-green-700 to-green-950 p-6 lg:p-8 text-white hidden md:flex flex-col justify-between overflow-hidden">
-
           <img
             src={currentAuth.image}
             alt="Background auth"
@@ -147,8 +146,9 @@ export default function AuthLayout() {
           </div>
         </section>
 
-        <section className="flex-1 bg-[#FAFAFA] p-4 lg:p-5 flex flex-col justify-center h-full overflow-hidden">
-          <div className="w-full max-w-95 mx-auto grid gap-3 lg:gap-3.5">
+        {/* ===== BAGIAN KANAN (FORM) ===== */}
+        <section className="flex-1 bg-[#FAFAFA] p-3 lg:p-4 flex flex-col justify-center h-full overflow-hidden">
+          <div className="w-full max-w-95 mx-auto grid gap-2 lg:gap-2.5">
             <Outlet />
           </div>
         </section>
