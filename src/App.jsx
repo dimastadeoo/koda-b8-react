@@ -22,7 +22,7 @@ import CustomerList from './component/admin/CustomerList';
 import { ProductProvider } from './component/ProdutsContext';
 import { ModalProvider } from './component/ModalContext';
 import AuthLayout from './component/auth/AuthLayout';
-import { AuthProvider } from './component/AuthContext';
+// import { AuthProvider } from './component/AuthContext';
 import { CartProvider } from './component/CartContext';
 import { ProfileProvider } from './component/ProfileContext';
 import ProfileLayout from './component/profile/ProfileLayout';
@@ -33,6 +33,9 @@ import StepConfirm from './component/checkout/StepConfirm';
 import StepSuccess from './component/checkout/StepSuccess';
 import ErrorPage from './component/ErorPage';
 import RootLayout from './component/RootLayout';
+import { Provider } from 'react-redux';
+import { persistor, store } from './redux/store';
+import { PersistGate } from 'redux-persist/integration/react';
 
 
 
@@ -169,17 +172,21 @@ const router = createBrowserRouter([
 function App() {
   // Jalankan konfigurasi router ke dalam aplikasi React
   return (
-    <ModalProvider>
-      <AuthProvider>
-        <ProductProvider>
-          <ProfileProvider>
-            <CartProvider>
-              <RouterProvider router={router} />
-            </CartProvider>
-          </ProfileProvider>
-        </ProductProvider>
-      </AuthProvider>
-    </ModalProvider>
+    <Provider store={store}>
+      <PersistGate loading={null} persistor={persistor}>
+        <ModalProvider>
+          {/* <AuthProvider> */}
+            <ProductProvider>
+              <ProfileProvider>
+                <CartProvider>
+                  <RouterProvider router={router} />
+                </CartProvider>
+              </ProfileProvider>
+            </ProductProvider>
+          {/* </AuthProvider> */}
+        </ModalProvider>
+      </PersistGate>
+    </Provider>
   )
 }
 
