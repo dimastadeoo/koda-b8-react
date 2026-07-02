@@ -8,7 +8,24 @@ on:
       - 'v*'
 
 jobs:
+  rules-tag:
+  runs-on: ubuntu-latest
+  steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Validate SemVer standard
+      run: | 
+
+          if [[ ! ${GITHUB_REF#refs/tags/} =~ ${{ vars.SEMVER_REGEX }} ]]; then 
+            echo "Error: Tag $TAG_NAME tidak sesuai dengan standar SemVer!" 
+            exit 1 
+          else 
+            echo "Tag $TAG_NAME valid menggunakan standar SemVer." 
+          fi
+
   build-docker-image:
+    needs: rules-tag
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
