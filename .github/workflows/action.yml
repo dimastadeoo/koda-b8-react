@@ -15,9 +15,10 @@ jobs:
       uses: actions/checkout@v2
 
     - name: Validate SemVer standard
-      run: | 
-
-          if [[ ! ${GITHUB_REF#refs/tags/} =~ ${{ vars.SEMVER_REGEX }} ]]; then 
+      run: |
+          TAG_NAME=${GITHUB_REF#refs/tags/} 
+          
+          if [[ ! $TAG_NAME =~ ${{ vars.SEMVER_REGEX }} ]]; then 
             echo "Error: Tag $TAG_NAME tidak sesuai dengan standar SemVer!" 
             exit 1 
           else 
