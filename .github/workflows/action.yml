@@ -1,10 +1,11 @@
 name: Automation build images
+run-name: running push docker to ghcr.io
 
 on:
   push:
     # Sequence of patterns matched against refs/tags
     tags:
-      - v*
+      - 'v*'
 
 jobs:
   build-docker-image:
