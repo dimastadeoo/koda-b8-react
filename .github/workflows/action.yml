@@ -95,4 +95,4 @@ jobs:
           script: |
             docker pull ghcr.io/${{github.repository}}:latest
             docker rm -f frontend-app
-            docker run -d -p 9012:80 --name frontend-app ghcr.io/${{github.repository}}:latest
+            docker run -d -p 9702:80 --name frontend-app ghcr.io/${{github.repository}}:latest
