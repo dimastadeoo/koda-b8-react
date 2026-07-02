@@ -59,7 +59,7 @@ jobs:
         with:
           artifact-ids: ${{needs.build-app.outputs.output1}}
       - name: Compress artifact
-        run: zip -r frontend-app.zip ./*
+        run: zip -r EasyShop-app.zip ./*
       - name: Release
         uses: softprops/action-gh-release@v3
         with:
