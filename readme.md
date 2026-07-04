@@ -1,6 +1,6 @@
-# 🛒 Easy Web - React E-Commerce
+# 🛒 EShop - React E-Commerce
 
-Easy Web adalah aplikasi web e-commerce yang dibangun menggunakan **React** dengan arsitektur modern. Project ini menerapkan state management menggunakan **Redux**, penyimpanan state menggunakan **Redux Persist** dan **LocalStorage**, serta telah dilengkapi dengan pipeline **CI/CD** untuk proses build, release, dan deployment secara otomatis menggunakan **Docker**.
+Easy Shop adalah aplikasi web e-commerce yang dibangun menggunakan **React** dengan arsitektur modern. Project ini menerapkan state management menggunakan **Redux**, penyimpanan state menggunakan **Redux Persist** dan **LocalStorage**, serta telah dilengkapi dengan pipeline **CI/CD** untuk proses build, release, dan deployment secara otomatis menggunakan **Docker**.
 
 ## 🚀 Live Demo
 
