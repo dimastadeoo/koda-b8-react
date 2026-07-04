@@ -28,7 +28,7 @@ jobs:
             fi
   release-app:
     name: "Release builded app"
-    needs: build-app
+    needs: rules-tag
     runs-on: ubuntu-latest
     steps:
       - name: setup nodejs
@@ -48,7 +48,7 @@ jobs:
         with:
           files: |
             EasyShop-app.zip
-  build-docker-image-and-release:
+  build-docker-image:
     needs: release-app
     runs-on: ubuntu-latest
     steps:
