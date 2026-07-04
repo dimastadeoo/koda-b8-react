@@ -2,6 +2,7 @@
   "name": "koda-b8-react",
   "private": true,
   "version": "0.0.0",
+  "author": "Dimas Tadeo <email@example.com> (https://github.com/dimastadeoo)",
   "type": "module",
   "scripts": {
     "dev": "vite",
