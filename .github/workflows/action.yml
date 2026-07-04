@@ -26,28 +26,46 @@ jobs:
             else 
               echo "Tag $TAG_NAME valid menggunakan standar SemVer." 
             fi
-  build-docker-image-and-release:
-    needs: rules-tag
+  release-app:
+    name: "Release builded app"
+    needs: build-app
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-      - name: Login to GitHub Container Registry
-        run: echo -n ${{ secrets.GITHUB_TOKEN }} | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+      - name: setup nodejs
+        uses: actions/setup-node@v6
+        with:
+          node_version: "26.4.0"
+      - name: get source
+        uses: actions/checkout@v7
+      - name: install nodejs deps
+        run: npm install
+      - name: build app
+        run: npm run build
       - name: Compress artifact
-        run: zip -r EasyShop-app.zip .
+        run: zip -r EasyShop-app.zip dist/*
       - name: Release
         uses: softprops/action-gh-release@v3
         with:
           files: |
             EasyShop-app.zip
+  build-docker-image-and-release:
+    needs: release-app
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Login to DockerHub
+        run: echo -n ${{ secrets.GITHUB_TOKEN }} | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+
       - name: Build Docker image
         run: docker build . -t ghcr.io/${{github.repository}}:latest
+
       - name: Push to ghcr.io
         run: docker push ghcr.io/${{github.repository}}:latest
   deploy-image:
     name: "Deploy image into server"
-    needs: build-docker-image-and-release
+    needs: build-docker-image
     runs-on: ubuntu-latest
     steps:
       - name: Pull image from ghcr
