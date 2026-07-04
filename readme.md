@@ -79,9 +79,9 @@ npm run preview
 
 ```text
 <!-- data products -->
-data/products.json
+public/data/products.json
 <!-- data gambar -->
-img/
+public/img/
 
 <!-- structure component -->
 src/
