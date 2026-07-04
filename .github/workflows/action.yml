@@ -42,7 +42,7 @@ jobs:
       - name: build app
         run: npm run build
       - name: Compress artifact
-        run: zip -r EasyShop-app.zip dist/*
+        run: zip -r EasyShop-app.zip ./dist/*
       - name: Release
         uses: softprops/action-gh-release@v3
         with:
