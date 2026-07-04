@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v2
 
       - name: Validate SemVer standard
         run: |
@@ -26,51 +26,12 @@ jobs:
             else 
               echo "Tag $TAG_NAME valid menggunakan standar SemVer." 
             fi
-  # build-app:
-  #   name: "Build React App into Distributable"
-  #   needs: rules-tag
-  #   runs-on: ubuntu-latest
-  #   outputs:
-  #     output1: ${{ steps.upload-dist.outputs.artifact-id }}
-  #   steps:
-  #     - name: setup nodejs
-  #       uses: actions/setup-node@v6
-  #       with:
-  #         node_version: "26.4.0"
-  #     - name: get source
-  #       uses: actions/checkout@v7
-  #     - name: install nodejs deps
-  #       run: npm install
-  #     - name: build app
-  #       run: npm run build
-  #     - name: Save artifact
-  #       uses: actions/upload-artifact@v7
-  #       with:
-  #         name: build-result
-  #         id: upload-dist
-  #         path: dist/
-  # release-app:
-  #   name: "Release builded app"
-  #   needs: build-app
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - name: Download artifact
-  #       uses: actions/download-artifact@v8
-  #       with:
-  #         artifact-ids: ${{needs.build-app.outputs.output1}}
-  #     - name: Compress artifact
-  #       run: zip -r EasyShop-app.zip ./*
-  #     - name: Release
-  #       uses: softprops/action-gh-release@v3
-  #       with:
-  #         files: |
-  #           EasyShop-app.zip
   build-docker-image-and-release:
     needs: rules-tag
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v2
       - name: Login to DockerHub
         run: echo -n ${{ secrets.GITHUB_TOKEN }} | docker login ghcr.io -u ${{ github.actor }} --password-stdin
       - name: Compress artifact
@@ -86,7 +47,7 @@ jobs:
         run: docker push ghcr.io/${{github.repository}}:latest
   deploy-image:
     name: "Deploy image into server"
-    needs: build-docker-image
+    needs: build-docker-image-and-release
     runs-on: ubuntu-latest
     steps:
       - name: Pull image from ghcr
