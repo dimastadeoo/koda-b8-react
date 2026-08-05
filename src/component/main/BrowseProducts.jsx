@@ -152,10 +152,8 @@ export default function BrowseProducts() {
 
   return (
     <>
-      <header className="sticky top-0 z-50" id="header">
-        <Header />
-      </header>
-
+      <Header />
+      
       <main className="bg-green-50 min-h-screen pb-10 text-gray-800 font-sans antialiased">
         {/* Breadcrumb & Title */}
         <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 pb-2">
