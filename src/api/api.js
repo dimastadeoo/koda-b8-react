@@ -11,9 +11,11 @@ export async function apiFetch(endpoint, options = {}) {
     };
 
     // Jika body adalah FormData, jangan set Content-Type (biar browser set boundary)
-    if (!(options.body instanceof FormData)) {
+    if ((options.body instanceof URLSearchParams)){
+        headers['Content-Type'] = 'application/x-www-form-urlencoded';
+    }else if (!(options.body instanceof FormData)) {
         headers['Content-Type'] = 'application/json';
-    }
+    } 
 
     // Tambahkan Authorization jika ada token
     if (token) {
