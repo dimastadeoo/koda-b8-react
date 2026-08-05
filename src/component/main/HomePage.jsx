@@ -1,8 +1,9 @@
 import Header from "../Header";
 import Footer from "../Footer";
 import { CartItem } from "../CartItem";
+import { transformProduct } from "../utils/productTransformer.js";
 import { Link, useNavigate } from "react-router";
-import { makeProducts } from "../ProdutsContext";
+import { useProducts } from "../custom_hooks/useProduct.js";
 import React from "react";
 
 import {
@@ -19,11 +20,24 @@ import {
 } from "react-icons/fa";
 
 export default function HomePage() {
-  const navigate = useNavigate()
-  const { products, loading, error, kategoriProducts } = makeProducts();
+  const navigate = useNavigate();
+  const { products, loading, error, categories } = useProducts();
   const [activeSlideIndex, setActiveSlideIndex] = React.useState(0);
 
-  const activeKategori = kategoriProducts[activeSlideIndex];
+  // Transform categories from backend ke format yang dipakai di UI
+  const kategoriProducts = React.useMemo(() => {
+    if (!categories || categories.length === 0) return [];
+    return categories.map((cat) => ({
+      id: cat.id,
+      title: cat.name,
+      image: cat.url_img || "/img/placeholder.png",
+      qty: products.filter((p) =>
+        p.categories?.some((c) => c.id === cat.id)
+      ).length,
+    }));
+  }, [categories, products]);
+
+  const activeKategori = kategoriProducts[activeSlideIndex] || kategoriProducts[0];
 
   const nextSlide = () => {
     setActiveSlideIndex((prev) =>
@@ -50,16 +64,19 @@ export default function HomePage() {
   }, [kategoriProducts.length]);
 
   function handleNavigate() {
-    navigate(`/main/all-products/${activeKategori.title.toLowerCase()}`)
+    if (activeKategori) {
+      navigate(`/main/all-products/${activeKategori.title.toLowerCase()}`);
+    }
   }
 
-
-  const flashSaleIds = [1, 2, 4, 7];
-  const newProductIds = [5, 6, 9, 13];
-  const bestProductIds = [3, 8, 10, 11];
+  // --- Tentukan ID produk untuk flash sale, new, best ---
+  // Ganti ID ini sesuai dengan data di database Anda
+  const flashSaleIds = [1, 2, 4, 7, 14, 21]; // contoh
+  const newProductIds = [5, 6, 9, 13, 15, 22];
+  const bestProductIds = [3, 8, 10, 11, 16, 23];
 
   const getProductsByIds = (ids) => {
-    return products.filter((product) => ids.includes(product.id));
+    return products.filter((product) => ids.includes(Number(product.id)));
   };
 
   const flashSaleProducts = getProductsByIds(flashSaleIds);
@@ -81,6 +98,7 @@ export default function HomePage() {
       </header>
 
       <main className="grid gap-7 pb-10 bg-green-50">
+        {/* Hero Banner */}
         <section className="relative w-full md:bg-linear-to-r md:from-[#288a17] md:from-50% md:to-[#05a2d1] md:to-50% bg-[#05a2d1] overflow-hidden min-h-110 flex items-center group">
           <div className="w-full absolute inset-y-0 md:right-0 md:w-1/2 h-full opacity-60 md:opacity-90 mix-blend-multiply pointer-events-none">
             <img
@@ -101,7 +119,10 @@ export default function HomePage() {
                 Temukan produk terbaik dari kategori {activeKategori?.title || "pilihan"} dengan promo menarik setiap hari
               </p>
 
-              <button onClick={handleNavigate} className="bg-green-100 hover:bg-purple-50 text-green-600 font-medium text-sm px-6 py-3 rounded-xl flex items-center gap-2 shadow-md hover:shadow-lg transition-all transform hover:-translate-y-0.5 cursor-pointer">
+              <button
+                onClick={handleNavigate}
+                className="bg-green-100 hover:bg-purple-50 text-green-600 font-medium text-sm px-6 py-3 rounded-xl flex items-center gap-2 shadow-md hover:shadow-lg transition-all transform hover:-translate-y-0.5 cursor-pointer"
+              >
                 <span>Lihat Promo</span>
                 <FaArrowRight className="w-4 h-4" />
               </button>
@@ -110,14 +131,16 @@ export default function HomePage() {
 
           <button
             className="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-green-100/20 hover:bg-green-100/30 backdrop-blur-sm flex items-center justify-center cursor-pointer transition-all text-white border border-white/10 opacity-0 group-hover:opacity-100 focus:opacity-100"
-            aria-label="Previous Slide" onClick={prevSlide}
+            aria-label="Previous Slide"
+            onClick={prevSlide}
           >
             <FaChevronLeft className="w-5 h-5" />
           </button>
 
           <button
             className="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-green-100/20 hover:bg-green-100/30 backdrop-blur-sm flex items-center justify-center cursor-pointer transition-all text-white border border-white/10 opacity-0 group-hover:opacity-100 focus:opacity-100"
-            aria-label="Next Slide" onClick={nextSlide}
+            aria-label="Next Slide"
+            onClick={nextSlide}
           >
             <FaChevronRight className="w-5 h-5" />
           </button>
@@ -129,6 +152,7 @@ export default function HomePage() {
           </div>
         </section>
 
+        {/* Kategori */}
         <section className="w-full max-w-5xl mx-auto font-sans">
           <div className="flex justify-between items-center mb-6">
             <h2 className="text-xl md:text-2xl font-bold text-gray-900 tracking-tight">
@@ -137,7 +161,7 @@ export default function HomePage() {
 
             <Link
               to="/main/all-products"
-              className="flex items-center gap-1 text-sm font-medium text-green-600 hover:text-gren-700 transition-colors no-underline group"
+              className="flex items-center gap-1 text-sm font-medium text-green-600 hover:text-green-700 transition-colors no-underline group"
             >
               <span>Lihat Semua</span>
               <FaArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
@@ -150,7 +174,10 @@ export default function HomePage() {
                 key={item.id}
                 className="bg-green-100 border border-gray-200 rounded-2xl p-4 flex flex-col items-center justify-center text-center shadow-sm hover:shadow-md hover:border-blue-500/50 transition-all group"
               >
-                <Link to={`/main/all-products/${item.title.toLowerCase()}`} className="no-underline w-full flex flex-col items-center">
+                <Link
+                  to={`/main/all-products/${item.title.toLowerCase()}`}
+                  className="no-underline w-full flex flex-col items-center"
+                >
                   <img
                     className="max-w-full max-h-full object-contain mix-blend-multiply transition-transform group-hover:scale-105 duration-300"
                     src={item.image}
@@ -170,6 +197,7 @@ export default function HomePage() {
           </div>
         </section>
 
+        {/* Flash Sale */}
         <section className="w-full max-w-5xl mx-auto font-sans">
           <div className="flex justify-between items-start sm:items-center gap-4 mb-6">
             <div className="flex flex-wrap items-center gap-4">
@@ -180,11 +208,7 @@ export default function HomePage() {
 
               <span className="max-sm:hidden flex items-center gap-2 text-gray-900 text-sm font-medium">
                 <FaClock className="w-4 h-4 text-gray-500" />
-
-                <span className="text-gray-500 font-normal">
-                  Berakhir dalam:
-                </span>
-
+                <span className="text-gray-500 font-normal">Berakhir dalam:</span>
                 <span className="flex items-center gap-1 font-bold tracking-wider text-base">
                   <span>05</span>
                   <span className="animate-pulse">:</span>
@@ -206,23 +230,25 @@ export default function HomePage() {
 
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6" id="flash-sale-item">
             {flashSaleProducts.map((item) => (
-              <CartItem key={item.id} item={item} />
+              <CartItem key={item.id} item={transformProduct(item)} />
             ))}
           </div>
         </section>
 
+        {/* Banner Promo */}
         <section id="badgePromo" className="w-full max-w-5xl mx-auto font-sans grid lg:grid-cols-2 sm:grid-cols-1 gap-3">
           <div className="relative min-h-45 sm:min-h-55 rounded-3xl overflow-hidden bg-cover bg-center bg-no-repeat flex items-center p-6 sm:p-10 text-white shadow-md">
             <div className="flex flex-col items-start gap-3 sm:gap-4 z-10">
               <span className="text-sm sm:text-base font-medium opacity-90 tracking-wide">
                 Fashion Wanita
               </span>
-
               <h2 className="text-2xl sm:text-3xl font-bold tracking-tight">
                 Diskon s/d 50%
               </h2>
-
-              <Link to="/main/all-products/fashion" className="text-xs sm:text-sm font-medium border border-white/80 rounded-xl px-4 py-2 hover:bg-green-100 hover:text-black transition-all duration-300 cursor-pointer">
+              <Link
+                to="/main/all-products/fashion"
+                className="text-xs sm:text-sm font-medium border border-white/80 rounded-xl px-4 py-2 hover:bg-green-100 hover:text-black transition-all duration-300 cursor-pointer"
+              >
                 Belanja Sekarang
               </Link>
             </div>
@@ -233,18 +259,20 @@ export default function HomePage() {
               <span className="text-sm sm:text-base font-medium opacity-90 tracking-wide">
                 Elektronik Pilihan
               </span>
-
               <h2 className="text-2xl sm:text-3xl font-bold tracking-tight">
                 Harga Terbaik
               </h2>
-
-              <Link to="/main/all-products/elektronik" className="text-xs sm:text-sm font-medium border border-white/80 rounded-xl px-4 py-2 hover:bg-green-100 hover:text-black transition-all duration-300 cursor-pointer">
+              <Link
+                to="/main/all-products/elektronik"
+                className="text-xs sm:text-sm font-medium border border-white/80 rounded-xl px-4 py-2 hover:bg-green-100 hover:text-black transition-all duration-300 cursor-pointer"
+              >
                 Lihat Produk
               </Link>
             </div>
           </div>
         </section>
 
+        {/* Produk Terbaru */}
         <section className="w-full max-w-5xl mx-auto font-sans">
           <div className="flex justify-between items-start sm:items-center gap-4 mb-6">
             <div className="flex flex-wrap items-center gap-4">
@@ -265,11 +293,12 @@ export default function HomePage() {
 
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6" id="new-sale-item">
             {newProducts.map((item) => (
-              <CartItem key={item.id} item={item} />
+              <CartItem key={item.id} item={transformProduct(item)} />
             ))}
           </div>
         </section>
 
+        {/* Produk Unggulan */}
         <section className="w-full max-w-5xl mx-auto font-sans">
           <div className="flex justify-between items-start sm:items-center gap-4 mb-6">
             <span className="flex flex-wrap items-center gap-4 font-semibold text-gray-900">
@@ -287,11 +316,12 @@ export default function HomePage() {
 
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6" id="super-sale-item">
             {bestProducts.map((item) => (
-              <CartItem key={item.id} item={item} />
+              <CartItem key={item.id} item={transformProduct(item)} />
             ))}
           </div>
         </section>
 
+        {/* Keunggulan */}
         <section className="max-sm:hidden w-full bg-green-100 border border-gray-100 py-2 shadow-xs">
           <div className="max-w-5xl mx-auto font-sans text-center">
             <h2 className="text-xl sm:text-2xl font-semibold text-gray-800 mb-10 tracking-wide">
@@ -301,11 +331,9 @@ export default function HomePage() {
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-6">
               <div className="flex flex-col items-center p-4">
                 <FaTruck className="text-4xl sm:text-5xl mb-4 text-green-600 transform hover:scale-110 transition-transform duration-200" />
-
                 <h3 className="text-base sm:text-lg font-bold text-gray-900 mb-2">
                   Gratis Ongkir
                 </h3>
-
                 <p className="text-sm text-gray-500 max-w-60 leading-relaxed">
                   Pembelian di atas Rp 100.000 gratis ongkir ke seluruh Indonesia
                 </p>
@@ -313,11 +341,9 @@ export default function HomePage() {
 
               <div className="flex flex-col items-center p-4">
                 <FaLock className="text-4xl sm:text-5xl mb-4 text-green-600 transform hover:scale-110 transition-transform duration-200" />
-
                 <h3 className="text-base sm:text-lg font-bold text-gray-900 mb-2">
                   Pembayaran Aman
                 </h3>
-
                 <p className="text-sm text-gray-500 max-w-60 leading-relaxed">
                   Data kamu terenkripsi dengan standar keamanan tertinggi
                 </p>
@@ -325,11 +351,9 @@ export default function HomePage() {
 
               <div className="flex flex-col items-center p-4">
                 <FaUndoAlt className="text-4xl sm:text-5xl mb-4 text-green-600 transform hover:scale-110 transition-transform duration-200" />
-
                 <h3 className="text-base sm:text-lg font-bold text-gray-900 mb-2">
                   Retur Mudah
                 </h3>
-
                 <p className="text-sm text-gray-500 max-w-60 leading-relaxed">
                   Produk tidak sesuai? Kembalikan dalam 30 hari tanpa ribet
                 </p>
@@ -337,11 +361,9 @@ export default function HomePage() {
 
               <div className="flex flex-col items-center p-4">
                 <FaComments className="text-4xl sm:text-5xl mb-4 text-green-600 transform hover:scale-110 transition-transform duration-200" />
-
                 <h3 className="text-base sm:text-lg font-bold text-gray-900 mb-2">
                   CS 24/7
                 </h3>
-
                 <p className="text-sm text-gray-500 max-w-60 leading-relaxed">
                   Tim kami siap membantu kamu kapan saja
                 </p>
