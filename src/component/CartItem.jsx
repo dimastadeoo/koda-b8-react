@@ -1,7 +1,6 @@
 import { useNavigate } from "react-router";
-import { FaHeart, FaRegHeart, FaStar } from "react-icons/fa";
+import { FaHeart, FaRegHeart, FaStar, FaStarHalfAlt } from "react-icons/fa";
 import { useProfileData } from "./custom_hooks/useProfileData.js";
-
 
 const formatRupiah = (number) => {
   return new Intl.NumberFormat("id-ID", {
@@ -11,27 +10,47 @@ const formatRupiah = (number) => {
   }).format(number);
 };
 
+// Fungsi render bintang berdasarkan rating
+const renderStars = (rating) => {
+  const fullStars = Math.floor(rating);
+  const hasHalfStar = rating % 1 >= 0.5;
+  const emptyStars = 5 - fullStars - (hasHalfStar ? 1 : 0);
+
+  return (
+    <>
+      {[...Array(fullStars)].map((_, i) => (
+        <FaStar key={`full-${i}`} className="w-3.5 h-3.5 text-amber-400" />
+      ))}
+      {hasHalfStar && <FaStarHalfAlt className="w-3.5 h-3.5 text-amber-400" />}
+      {[...Array(emptyStars)].map((_, i) => (
+        <FaStar key={`empty-${i}`} className="w-3.5 h-3.5 text-gray-300" />
+      ))}
+    </>
+  );
+};
+
 function CartItem({ item }) {
   const navigate = useNavigate();
   const { toggleWishlist, isWishlisted } = useProfileData();
+  console.log(item)
+
 
   if (!item) return null;
+
   const {
     id,
-    badgeContent,
-    cartJenisContent,
-    cartNameContent,
-    rateContent,
-    reviewContent,
-    price,
-    image,
+    badgeContent = 0,
+    cartJenisContent = 'Umum',
+    cartNameContent = 'Produk',
+    rateContent = 0,
+    reviewContent = 0,
+    price = 0,
+    image = [],
   } = item;
-  
+
   const liked = isWishlisted(id);
-  const isDiscount = typeof badgeContent === "number";
-  const finalPrice = isDiscount
-    ? price - (price * badgeContent) / 100
-    : price;
+  const isDiscount = typeof badgeContent === "number" && badgeContent > 0;
+  const finalPrice = isDiscount ? price - (price * badgeContent) / 100 : price;
 
   const handleCardClick = () => {
     navigate(`/main/product/${id}`);
@@ -62,19 +81,18 @@ function CartItem({ item }) {
           <div
             className="relative w-full aspect-square bg-cover bg-center bg-no-repeat transition-transform group-hover:scale-[1.02] duration-300"
             style={{
-              backgroundImage: `url(${image?.[0]})`,
+              backgroundImage: `url(${image?.[0] || '/img/placeholder.png'})`,
             }}
           >
-            {badgeContent !== "" &&
-              badgeContent !== null &&
-              badgeContent !== undefined && (
-                <span
-                  className={`absolute top-2 left-2 ${isDiscount ? "bg-red-500" : "bg-green-600"
-                    } text-white text-xs font-bold px-2 py-1 rounded-full`}
-                >
-                  {isDiscount ? `-${badgeContent}%` : badgeContent}
-                </span>
-              )}
+            {badgeContent > 0 && (
+              <span
+                className={`absolute top-2 left-2 ${
+                  isDiscount ? "bg-red-500" : "bg-green-600"
+                } text-white text-xs font-bold px-2 py-1 rounded-full`}
+              >
+                {isDiscount ? `-${badgeContent}%` : badgeContent}
+              </span>
+            )}
           </div>
 
           <button
@@ -102,16 +120,11 @@ function CartItem({ item }) {
 
           <div className="flex items-center gap-1 text-xs py-0.5">
             <span className="flex items-center gap-0.5">
-              {[...Array(5)].map((_, index) => (
-                <FaStar
-                  key={index}
-                  className="w-3.5 h-3.5 text-amber-400"
-                />
-              ))}
+              {renderStars(rateContent)}
             </span>
 
             <span className="font-bold text-gray-800 ml-1">
-              {rateContent}
+              {rateContent.toFixed(1)}
             </span>
 
             <span className="text-gray-400 max-sm:hidden">
@@ -137,4 +150,4 @@ function CartItem({ item }) {
 }
 
 // eslint-disable-next-line react-refresh/only-export-components
-export { CartItem, formatRupiah }
+export { CartItem, formatRupiah };
