@@ -45,61 +45,38 @@ export default function Login() {
   // };
 
   const methods = useFormBuilder(fieldConfigs, {
-    mode: 'onSubmit', // atau 'onChange' untuk validasi real-time
+    mode: 'onSubmit',
     onSubmit: async (data) => {
-
-      // if (isLoading) return;
-
-      // const formElement = e.currentTarget;
-      // const form = new FormData(formElement);
-
-      // const data = Object.fromEntries(form.entries())
-      // const {email, pass} = data
-
       const { email, pass } = data;
 
-
-
-      // if (!isValidEmail(email)) {
-      //   await showAlert({
-      //     title: "Email tidak valid",
-      //     message: "Masukkan email dengan format yang benar, contoh: nama@email.com",
-      //   });
-      //   return;
-      // }
-
+      // Konfirmasi
       const confirmed = await showConfirm({
         title: "Masuk ke akun?",
         message: `Kamu akan login menggunakan email ${email}. Lanjutkan?`,
         confirmText: "Ya, Masuk",
         cancelText: "Batal",
       });
-
       if (!confirmed) return;
 
-      // setIsLoading(true);
-
-      // try {
-      await new Promise((resolve) => setTimeout(resolve, 3000));
-      const result = loginUser({
+      // Panggil loginUser (async)
+      const result = await loginUser({
         email: email,
         password: pass,
       });
 
+      // Tampilkan alert
       await showAlert({
         title: result.success ? "Berhasil" : "Gagal Login",
         message: result.message,
       });
 
       if (result.success) {
-        // formElement.reset();
         navigate("/main");
       }
-      // } finally {
-      //   setIsLoading(false);
-      // }
     }
   });
+
+
   const { submit, formState } = methods;
   return (
     <>

@@ -76,8 +76,8 @@ export default function Register() {
       if (!isConfirmed) return;
 
       try {
-        await new Promise((resolve) => setTimeout(resolve, 3000));
-        const result = registerUser({ name, email, password: pass });
+        await new Promise((resolve) => setTimeout(resolve, 2000));
+        const result = await registerUser({ name, email, password: pass });
 
         await showAlert({
           title: result.success ? 'Berhasil' : 'Gagal',
