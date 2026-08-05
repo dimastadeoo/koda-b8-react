@@ -6,12 +6,12 @@ import {
   FaTrash,
   FaTimes,
 } from "react-icons/fa";
-
-import { useProfileData } from "../custom_hooks/useProfileData";
+import { useAddress } from "../custom_hooks/useAddress";
 import { makeModal } from "../ModalContext";
 
 export default function AlamatSaya() {
-  const { addresses, addAddress, removeAddress, setPrimaryAddress } = useProfileData();
+  const { addresses, addAddress, removeAddress, setPrimary, loading } =
+    useAddress();
   const { showConfirm, showAlert } = makeModal();
   const [showForm, setShowForm] = useState(false);
 
@@ -21,15 +21,32 @@ export default function AlamatSaya() {
     const form = new FormData(event.currentTarget);
     const data = Object.fromEntries(form.entries());
 
-    addAddress(data);
+    // Map form fields to backend fields
+    const payload = {
+      receiver_name: data.receiverName,
+      detail_address: data.detail,
+      province: data.province || "DKI Jakarta",
+      city: data.city,
+      district: data.district || "Kebayoran Baru",
+      village: data.village || "Cipete",
+      label: data.label,
+      phone: data.phone,
+    };
 
-    await showAlert({
-      title: "Berhasil",
-      message: "Alamat berhasil ditambahkan.",
-    });
-
-    event.currentTarget.reset();
-    setShowForm(false);
+    try {
+      await addAddress(payload).unwrap();
+      await showAlert({
+        title: "Berhasil",
+        message: "Alamat berhasil ditambahkan.",
+      });
+      event.currentTarget.reset();
+      setShowForm(false);
+    } catch (err) {
+      await showAlert({
+        title: "Gagal",
+        message: err || "Gagal menambahkan alamat.",
+      });
+    }
   };
 
   const handleRemove = async (addressId) => {
@@ -42,22 +59,36 @@ export default function AlamatSaya() {
 
     if (!confirmed) return;
 
-    removeAddress(addressId);
-
-    await showAlert({
-      title: "Berhasil",
-      message: "Alamat berhasil dihapus.",
-    });
+    try {
+      await removeAddress(addressId).unwrap();
+      await showAlert({
+        title: "Berhasil",
+        message: "Alamat berhasil dihapus.",
+      });
+    } catch (err) {
+      await showAlert({
+        title: "Gagal",
+        message: err || "Gagal menghapus alamat.",
+      });
+    }
   };
 
   const handleSetPrimary = async (addressId) => {
-    setPrimaryAddress(addressId);
-
-    await showAlert({
-      title: "Berhasil",
-      message: "Alamat utama berhasil diperbarui.",
-    });
+    try {
+      await setPrimary(addressId).unwrap();
+      await showAlert({
+        title: "Berhasil",
+        message: "Alamat utama berhasil diperbarui.",
+      });
+    } catch (err) {
+      await showAlert({
+        title: "Gagal",
+        message: err || "Gagal mengubah alamat utama.",
+      });
+    }
   };
+
+  if (loading) return <div className="p-6">Memuat alamat...</div>;
 
   return (
     <div className="grid w-full auto-rows-max content-start gap-4">
@@ -92,7 +123,6 @@ export default function AlamatSaya() {
             <label className="text-xs text-[#6B7280]" htmlFor="label">
               Label Alamat
             </label>
-
             <input
               id="label"
               name="label"
@@ -107,7 +137,6 @@ export default function AlamatSaya() {
             <label className="text-xs text-[#6B7280]" htmlFor="receiverName">
               Nama Penerima
             </label>
-
             <input
               id="receiverName"
               name="receiverName"
@@ -122,7 +151,6 @@ export default function AlamatSaya() {
             <label className="text-xs text-[#6B7280]" htmlFor="phone">
               Nomor Telepon
             </label>
-
             <input
               id="phone"
               name="phone"
@@ -137,7 +165,6 @@ export default function AlamatSaya() {
             <label className="text-xs text-[#6B7280]" htmlFor="detail">
               Alamat Lengkap
             </label>
-
             <textarea
               id="detail"
               name="detail"
@@ -149,10 +176,23 @@ export default function AlamatSaya() {
 
           <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
             <div className="grid gap-1">
+              <label className="text-xs text-[#6B7280]" htmlFor="province">
+                Provinsi
+              </label>
+              <input
+                id="province"
+                name="province"
+                type="text"
+                placeholder="Contoh: DKI Jakarta"
+                defaultValue="DKI Jakarta"
+                className="rounded-xl border border-[#0000001A] bg-[#F3F4F6] px-4 py-3 text-sm outline-none focus:border-green-600"
+                required
+              />
+            </div>
+            <div className="grid gap-1">
               <label className="text-xs text-[#6B7280]" htmlFor="city">
                 Kota / Kabupaten
               </label>
-
               <input
                 id="city"
                 name="city"
@@ -162,19 +202,33 @@ export default function AlamatSaya() {
                 required
               />
             </div>
+          </div>
 
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
             <div className="grid gap-1">
-              <label className="text-xs text-[#6B7280]" htmlFor="postalCode">
-                Kode Pos
+              <label className="text-xs text-[#6B7280]" htmlFor="district">
+                Kecamatan
               </label>
-
               <input
-                id="postalCode"
-                name="postalCode"
+                id="district"
+                name="district"
                 type="text"
-                placeholder="Contoh: 12190"
+                placeholder="Contoh: Kebayoran Baru"
+                defaultValue="Kebayoran Baru"
                 className="rounded-xl border border-[#0000001A] bg-[#F3F4F6] px-4 py-3 text-sm outline-none focus:border-green-600"
-                required
+              />
+            </div>
+            <div className="grid gap-1">
+              <label className="text-xs text-[#6B7280]" htmlFor="village">
+                Kelurahan
+              </label>
+              <input
+                id="village"
+                name="village"
+                type="text"
+                placeholder="Contoh: Cipete"
+                defaultValue="Cipete"
+                className="rounded-xl border border-[#0000001A] bg-[#F3F4F6] px-4 py-3 text-sm outline-none focus:border-green-600"
               />
             </div>
           </div>
@@ -191,11 +245,9 @@ export default function AlamatSaya() {
       {addresses.length === 0 ? (
         <div className="rounded-2xl border border-[#0000001A] bg-white p-8 text-center">
           <FaMapMarkerAlt className="mx-auto mb-3 h-10 w-10 text-[#6B7280]" />
-
           <h2 className="text-base font-semibold text-[#111827]">
             Belum ada alamat
           </h2>
-
           <p className="mt-2 text-sm text-[#6B7280]">
             Tambahkan alamat untuk mempermudah proses checkout.
           </p>
@@ -209,10 +261,10 @@ export default function AlamatSaya() {
             <div className="flex w-full items-center justify-between gap-4">
               <div className="flex items-center gap-2">
                 <h2 className="text-base font-semibold text-[#111827]">
-                  {address.label}
+                  {address.label || "Alamat"}
                 </h2>
 
-                {address.isPrimary && (
+                {address.is_primary && (
                   <div className="rounded-full bg-green-600 px-2 py-0.5 text-sm font-medium text-white">
                     Utama
                   </div>
@@ -231,19 +283,18 @@ export default function AlamatSaya() {
 
             <div className="grid gap-1">
               <p className="text-sm font-normal text-[#111827]">
-                {address.receiverName} · {address.phone}
+                {address.receiver_name} · {address.phone}
               </p>
-
               <p className="text-xs font-normal text-[#6B7280]">
-                {address.detail}
+                {address.detail_address}
               </p>
-
               <p className="text-xs font-normal text-[#6B7280]">
-                {address.city}, {address.postalCode}
+                {address.village}, {address.district}, {address.city},{" "}
+                {address.province}
               </p>
             </div>
 
-            {!address.isPrimary && (
+            {!address.is_primary && (
               <button
                 type="button"
                 onClick={() => handleSetPrimary(address.id)}
