@@ -14,6 +14,7 @@ import Header from "../Header";
 import Footer from "../Footer";
 import { useAuth } from "../custom_hooks/useAuth.js"
 import { useProfileData } from "../custom_hooks/useProfileData";
+import { useWishlist } from "../custom_hooks/useWhislist.js";
 import { makeModal } from "../ModalContext";
 import { useProfile } from "../custom_hooks/useProfile.js";
 import { getImageUrl } from "../utils/image.js";
@@ -22,7 +23,8 @@ export default function ProfileLayout() {
   const navigate = useNavigate();
   const {isLoggedIn, currentUser, logoutUser} = useAuth()
   const { profile, clear } = useProfile(); // data dari backend
-  const { orders = [], wishlistItems = [] } = useProfileData();
+  const { orders = []} = useProfileData();
+  const {wishlist = []} = useWishlist()
   const { showConfirm, showAlert } = makeModal();
   const [previewImage, setPreviewImage] = useState(null);
   
@@ -137,7 +139,7 @@ export default function ProfileLayout() {
                 </div>
                 <div className="grid">
                   <h2 className="place-self-center text-base font-semibold text-[#111827]">
-                    {wishlistItems.length}
+                    {wishlist.length}
                   </h2>
                   <p className="place-self-center text-xs font-normal text-[#6B7280]">
                     Wishlist
