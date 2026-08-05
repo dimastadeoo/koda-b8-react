@@ -2,7 +2,6 @@ import React from "react";
 import { Link, useParams, useSearchParams } from "react-router";
 import { FaChevronRight, FaStar } from "react-icons/fa";
 
-import Header from "../Header";
 import Footer from "../Footer";
 import { CartItem, formatRupiah } from "../CartItem";
 import { useProducts } from "../custom_hooks/useProduct.js";
@@ -152,7 +151,6 @@ export default function BrowseProducts() {
 
   return (
     <>
-      <Header />
       
       <main className="bg-green-50 min-h-screen pb-10 text-gray-800 font-sans antialiased">
         {/* Breadcrumb & Title */}
