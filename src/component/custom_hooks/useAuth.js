@@ -1,53 +1,75 @@
+// src/custom_hooks/useAuth.js
 import { useDispatch, useSelector } from 'react-redux';
-import { store } from '../../redux/store.js';
 import {
   registerUser as registerAction,
   loginUser as loginAction,
   logoutUser as logoutAction,
+  clearMessages,
 } from '../../redux/reducers/userSlice';
 
 export function useAuth() {
   const dispatch = useDispatch();
-  const users = useSelector((state) => state.user.users);
-  const currentUser = useSelector((state) => state.user.currentUser);
+  const user = useSelector((state) => state.user.user);
+  const token = useSelector((state) => state.user.token);
   const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
+  const isLoading = useSelector((state) => state.user.isLoading);
+  const error = useSelector((state) => state.user.error);
+  const registerMessage = useSelector((state) => state.user.registerMessage);
+  const loginMessage = useSelector((state) => state.user.loginMessage);
 
-  const registerUser = ({ name, email, password }) => {
+  const registerUser = async ({ name, email, password }) => {
     try {
-      dispatch(registerAction({ name, email, password }));
-      return { success: true, message: 'Registrasi berhasil. Silakan login.' };
-    } catch (error) {
-      return { success: false, message: error.message };
+      const result = await dispatch(registerAction({ name, email, password })).unwrap();
+      // result = { success: true, message: "...", results: { name, email } }
+      // Ambil message dari result
+      return {
+        success: true,
+        message: result.message || 'Registrasi berhasil. Silakan login.',
+      };
+    } catch (err) {
+      return {
+        success: false,
+        message: err || 'Registrasi gagal',
+      };
     }
   };
 
-  const loginUser = ({ email, password }) => {
+  const loginUser = async ({ email, password }) => {
     try {
-      dispatch(loginAction({ email, password }));
-      // Ambil user terbaru dari store
-      const state = store.getState();
-      const user = state.user.currentUser;
-      return { success: true, message: 'Login berhasil.', user };
-    } catch (error) {
-      return { success: false, message: error.message };
+      const result = await dispatch(loginAction({ email, password })).unwrap();
+      // result = { token, user, message }
+      return {
+        success: true,
+        message: result.message,
+      };
+    } catch (err) {
+      return {
+        success: false,
+        message: err,
+      };
     }
   };
 
   const logoutUser = () => {
-    try {
-      dispatch(logoutAction());
-      return { success: true, message: 'Logout berhasil.' };
-    } catch (error) {
-      return { success: false, message: error.message };
-    }
+    dispatch(logoutAction());
+    return { success: true, message: 'Logout berhasil.' };
+  };
+
+  const clearAuthMessages = () => {
+    dispatch(clearMessages());
   };
 
   return {
-    users,
-    currentUser,
+    user,
+    token,
     isLoggedIn,
+    isLoading,
+    error,
+    registerMessage,
+    loginMessage,
     registerUser,
     loginUser,
     logoutUser,
+    clearAuthMessages,
   };
 }
