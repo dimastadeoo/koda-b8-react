@@ -29,6 +29,7 @@ import {
 import { useAuth } from "./custom_hooks/useAuth.js";
 import { makeModal } from "./ModalContext";
 import { makeProducts } from "./ProdutsContext";
+import { useProfile } from "./custom_hooks/useProfile.js";
 
 export default function Header() {
   const navigate = useNavigate();
@@ -39,6 +40,7 @@ export default function Header() {
   const [searchKeyword, setSearchKeyword] = React.useState("");
   const [isSearchTouched, setIsSearchTouched] = React.useState(false);
   const { showConfirm, showAlert } = makeModal();
+  const {clear} = useProfile()
 
   const trimmedSearchKeyword = searchKeyword.trim();
 
@@ -113,6 +115,7 @@ export default function Header() {
     if (!confirmed) return;
 
     const result = logoutUser();
+    clear()
 
     await showAlert({
       title: "Berhasil",

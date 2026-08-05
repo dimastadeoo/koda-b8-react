@@ -7,7 +7,8 @@ import { CartItem, formatRupiah } from "../CartItem";
 import { makeProducts } from "../ProdutsContext";
 import { makeCart } from "../CartContext";
 import { makeModal } from "../ModalContext";
-import { makeProfile } from "../ProfileContext";
+import { useProfileData } from "../custom_hooks/useProfileData.js";
+
 import { useAuth } from "../custom_hooks/useAuth.js";
 
 import {
@@ -28,7 +29,7 @@ export default function DetailPage() {
   const { id } = useParams();
   const { products, loading, error, kategoriProducts } = makeProducts();
   const { isLoggedIn, currentUser } = useAuth();
-  const { createCheckout } = makeProfile();
+  const { createOrder } = useProfileData();
 
   const [quantity, setQuantity] = React.useState(1);
   const [selectedImage, setSelectedImage] = React.useState("");
@@ -168,7 +169,7 @@ export default function DetailPage() {
       image: product.image,
     };
 
-    const result = createCheckout({
+    const result = createOrder({
       source: "detail",
       items: [checkoutItem],
       total: finalPrice * quantity,

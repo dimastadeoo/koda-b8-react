@@ -17,13 +17,13 @@ import { useAuth } from "../custom_hooks/useAuth.js"
 import { makeCart } from "../CartContext";
 import { makeProducts } from "../ProdutsContext";
 import { makeModal } from "../ModalContext";
-import { makeProfile } from "../ProfileContext";
+import { useProfileData } from "../custom_hooks/useProfileData.js";
 
 export default function Cart() {
   const navigate = useNavigate();
   const {isLoggedIn} = useAuth()
 
-  const { createCheckout } = makeProfile();
+  const { createOrder } = useProfileData();
   const {
     cartItems,
     increaseQuantity,
@@ -90,7 +90,7 @@ export default function Cart() {
 
     if (cartItems.length === 0) return;
 
-    const result = createCheckout({
+    const result = createOrder({
       source: "cart",
       items: cartItems,
       total: subtotal,

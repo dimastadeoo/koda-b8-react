@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router";
 import { FaHeart, FaRegHeart, FaStar } from "react-icons/fa";
-import { makeProfile } from "./ProfileContext";
+import { useProfileData } from "./custom_hooks/useProfileData.js";
+
 
 const formatRupiah = (number) => {
   return new Intl.NumberFormat("id-ID", {
@@ -12,7 +13,7 @@ const formatRupiah = (number) => {
 
 function CartItem({ item }) {
   const navigate = useNavigate();
-  const { toggleWishlist, isWishlisted } = makeProfile();
+  const { toggleWishlist, isWishlisted } = useProfileData();
 
   if (!item) return null;
   const {
