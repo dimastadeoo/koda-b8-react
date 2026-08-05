@@ -13,15 +13,16 @@ import {
 import Header from "../Header";
 import Footer from "../Footer";
 import { CartItem, formatRupiah } from "../CartItem";
-import { useAuth } from "../custom_hooks/useAuth.js"
+import { transformProduct } from "../utils/productTransformer.js";
+import { useAuth } from "../custom_hooks/useAuth.js";
 import { makeCart } from "../CartContext";
-import { makeProducts } from "../ProdutsContext";
+import { useProducts } from "../custom_hooks/useProduct.js";
 import { makeModal } from "../ModalContext";
 import { useProfileData } from "../custom_hooks/useProfileData.js";
 
 export default function Cart() {
   const navigate = useNavigate();
-  const {isLoggedIn} = useAuth()
+  const { isLoggedIn } = useAuth();
 
   const { createOrder } = useProfileData();
   const {
@@ -29,10 +30,10 @@ export default function Cart() {
     increaseQuantity,
     decreaseQuantity,
     removeFromCart,
-    removeCheckedOutCartItems
+    removeCheckedOutCartItems,
   } = makeCart();
 
-  const { products } = makeProducts();
+  const { products } = useProducts();
   const { showConfirm } = makeModal();
 
   useEffect(() => {
@@ -41,14 +42,11 @@ export default function Cart() {
     }
   }, [isLoggedIn, navigate]);
 
-
   const getFinalPrice = (item) => {
     const isDiscount = typeof item.badgeContent === "number";
-
     if (!isDiscount) {
       return item.price;
     }
-
     return item.price - (item.price * item.badgeContent) / 100;
   };
 
@@ -62,12 +60,12 @@ export default function Cart() {
     0
   );
 
+  // Rekomendasi produk: filter produk yang tidak ada di cart, lalu transform
+  const cartProductIds = cartItems.map((item) => item.productId);
   const recommendationProducts = products
-    .filter(
-      (product) =>
-        !cartItems.some((cartItem) => cartItem.productId === product.id)
-    )
-    .slice(0, 4);
+    .filter((product) => !cartProductIds.includes(product.id))
+    .slice(0, 4)
+    .map((product) => transformProduct(product)); // 🔥 transform di sini
 
   const handleRemoveItem = async (productId) => {
     const confirmed = await showConfirm({
@@ -76,9 +74,7 @@ export default function Cart() {
       confirmText: "Ya, Hapus",
       cancelText: "Batal",
     });
-
     if (!confirmed) return;
-
     removeFromCart(productId);
   };
 
@@ -87,7 +83,6 @@ export default function Cart() {
       navigate("/auth/login");
       return;
     }
-
     if (cartItems.length === 0) return;
 
     const result = createOrder({
@@ -103,7 +98,6 @@ export default function Cart() {
 
     if (result.success) {
       removeCheckedOutCartItems(cartItems);
-
       navigate(`/checkout/${result.checkout.id}/shipping`, {
         state: {
           checkout: result.checkout,
@@ -122,9 +116,8 @@ export default function Cart() {
         <Header />
       </header>
 
-      <main className="min-h-screen bg-green-50 py-10 text-slate-800 antialiased">
+      <main className="min-h-screen bg-green-50 py-10 px-30 text-slate-800 antialiased">
         <div className="max-w-full mx-auto px-20 max-sm:p-4 space-y-8">
-
           {/* Section 1: Judul */}
           <section>
             <h1 className="text-2xl font-bold tracking-tight md:text-3xl">
@@ -161,19 +154,19 @@ export default function Cart() {
                         className="bg-white p-5 rounded-2xl border border-slate-100 shadow-sm flex flex-col sm:flex-row gap-4 items-start sm:items-center relative"
                       >
                         <img
-                          src={item.image?.[0]}
-                          alt={item.cartNameContent}
+                          src={item.image?.[0] || "/img/placeholder.png"}
+                          alt={item.cartNameContent || "Produk"}
                           className="w-24 h-24 sm:w-28 sm:h-28 object-cover rounded-xl bg-amber-100 shrink-0"
                         />
                         <div className="flex-1 space-y-1 w-full min-w-0">
                           <h3 className="text-base font-semibold sm:text-lg pr-8 wrap-break-word">
-                            {item.cartNameContent}
+                            {item.cartNameContent || "Produk"}
                           </h3>
                           <p className="text-xs text-slate-400 font-medium">
-                            {item.cartJenisContent}
+                            {item.cartJenisContent || "Umum"}
                           </p>
                           <p className="text-[11px] text-slate-400 truncate">
-                            Ditambahkan oleh: {item.userEmail}
+                            Ditambahkan oleh: {item.userEmail || "Anda"}
                           </p>
                           <div className="flex items-center gap-3 pt-2">
                             <div className="flex items-center border border-slate-200 rounded-full px-2 py-1 bg-slate-50">
@@ -214,7 +207,7 @@ export default function Cart() {
                             <FaTrash className="w-5 h-5" />
                           </button>
                           <div className="sm:mt-auto text-right">
-                            {typeof item.badgeContent === "number" && (
+                            {typeof item.badgeContent === "number" && item.badgeContent > 0 && (
                               <p className="text-xs text-slate-400 line-through">
                                 {formatRupiah(item.price)}
                               </p>
@@ -282,10 +275,11 @@ export default function Cart() {
                 type="button"
                 onClick={handleCheckout}
                 disabled={cartItems.length === 0}
-                className={`w-full text-white font-bold py-3.5 px-4 rounded-xl shadow-md flex items-center justify-center gap-2 transition-all active:scale-[0.99] ${cartItems.length === 0
-                  ? "bg-orange-300 cursor-not-allowed"
-                  : "bg-orange-500 hover:bg-orange-600 shadow-orange-100"
-                  }`}
+                className={`w-full text-white font-bold py-3.5 px-4 rounded-xl shadow-md flex items-center justify-center gap-2 transition-all active:scale-[0.99] ${
+                  cartItems.length === 0
+                    ? "bg-orange-300 cursor-not-allowed"
+                    : "bg-orange-500 hover:bg-orange-600 shadow-orange-100"
+                }`}
               >
                 <FaShieldAlt className="w-4 h-4" />
                 Checkout Aman
@@ -311,7 +305,7 @@ export default function Cart() {
             </div>
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
               {recommendationProducts.map((item) => (
-                <CartItem key={item.id} item={item} />
+                <CartItem key={item.id} item={item} /> 
               ))}
             </div>
           </section>
