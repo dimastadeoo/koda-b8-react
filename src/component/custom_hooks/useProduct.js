@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { useEffect } from 'react';
+import { useCallback, useEffect, useRef } from 'react';
 import {
   fetchProducts,
   fetchProductById,
@@ -21,51 +21,64 @@ export function useProducts() {
     error,
   } = useSelector((state) => state.products);
 
-  // Fetch all products on mount (optional: bisa dipanggil manual)
-  const loadProducts = (params = {}) => {
-    dispatch(fetchProducts(params));
-  };
+  const fetchedRef = useRef(false); // flag untuk mencegah fetch ganda
 
-  const loadProductDetail = async(id) => {
-    try {
-        await dispatch(fetchProductById(id)).unwrap();
-    } catch (err) {
-        console.error('Error fetching product detail:', err);
-    }
-  };
+  const loadProducts = useCallback(
+    (params = {}) => {
+      dispatch(fetchProducts(params));
+    },
+    [dispatch]
+  );
 
-  const loadCategories = () => {
+  const loadProductDetail = useCallback(
+    (id) => {
+      dispatch(fetchProductById(id));
+    },
+    [dispatch]
+  );
+
+  const loadCategories = useCallback(() => {
     dispatch(fetchCategories());
-  };
+  }, [dispatch]);
 
-  const loadMerks = () => {
+  const loadMerks = useCallback(() => {
     dispatch(fetchMerks());
-  };
+  }, [dispatch]);
 
-  const loadReviews = (productId, page = 1, limit = 10) => {
-    dispatch(fetchProductReviews({ productId, page, limit }));
-  };
+  const loadReviews = useCallback(
+    (productId, page = 1, limit = 10) => {
+      dispatch(fetchProductReviews({ productId, page, limit }));
+    },
+    [dispatch]
+  );
 
-  const clearProduct = () => {
+  const clearProduct = useCallback(() => {
     dispatch(clearSelectedProduct());
-  };
+  }, [dispatch]);
 
-  // Auto fetch on mount (optional)
+  // 🔥 Hanya fetch sekali saat mount
   useEffect(() => {
-    loadProducts();
-    loadCategories();
-    loadMerks();
-  }, []);
+    if (!fetchedRef.current) {
+      fetchedRef.current = true;
+      loadProducts();
+      loadCategories();
+      loadMerks();
+    }
+  }, [loadProducts, loadCategories, loadMerks]);
 
-  // Helper: get product by id from local state (sync)
-  const getProductById = (id) => {
-    return products.find((p) => p.id === Number(id));
-  };
+  const getProductById = useCallback(
+    (id) => {
+      return products.find((p) => p.id === Number(id));
+    },
+    [products]
+  );
 
-  // Helper: get products by ids (for recommendations)
-  const getProductsByIds = (ids = []) => {
-    return products.filter((p) => ids.includes(p.id));
-  };
+  const getProductsByIds = useCallback(
+    (ids = []) => {
+      return products.filter((p) => ids.includes(p.id));
+    },
+    [products]
+  );
 
   return {
     products,
