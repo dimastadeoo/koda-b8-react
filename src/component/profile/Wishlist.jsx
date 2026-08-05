@@ -1,8 +1,9 @@
 import {CartItem} from "../CartItem";
-import { makeProfile } from "../ProfileContext";
+import { useProfileData } from "../custom_hooks/useProfileData";
+
 
 export default function Wishlist() {
-  const { wishlistItems } = makeProfile();
+  const { wishlistItems } = useProfileData();
 
   return (
     <div className="flex flex-col items-start gap-4">

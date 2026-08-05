@@ -7,15 +7,12 @@ import {
   FaTimes,
 } from "react-icons/fa";
 
-import { makeProfile } from "../ProfileContext";
+import { useProfileData } from "../custom_hooks/useProfileData";
 import { makeModal } from "../ModalContext";
 
 export default function AlamatSaya() {
-  const { addresses, addAddress, removeAddress, setPrimaryAddress } =
-    makeProfile();
-
+  const { addresses, addAddress, removeAddress, setPrimaryAddress } = useProfileData();
   const { showConfirm, showAlert } = makeModal();
-
   const [showForm, setShowForm] = useState(false);
 
   const handleSubmit = async (event) => {

@@ -6,12 +6,12 @@ import {
   FaTruck,
 } from "react-icons/fa";
 
-import { makeProfile } from "../ProfileContext";
+import { useProfileData } from "../custom_hooks/useProfileData";
 import { useNavigate } from "react-router";
 import { formatRupiah } from "../CartItem";
 
 export default function Myorder() {
-  const { orders } = makeProfile();
+  const { orders } = useProfileData();
   const navigate = useNavigate();
 
   const handleContinueCheckout = (order) => {
