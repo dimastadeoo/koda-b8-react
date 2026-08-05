@@ -19,7 +19,7 @@ import ProductsList from './component/admin/ProductsList';
 import OrderList from './component/admin/OrderList';
 import Dashboard from './component/admin/Dashboard';
 import CustomerList from './component/admin/CustomerList';
-import { ProductProvider } from './component/ProdutsContext';
+// import { ProductProvider } from './component/ProdutsContext';
 import { ModalProvider } from './component/ModalContext';
 import AuthLayout from './component/auth/AuthLayout';
 // import { AuthProvider } from './component/AuthContext';
@@ -37,6 +37,7 @@ import { Provider } from 'react-redux';
 import { persistor, store } from './redux/store';
 import { PersistGate } from 'redux-persist/integration/react';
 import ProtectedRoute from './component/ProtectedRoute';
+import Header from './component/Header';
 
 
 // Konfigurasi Peta Rute URL halaman
@@ -48,11 +49,11 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <HomePage />,
+        element: <><Header /> <HomePage /></>,
       },
       {
         path: "/main",
-        element: <HomePage />,
+        element: <><Header /> <HomePage /></>,
       },
       {
         path: "/main/product/:id",
@@ -176,13 +177,13 @@ function App() {
       <PersistGate loading={null} persistor={persistor}>
         <ModalProvider>
           {/* <AuthProvider> */}
-            <ProductProvider>
+            {/* <ProductProvider> */}
               {/* <ProfileProvider> */}
                 <CartProvider>
                   <RouterProvider router={router} />
                 </CartProvider>
               {/* </ProfileProvider> */}
-            </ProductProvider>
+            {/* </ProductProvider> */}
           {/* </AuthProvider> */}
         </ModalProvider>
       </PersistGate>
