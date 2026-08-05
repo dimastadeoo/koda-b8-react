@@ -147,7 +147,7 @@ export default function Header() {
             <div className="flex items-center gap-1.5">
               <FaMapMarkerAlt className="w-3.5 h-3.5" />
               <span>
-                Kirim ke: <span className="font-semibold">Jakarta Selatan</span>
+                Kirim ke: <span className="font-semibold">Jakarta Pusat</span>
               </span>
             </div>
 
