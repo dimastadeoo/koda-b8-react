@@ -1,4 +1,5 @@
 import { Navigate, NavLink, Outlet, useNavigate } from "react-router";
+import { useState, useEffect } from "react";
 import {
   FaBoxOpen,
   FaHeart,
@@ -12,15 +13,19 @@ import {
 import Header from "../Header";
 import Footer from "../Footer";
 import { useAuth } from "../custom_hooks/useAuth.js"
-import { makeProfile } from "../ProfileContext";
+import { useProfileData } from "../custom_hooks/useProfileData";
 import { makeModal } from "../ModalContext";
+import { useProfile } from "../custom_hooks/useProfile.js";
+import { getImageUrl } from "../utils/image.js";
 
 export default function ProfileLayout() {
   const navigate = useNavigate();
   const {isLoggedIn, currentUser, logoutUser} = useAuth()
-
-  const { profile, orders = [], wishlistItems = [] } = makeProfile();
+  const { profile, clear } = useProfile(); // data dari backend
+  const { orders = [], wishlistItems = [] } = useProfileData();
   const { showConfirm, showAlert } = makeModal();
+  const [previewImage, setPreviewImage] = useState(null);
+  
 
   const profileMenus = [
     {
@@ -50,13 +55,22 @@ export default function ProfileLayout() {
     },
   ];
 
+  useEffect(() => {
+      async function setData() {
+        if (profile.picture) {
+          setPreviewImage(getImageUrl(profile.picture));
+        }
+      }
+      setData()
+  
+    }, [profile]);
+
   if (!isLoggedIn) {
     return <Navigate to="/auth/login" replace />;
   }
 
   const userName = profile?.name || currentUser?.name || "Pengguna";
   const userEmail = profile?.email || currentUser?.email || "user@email.com";
-  const initialName = userName.charAt(0).toUpperCase();
 
   const menuClass = ({ isActive }) =>
     `flex items-center gap-3 px-4 py-3.5 text-sm font-medium transition-colors ${isActive
@@ -75,6 +89,7 @@ export default function ProfileLayout() {
     if (!confirmed) return;
 
     const result = logoutUser();
+    clear()
 
     await showAlert({
       title: "Berhasil",
@@ -95,7 +110,11 @@ export default function ProfileLayout() {
           <aside className="w-full md:w-64 md:shrink-0">
             <div className="grid gap-3 rounded-2xl border border-[#0000001A] bg-white p-5">
               <div className="flex h-16 w-16 place-self-center items-center justify-center rounded-full bg-green-100 text-xl font-bold text-green-600">
-                {initialName}
+                {previewImage ? (
+                  <img src={previewImage} alt="Profile" className="w-full h-full object-cover" />
+                    ) : (
+                  userName.charAt(0)?.toUpperCase() || "U"
+                )}
               </div>
 
               <div className="grid text-center">

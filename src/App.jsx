@@ -24,7 +24,7 @@ import { ModalProvider } from './component/ModalContext';
 import AuthLayout from './component/auth/AuthLayout';
 // import { AuthProvider } from './component/AuthContext';
 import { CartProvider } from './component/CartContext';
-import { ProfileProvider } from './component/ProfileContext';
+// import { ProfileProvider } from './component/ProfileContext';
 import ProfileLayout from './component/profile/ProfileLayout';
 import CheckoutLayout from './component/checkout/CheckoutLayout';
 import StepShipping from './component/checkout/StepShipping';
@@ -36,7 +36,7 @@ import RootLayout from './component/RootLayout';
 import { Provider } from 'react-redux';
 import { persistor, store } from './redux/store';
 import { PersistGate } from 'redux-persist/integration/react';
-
+import ProtectedRoute from './component/ProtectedRoute';
 
 
 // Konfigurasi Peta Rute URL halaman
@@ -60,7 +60,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/main/cart",
-        element: <Cart />,
+        element: <ProtectedRoute><Cart /></ProtectedRoute>,
       },
       {
         path: "/main/all-products",
@@ -72,7 +72,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/profile",
-        element: <ProfileLayout />,
+        element: <ProtectedRoute><ProfileLayout /></ProtectedRoute>,
         children: [
           {
             index: true,
@@ -136,7 +136,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/checkout/:checkoutId",
-        element: <CheckoutLayout />,
+        element: <ProtectedRoute><CheckoutLayout /></ProtectedRoute>,
         children: [
           {
             index: true,
@@ -177,11 +177,11 @@ function App() {
         <ModalProvider>
           {/* <AuthProvider> */}
             <ProductProvider>
-              <ProfileProvider>
+              {/* <ProfileProvider> */}
                 <CartProvider>
                   <RouterProvider router={router} />
                 </CartProvider>
-              </ProfileProvider>
+              {/* </ProfileProvider> */}
             </ProductProvider>
           {/* </AuthProvider> */}
         </ModalProvider>
