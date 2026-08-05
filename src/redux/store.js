@@ -8,7 +8,7 @@ const persistConfig = {
   key: 'root',           // key untuk local storage
   storage,               // gunakan local storage
   // whitelist: ['user'], // jika hanya ingin menyimpan reducer 'user' saja (opsional)
-  blacklist: ['profile']        // jika ingin mengecualikan reducer tertentu
+  blacklist: ['profile', 'wishlist', 'products', 'address']        // jika ingin mengecualikan reducer tertentu
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
