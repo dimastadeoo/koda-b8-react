@@ -99,10 +99,7 @@ jobs:
         run: echo -n ${{ secrets.GITHUB_TOKEN }} | docker login ghcr.io -u ${{ github.actor }} --password-stdin
 
       - name: Build Docker image
-        run: docker build \
-            --build-arg VITE_BACKEND_PORT="${{ vars.VITE_BACKEND_PORT }}" \
-            --build-arg VITE_BACKEND_URL="${{ vars.VITE_BACKEND_URL }}" \
-            . -t ghcr.io/${{ github.repository }}:latest
+        run: docker build --build-arg VITE_BACKEND_PORT="${{ vars.VITE_BACKEND_PORT }}" --build-arg VITE_BACKEND_URL="${{ vars.VITE_BACKEND_URL }}" . -t ghcr.io/${{ github.repository }}:latest
 
       - name: Push to ghcr.io
         run: docker push ghcr.io/${{github.repository}}:latest
