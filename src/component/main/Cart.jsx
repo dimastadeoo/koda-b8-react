@@ -112,9 +112,7 @@ export default function Cart() {
 
   return (
     <>
-      <header className="sticky top-0 z-50" id="header">
-        <Header />
-      </header>
+      <Header />
 
       <main className="min-h-screen bg-green-50 py-10 px-30 text-slate-800 antialiased">
         <div className="max-w-full mx-auto px-20 max-sm:p-4 space-y-8">
