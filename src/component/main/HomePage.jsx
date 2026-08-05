@@ -1,4 +1,4 @@
-import Header from "../Header";
+
 import Footer from "../Footer";
 import { CartItem } from "../CartItem";
 import { transformProduct } from "../utils/productTransformer.js";
@@ -93,10 +93,6 @@ export default function HomePage() {
 
   return (
     <>
-      <header className="sticky top-0 z-50" id="header">
-        <Header />
-      </header>
-
       <main className="grid gap-7 pb-10 bg-green-50">
         {/* Hero Banner */}
         <section className="relative w-full md:bg-linear-to-r md:from-[#288a17] md:from-50% md:to-[#05a2d1] md:to-50% bg-[#05a2d1] overflow-hidden min-h-110 flex items-center group">
