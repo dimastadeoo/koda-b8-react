@@ -38,6 +38,8 @@ import { persistor, store } from './redux/store';
 import { PersistGate } from 'redux-persist/integration/react';
 import ProtectedRoute from './component/ProtectedRoute';
 import Header from './component/Header';
+import { registerLogout } from "./api/authService";
+import { logoutUser } from "./redux/reducers/userSlice";
 
 
 // Konfigurasi Peta Rute URL halaman
@@ -171,6 +173,17 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
+  registerLogout((message) => {
+
+    localStorage.clear();
+
+    persistor.purge();
+
+    store.dispatch(
+        logoutUser(message)
+    );
+
+});
   // Jalankan konfigurasi router ke dalam aplikasi React
   return (
     <Provider store={store}>

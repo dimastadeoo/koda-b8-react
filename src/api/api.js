@@ -1,3 +1,5 @@
+import { forceLogout } from "./authService";
+
 const url = import.meta.env.VITE_BACKEND_URL;
 const port = import.meta.env.VITE_BACKEND_PORT;
 const API_BASE = `${url}:${port}`;
@@ -28,5 +30,9 @@ export async function apiFetch(endpoint, options = {}) {
     });
 
     const data = await response.json();
+
+    if (response.status === 401) {
+        forceLogout(data.message);
+    }
     return { response, data };
 }

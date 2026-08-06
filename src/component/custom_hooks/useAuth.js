@@ -3,9 +3,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import {
   registerUser as registerAction,
   loginUser as loginAction,
-  logoutUser as logoutAction,
   clearMessages,
 } from '../../redux/reducers/userSlice';
+import { forceLogout } from "../../api/authService";
 
 export function useAuth() {
   const dispatch = useDispatch();
@@ -51,7 +51,7 @@ export function useAuth() {
   };
 
   const logoutUser = () => {
-    dispatch(logoutAction());
+    forceLogout("Logout berhasil.");
     return { success: true, message: 'Logout berhasil.' };
   };
 

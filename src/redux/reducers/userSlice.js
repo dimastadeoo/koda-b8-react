@@ -56,14 +56,13 @@ const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
-    logoutUser: (state) => {
-      state.user = null;
-      state.token = null;
-      state.isLoggedIn = false;
-      localStorage.removeItem('token');
-      state.registerMessage = null;
-      state.loginMessage = null;
-      
+    logoutUser(state, action) {
+        state.user = null;
+        state.token = null;
+        state.isLoggedIn = false;
+        state.error = action.payload ?? null;
+        state.loginMessage = null;
+        state.registerMessage = null;
     },
     clearMessages: (state) => {
       state.registerMessage = null;
