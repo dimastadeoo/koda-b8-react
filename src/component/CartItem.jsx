@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router";
 import { FaHeart, FaRegHeart, FaStar, FaStarHalfAlt } from "react-icons/fa";
 import { useWishlist } from "./custom_hooks/useWhislist.js";
+import { getImageProducts } from "./utils/image.js";
 
 const formatRupiah = (number) => {
   return new Intl.NumberFormat("id-ID", {
@@ -79,7 +80,7 @@ function CartItem({ item }) {
           <div
             className="relative w-full aspect-square bg-cover bg-center bg-no-repeat transition-transform group-hover:scale-[1.02] duration-300"
             style={{
-              backgroundImage: `url(${image?.[0] || '/img/placeholder.png'})`,
+              backgroundImage: `url(${getImageProducts(image?.[0]) || '/img/placeholder.png'})`,
             }}
           >
             {badgeContent > 0 && (

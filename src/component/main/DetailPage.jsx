@@ -10,6 +10,7 @@ import { useProducts } from "../custom_hooks/useProduct.js";
 import { makeCart } from "../CartContext";
 import { makeModal } from "../ModalContext";
 import { useProfileData } from "../custom_hooks/useProfileData.js";
+import { getImageProducts } from "../utils/image.js";
 
 import { useAuth } from "../custom_hooks/useAuth.js";
 
@@ -299,7 +300,7 @@ export default function DetailPage() {
               )}
               <img
                 id="main-product-image"
-                src={selectedImage || "/img/placeholder.png"}
+                src={getImageProducts(selectedImage) || "/img/placeholder.png"}
                 alt={name}
                 className="w-full h-full object-contain transition-all duration-300"
               />
@@ -318,7 +319,7 @@ export default function DetailPage() {
                   }`}
                 >
                   <img
-                    src={img.url_img}
+                    src={getImageProducts(img.url_img)}
                     alt={`${name} ${index + 1}`}
                     className="w-full h-full object-contain"
                   />

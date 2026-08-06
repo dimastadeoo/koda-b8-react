@@ -19,6 +19,7 @@ import { makeCart } from "../CartContext";
 import { useProducts } from "../custom_hooks/useProduct.js";
 import { makeModal } from "../ModalContext";
 import { useProfileData } from "../custom_hooks/useProfileData.js";
+import { getImageProducts } from "../utils/image.js";
 
 export default function Cart() {
   const navigate = useNavigate();
@@ -176,7 +177,7 @@ export default function Cart() {
                         className="bg-white p-5 rounded-2xl border border-slate-100 shadow-sm flex flex-col sm:flex-row gap-4 items-start sm:items-center relative"
                       >
                         <img
-                          src={item.image?.[0] || "/img/placeholder.png"}
+                          src={getImageProducts(item.image?.[0]) || "/img/placeholder.png"}
                           alt={item.cartNameContent}
                           className="w-24 h-24 sm:w-28 sm:h-28 object-cover rounded-xl bg-amber-100 shrink-0"
                         />
