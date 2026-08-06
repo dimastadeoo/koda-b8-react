@@ -183,7 +183,7 @@ function App() {
         logoutUser(message)
     );
 
-});
+  });
   // Jalankan konfigurasi router ke dalam aplikasi React
   return (
     <Provider store={store}>

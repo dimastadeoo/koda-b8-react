@@ -34,7 +34,7 @@ import { useProfile } from "./custom_hooks/useProfile.js";
 
 export default function Header() {
   const navigate = useNavigate();
-  const {isLoggedIn, currentUser, logoutUser} = useAuth()
+  const {isLoggedIn, user, logoutUser} = useAuth()
   const { categories, products } = useProducts();
   const [searchParams] = useSearchParams();
 
@@ -53,7 +53,7 @@ export default function Header() {
   const [searchKeyword, setSearchKeyword] = React.useState("");
   const [isSearchTouched, setIsSearchTouched] = React.useState(false);
   const { showConfirm, showAlert } = makeModal();
-  const {clear} = useProfile()
+  const {clear, profile} = useProfile()
 
   const trimmedSearchKeyword = searchKeyword.trim();
 
@@ -91,7 +91,7 @@ export default function Header() {
   const [isAccountOpen, setIsAccountOpen] = React.useState(false);
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
 
-  const firstName = currentUser?.name ? currentUser.name.split(" ")[0] : "";
+  const firstName = profile?.name ? profile.name.split(" ")[0] : "";
 
   const handleSearch = (event) => {
     event.preventDefault();
@@ -279,11 +279,11 @@ export default function Header() {
 
                         <div className="min-w-0">
                           <h4 className="font-semibold text-sm text-gray-800 truncate">
-                            {currentUser?.name}
+                            {profile?.name}
                           </h4>
 
                           <p className="text-xs text-gray-400 truncate">
-                            {currentUser?.email}
+                            {user?.email}
                           </p>
                         </div>
                       </div>
