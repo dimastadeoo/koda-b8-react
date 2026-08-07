@@ -18,13 +18,13 @@ import { useAuth } from "../custom_hooks/useAuth.js";
 import { makeCart } from "../CartContext";
 import { useProducts } from "../custom_hooks/useProduct.js";
 import { makeModal } from "../ModalContext";
-import { useProfileData } from "../custom_hooks/useProfileData.js";
 import { getImageProducts } from "../utils/image.js";
+import { useCheckout } from "../custom_hooks/useCheckout.js";
 
 export default function Cart() {
   const navigate = useNavigate();
   const { isLoggedIn } = useAuth();
-  const { createOrder } = useProfileData();
+  const { createOrder, loading: checkoutLoading } = useCheckout();
   const {
     cartItems,
     loading,
@@ -34,7 +34,7 @@ export default function Cart() {
     removeCheckedOutCartItems,
   } = makeCart();
   const { products } = useProducts();
-  const { showConfirm } = makeModal();
+  const { showConfirm, showAlert } = makeModal();
 
   useEffect(() => {
     if (!isLoggedIn) {
@@ -92,30 +92,24 @@ export default function Cart() {
     await removeFromCart(productId);
   };
 
-  const handleCheckout = () => {
+  const handleCheckout = async () => {
     if (!isLoggedIn) {
       navigate("/auth/login");
       return;
     }
     if (adaptedCartItems.length === 0) return;
 
-    const result = createOrder({
-      source: "cart",
-      items: adaptedCartItems,
-      total: subtotal,
-    });
-
-    if (result.requireLogin) {
-      navigate("/auth/login");
-      return;
-    }
-
-    if (result.success) {
+    try {
+      const newOrder = await createOrder(); // dari useCheckout
+      // Hapus cart items dari localStorage (optional)
       removeCheckedOutCartItems();
-      navigate(`/checkout/${result.checkout.id}/shipping`, {
-        state: {
-          checkout: result.checkout,
-        },
+      navigate(`/checkout/${newOrder.id}/shipping`, {
+        state: { order: newOrder },
+      });
+    } catch (err) {
+      await showAlert({
+        title: "Checkout Gagal",
+        message: err,
       });
     }
   };
@@ -131,6 +125,19 @@ export default function Cart() {
         <main className="min-h-screen bg-green-50 py-10 px-4 text-slate-800 antialiased">
           <div className="max-w-6xl mx-auto text-center">
             <p className="text-gray-600">Memuat keranjang...</p>
+          </div>
+        </main>
+        <Footer />
+      </>
+    );
+  }
+  if (checkoutLoading) {
+    return (
+      <>
+        <Header />
+        <main className="min-h-screen bg-green-50 py-10 px-4 text-slate-800 antialiased">
+          <div className="max-w-6xl mx-auto text-center">
+            <p className="text-gray-600">Memproses Pesanan...</p>
           </div>
         </main>
         <Footer />
