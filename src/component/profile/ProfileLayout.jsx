@@ -13,7 +13,7 @@ import {
 import Header from "../Header";
 import Footer from "../Footer";
 import { useAuth } from "../custom_hooks/useAuth.js"
-import { useProfileData } from "../custom_hooks/useProfileData";
+import { useCheckout } from "../custom_hooks/useCheckout.js";
 import { useWishlist } from "../custom_hooks/useWhislist.js";
 import { makeModal } from "../ModalContext";
 import { useProfile } from "../custom_hooks/useProfile.js";
@@ -23,7 +23,7 @@ export default function ProfileLayout() {
   const navigate = useNavigate();
   const {isLoggedIn, currentUser, logoutUser} = useAuth()
   const { profile, clear } = useProfile(); // data dari backend
-  const { orders = []} = useProfileData();
+  const { orders, loading} = useCheckout();
   const {wishlist = []} = useWishlist()
   const { showConfirm, showAlert } = makeModal();
   const [previewImage, setPreviewImage] = useState(null);
@@ -69,6 +69,10 @@ export default function ProfileLayout() {
 
   if (!isLoggedIn) {
     return <Navigate to="/auth/login" replace />;
+  }
+
+  if (loading && orders.length === 0) {
+    return <div className="flex w-full flex-col items-start gap-4 p-6">Memuat pesanan...</div>;
   }
 
   const userName = profile?.name || currentUser?.name || "Pengguna";
