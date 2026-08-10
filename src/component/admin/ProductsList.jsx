@@ -1,8 +1,16 @@
 import { useState } from "react";
 import AsideContent from "../Aside";
 import NavPage from "../NavPage";
-
-const urlW3 = "http://www.w3.org/2000/svg";
+import {
+  FaEye,
+  FaEdit,
+  FaTrash,
+  FaSearch,
+  FaFilter,
+  FaPlus,
+  FaTimes,
+  FaStar,
+} from "react-icons/fa";
 
 const products = [
   {
@@ -48,8 +56,9 @@ function StatusBadge({ children }) {
 
   return (
     <div
-      className={`flex w-fit items-center justify-center rounded-2xl px-2 py-1 text-xs font-normal ${badgeClass[children] || "bg-[#EFF6FF] text-[#1A73E8]"
-        }`}
+      className={`flex w-fit items-center justify-center rounded-2xl px-2 py-1 text-xs font-normal ${
+        badgeClass[children] || "bg-[#EFF6FF] text-[#1A73E8]"
+      }`}
     >
       {children}
     </div>
@@ -101,20 +110,7 @@ function ProductRow({ product }) {
 
       <td className="px-4 py-3">
         <div className="flex items-center gap-1">
-          <svg
-            xmlns={urlW3}
-            width="12"
-            height="12"
-            viewBox="0 0 24 24"
-            fill="gold"
-            stroke="none"
-            strokeWidth="1"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            <path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z" />
-          </svg>
-
+          <FaStar size={12} fill="gold" />
           <h3 className="text-sm font-normal text-[#111827]">
             {product.rating}
           </h3>
@@ -139,20 +135,7 @@ function ProductRow({ product }) {
             className="flex cursor-pointer items-center justify-center border-0 bg-transparent p-1 text-[#6B7280] hover:text-[#1A73E8]"
             aria-label="Lihat produk"
           >
-            <svg
-              xmlns={urlW3}
-              width="16"
-              height="16"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="1"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0" />
-              <circle cx="12" cy="12" r="3" />
-            </svg>
+            <FaEye size={16} />
           </button>
 
           <button
@@ -160,20 +143,7 @@ function ProductRow({ product }) {
             className="flex cursor-pointer items-center justify-center border-0 bg-transparent p-1 text-[#6B7280] hover:text-[#1A73E8]"
             aria-label="Edit produk"
           >
-            <svg
-              xmlns={urlW3}
-              width="16"
-              height="16"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="1"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" />
-              <path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z" />
-            </svg>
+            <FaEdit size={16} />
           </button>
 
           <button
@@ -181,23 +151,7 @@ function ProductRow({ product }) {
             className="flex cursor-pointer items-center justify-center border-0 bg-transparent p-1 text-[#6B7280] hover:text-[#DC2626]"
             aria-label="Hapus produk"
           >
-            <svg
-              xmlns={urlW3}
-              width="16"
-              height="16"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="1"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <path d="M10 11v6" />
-              <path d="M14 11v6" />
-              <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6" />
-              <path d="M3 6h18" />
-              <path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
-            </svg>
+            <FaTrash size={16} />
           </button>
         </div>
       </td>
@@ -210,15 +164,10 @@ export default function ProductsList() {
 
   return (
     <>
-      {/* Content Aside di sebelah kiri */}
       <AsideContent />
-
-      {/* Header */}
       <NavPage />
-      
-      {/* Content di sebelah kanan */}
-      <main className="min-h-screen bg-[#F8F9FA] pl-18 pt-16 md:pl-60">
 
+      <main className="min-h-screen bg-[#F8F9FA] pl-18 pt-16 md:pl-60">
         <section className="grid gap-6 p-6">
           <div className="grid gap-4 sm:flex sm:items-center sm:justify-between">
             <h1 className="text-2xl font-medium text-[#111827]">
@@ -230,44 +179,14 @@ export default function ProductsList() {
               onClick={() => setIsModalOpen(true)}
               className="flex w-fit max-w-40 cursor-pointer items-center justify-center gap-2 rounded-xl border-0 bg-[#F97316] px-4 py-2 transition-colors hover:bg-[#d4780e]"
             >
-              <svg
-                xmlns={urlW3}
-                width="14"
-                height="14"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="#ffffff"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <path d="M5 12h14" />
-                <path d="M12 5v14" />
-              </svg>
-
-              <p className="text-sm font-medium text-white">
-                Tambah Produk
-              </p>
+              <FaPlus size={14} className="text-white" />
+              <p className="text-sm font-medium text-white">Tambah Produk</p>
             </button>
           </div>
 
           <div className="grid items-center gap-3 rounded-2xl border border-black/10 bg-white p-4 md:grid-cols-[minmax(0,1fr)_max-content_max-content]">
             <div className="flex items-center gap-2 rounded-xl bg-[#ccced2] px-4 py-2.5">
-              <svg
-                xmlns={urlW3}
-                width="16"
-                height="16"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="#6B7280"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <path d="m21 21-4.34-4.34" />
-                <circle cx="11" cy="11" r="8" />
-              </svg>
-
+              <FaSearch size={16} className="text-[#6B7280]" />
               <input
                 type="text"
                 name="search"
@@ -288,23 +207,8 @@ export default function ProductsList() {
               type="button"
               className="flex cursor-pointer items-center justify-center gap-2 rounded-xl border border-[#111827] bg-transparent px-4 py-2.5 transition-colors hover:bg-[#f1d9d9]"
             >
-              <svg
-                xmlns={urlW3}
-                width="16"
-                height="16"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="#6B7280"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <path d="M10 20a1 1 0 0 0 .553.895l2 1A1 1 0 0 0 14 21v-7a2 2 0 0 1 .517-1.341L21.74 4.67A1 1 0 0 0 21 3H3a1 1 0 0 0-.742 1.67l7.225 7.989A2 2 0 0 1 10 14z" />
-              </svg>
-
-              <p className="text-sm font-medium text-[#99A1AF]">
-                Filter
-              </p>
+              <FaFilter size={16} className="text-[#6B7280]" />
+              <p className="text-sm font-medium text-[#99A1AF]">Filter</p>
             </button>
           </div>
 
@@ -345,7 +249,6 @@ export default function ProductsList() {
                     <th className="px-4 py-3 font-normal">Aksi</th>
                   </tr>
                 </thead>
-
                 <tbody>
                   {products.map((product) => (
                     <ProductRow key={product.id} product={product} />
@@ -375,20 +278,7 @@ export default function ProductsList() {
                 className="flex cursor-pointer items-center justify-center border-0 bg-transparent"
                 aria-label="Tutup modal"
               >
-                <svg
-                  xmlns={urlW3}
-                  width="16"
-                  height="16"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="black"
-                  strokeWidth="1"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <path d="M18 6 6 18" />
-                  <path d="m6 6 12 12" />
-                </svg>
+                <FaTimes size={16} className="text-black" />
               </button>
             </div>
 
@@ -509,11 +399,7 @@ export default function ProductsList() {
                   htmlFor="new-product"
                   className="flex items-center gap-1 text-xs font-normal text-[#111827]"
                 >
-                  <input
-                    type="checkbox"
-                    id="new-product"
-                    value="Produk Baru"
-                  />
+                  <input type="checkbox" id="new-product" value="Produk Baru" />
                   Produk Baru
                 </label>
               </div>

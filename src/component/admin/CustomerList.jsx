@@ -1,7 +1,15 @@
 import AsideContent from "../Aside";
-import NavPage from "../NavPage"
-
-const urlW3 = "http://www.w3.org/2000/svg";
+import NavPage from "../NavPage";
+import {
+  FaUsers,
+  FaUserPlus,
+  FaBox,
+  FaStar,
+  FaEye,
+  FaEdit,
+  FaTrash,
+  FaSearch,
+} from "react-icons/fa";
 
 const customerStats = [
   {
@@ -9,92 +17,28 @@ const customerStats = [
     label: "Total Pelanggan",
     iconBg: "bg-[#F0FDF4]",
     iconColor: "text-[#16A34A]",
-    icon: (
-      <svg
-        xmlns={urlW3}
-        width="18"
-        height="18"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      >
-        <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
-        <path d="M16 3.128a4 4 0 0 1 0 7.744" />
-        <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
-        <circle cx="9" cy="7" r="4" />
-      </svg>
-    ),
+    icon: <FaUsers size={18} />,
   },
   {
     value: "89",
     label: "Pelanggan Baru",
     iconBg: "bg-[#EFF6FF]",
     iconColor: "text-[#1A73E8]",
-    icon: (
-      <svg
-        xmlns={urlW3}
-        width="18"
-        height="18"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      >
-        <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
-        <circle cx="9" cy="7" r="4" />
-        <line x1="19" x2="19" y1="8" y2="14" />
-        <line x1="22" x2="16" y1="11" y2="11" />
-      </svg>
-    ),
+    icon: <FaUserPlus size={18} />,
   },
   {
     value: "4.7",
     label: "Rata - Rata Pesanan",
     iconBg: "bg-[#FAF5FF]",
     iconColor: "text-[#8B5CF6]",
-    icon: (
-      <svg
-        xmlns={urlW3}
-        width="18"
-        height="18"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      >
-        <path d="M12 22V12" />
-        <path d="M20.27 18.27 22 20" />
-        <path d="M21 10.498V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.729l7 4a2 2 0 0 0 2 .001l.98-.559" />
-        <path d="M3.29 7 12 12l8.71-5" />
-        <path d="m7.5 4.27 8.997 5.148" />
-        <circle cx="18.5" cy="16.5" r="2.5" />
-      </svg>
-    ),
+    icon: <FaBox size={18} />,
   },
   {
     value: "4.2 / 5",
     label: "Kepuasan Pelanggan",
     iconBg: "bg-[#FFF7ED]",
     iconColor: "text-[#F97316]",
-    icon: (
-      <svg
-        xmlns={urlW3}
-        width="18"
-        height="18"
-        viewBox="0 0 24 24"
-        fill="currentColor"
-        stroke="none"
-      >
-        <path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z" />
-      </svg>
-    ),
+    icon: <FaStar size={18} />,
   },
 ];
 
@@ -121,8 +65,9 @@ function TierBadge({ tier }) {
 
   return (
     <div
-      className={`flex w-fit items-center justify-center rounded-xl px-2 py-0.5 text-xs font-normal ${tierClass[tier] || "bg-[#EFF6FF] text-[#1A73E8]"
-        }`}
+      className={`flex w-fit items-center justify-center rounded-xl px-2 py-0.5 text-xs font-normal ${
+        tierClass[tier] || "bg-[#EFF6FF] text-[#1A73E8]"
+      }`}
     >
       {tier}
     </div>
@@ -137,20 +82,7 @@ function ActionButtons() {
         className="flex cursor-pointer items-center justify-center border-0 bg-transparent p-1 text-[#6B7280] hover:text-[#1A73E8]"
         aria-label="Lihat pelanggan"
       >
-        <svg
-          xmlns={urlW3}
-          width="16"
-          height="16"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="1"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        >
-          <path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0" />
-          <circle cx="12" cy="12" r="3" />
-        </svg>
+        <FaEye size={16} />
       </button>
 
       <button
@@ -158,20 +90,7 @@ function ActionButtons() {
         className="flex cursor-pointer items-center justify-center border-0 bg-transparent p-1 text-[#6B7280] hover:text-[#1A73E8]"
         aria-label="Edit pelanggan"
       >
-        <svg
-          xmlns={urlW3}
-          width="16"
-          height="16"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="1"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        >
-          <path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" />
-          <path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z" />
-        </svg>
+        <FaEdit size={16} />
       </button>
 
       <button
@@ -179,23 +98,7 @@ function ActionButtons() {
         className="flex cursor-pointer items-center justify-center border-0 bg-transparent p-1 text-[#6B7280] hover:text-[#DC2626]"
         aria-label="Hapus pelanggan"
       >
-        <svg
-          xmlns={urlW3}
-          width="16"
-          height="16"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="1"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        >
-          <path d="M10 11v6" />
-          <path d="M14 11v6" />
-          <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6" />
-          <path d="M3 6h18" />
-          <path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
-        </svg>
+        <FaTrash size={16} />
       </button>
     </div>
   );
@@ -226,15 +129,11 @@ function CustomerRow({ customer }) {
       </td>
 
       <td className="px-4 py-3">
-        <p className="text-xs font-normal text-[#99A1AF]">
-          {customer.city}
-        </p>
+        <p className="text-xs font-normal text-[#99A1AF]">{customer.city}</p>
       </td>
 
       <td className="px-4 py-3">
-        <p className="text-xs font-normal text-[#99A1AF]">
-          {customer.joined}
-        </p>
+        <p className="text-xs font-normal text-[#99A1AF]">{customer.joined}</p>
       </td>
 
       <td className="px-4 py-3">
@@ -260,17 +159,12 @@ function CustomerRow({ customer }) {
   );
 }
 
-
 export default function CustomerList() {
   return (
     <>
-      {/* Content Aside di sebelah kiri */}
       <AsideContent />
-
-      {/* Header */}
       <NavPage />
 
-      {/* Content di sebelah kanan */}
       <main className="min-h-screen bg-[#F8F9FA] pt-16 pl-18 md:pl-60">
         <section className="grid gap-6 p-6">
           <div className="grid gap-4 sm:flex sm:items-center sm:justify-between">
@@ -317,29 +211,12 @@ export default function CustomerList() {
                 Pertumbuhan Pelanggan Baru (2026)
               </h1>
             </div>
-
-            <div className="w-full overflow-hidden">
-              
-            </div>
+            <div className="w-full overflow-hidden">{/* Grafik di sini */}</div>
           </section>
 
           <section className="grid items-center gap-3 rounded-2xl border border-black/10 bg-white p-4">
             <div className="flex items-center gap-2 rounded-xl bg-[#ccced2] px-4 py-2.5">
-              <svg
-                xmlns={urlW3}
-                width="16"
-                height="16"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="#6B7280"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <path d="m21 21-4.34-4.34" />
-                <circle cx="11" cy="11" r="8" />
-              </svg>
-
+              <FaSearch size={16} className="text-[#6B7280]" />
               <input
                 type="text"
                 name="search"
@@ -363,7 +240,6 @@ export default function CustomerList() {
                     <th className="px-4 py-3 font-normal">Aksi</th>
                   </tr>
                 </thead>
-
                 <tbody>
                   {customers.map((customer) => (
                     <CustomerRow key={customer.id} customer={customer} />
@@ -374,8 +250,6 @@ export default function CustomerList() {
           </section>
         </section>
       </main>
-
-
     </>
-  )
+  );
 }

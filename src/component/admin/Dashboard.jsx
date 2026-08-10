@@ -1,6 +1,11 @@
 import AsideContent from "../Aside";
 import NavPage from "../NavPage";
-const urlW3 = 'http://www.w3.org/2000/svg'
+import {
+  FaMoneyBillWave,
+  FaClipboardList,
+  FaUsers,
+  FaBox,
+} from "react-icons/fa";
 
 const stats = [
   {
@@ -10,26 +15,7 @@ const stats = [
     changeColor: "text-[#16A34A]",
     iconBg: "bg-[#EFF6FF]",
     iconColor: "text-[#1A73E8]",
-    icon: (
-      <svg
-        xmlns={urlW3}
-        width="18"
-        height="18"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      >
-        <path d="M12 18H4a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5" />
-        <path d="M18 12h.01" />
-        <path d="M19 22v-6" />
-        <path d="m22 19-3-3-3 3" />
-        <path d="M6 12h.01" />
-        <circle cx="12" cy="12" r="2" />
-      </svg>
-    ),
+    icon: <FaMoneyBillWave size={18} />,
   },
   {
     title: "Pesanan Baru",
@@ -38,26 +24,7 @@ const stats = [
     changeColor: "text-[#16A34A]",
     iconBg: "bg-[#FFF7ED]",
     iconColor: "text-[#F97316]",
-    icon: (
-      <svg
-        xmlns={urlW3}
-        width="18"
-        height="18"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      >
-        <path d="M11 5h10" />
-        <path d="M11 12h10" />
-        <path d="M11 19h10" />
-        <path d="M4 4h1v5" />
-        <path d="M4 9h2" />
-        <path d="M6.5 20H3.4c0-1 2.6-1.925 2.6-3.5a1.5 1.5 0 0 0-2.6-1.02" />
-      </svg>
-    ),
+    icon: <FaClipboardList size={18} />,
   },
   {
     title: "Pelanggan Aktif",
@@ -66,24 +33,7 @@ const stats = [
     changeColor: "text-[#16A34A]",
     iconBg: "bg-[#F0FDF4]",
     iconColor: "text-[#16A34A]",
-    icon: (
-      <svg
-        xmlns={urlW3}
-        width="18"
-        height="18"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      >
-        <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
-        <path d="M16 3.128a4 4 0 0 1 0 7.744" />
-        <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
-        <circle cx="9" cy="7" r="4" />
-      </svg>
-    ),
+    icon: <FaUsers size={18} />,
   },
   {
     title: "Produk Aktif",
@@ -92,26 +42,7 @@ const stats = [
     changeColor: "text-[#DC2626]",
     iconBg: "bg-[#FAF5FF]",
     iconColor: "text-[#8B5CF6]",
-    icon: (
-      <svg
-        xmlns={urlW3}
-        width="18"
-        height="18"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      >
-        <path d="M12 22V12" />
-        <path d="M20.27 18.27 22 20" />
-        <path d="M21 10.498V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.729l7 4a2 2 0 0 0 2 .001l.98-.559" />
-        <path d="M3.29 7 12 12l8.71-5" />
-        <path d="m7.5 4.27 8.997 5.148" />
-        <circle cx="18.5" cy="16.5" r="2.5" />
-      </svg>
-    ),
+    icon: <FaBox size={18} />,
   },
 ];
 
@@ -222,13 +153,9 @@ const products = [
 export default function Dashboard() {
   return (
     <>
-      {/* Content Aside di sebelah kiri */}
       <AsideContent />
-
-    {/* Header */}
       <NavPage />
-      
-      {/* Content di sebelah kanan */}
+
       <main className="min-h-screen bg-[#F8F9FA] pl-18 pt-16 md:pl-60">
         <section className="grid gap-6 p-6">
           <div className="grid gap-4 sm:flex sm:items-center sm:justify-between">
