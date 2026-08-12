@@ -72,7 +72,7 @@ export default function DetailPage() {
       loadProductDetail(productId);
     }
 
-  }, [productId]);
+  }, [productId, loadProductDetail]);
 
   // 🔥 Set default image when product loaded
   React.useEffect(() => {
@@ -300,7 +300,7 @@ export default function DetailPage() {
               )}
               <img
                 id="main-product-image"
-                src={getImageProducts(selectedImage) || "/img/placeholder.png"}
+                src={getImageProducts(selectedImage) || getImageProducts("example.jpeg")}
                 alt={name}
                 className="w-full h-full object-contain transition-all duration-300"
               />

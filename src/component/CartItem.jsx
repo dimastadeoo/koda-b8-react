@@ -80,7 +80,7 @@ function CartItem({ item }) {
           <div
             className="relative w-full aspect-square bg-cover bg-center bg-no-repeat transition-transform group-hover:scale-[1.02] duration-300"
             style={{
-              backgroundImage: `url(${getImageProducts(image?.[0]) || '/img/placeholder.png'})`,
+              backgroundImage: `url(${getImageProducts(image?.[0]) || getImageProducts('example.jpeg')})`,
             }}
           >
             {badgeContent > 0 && (

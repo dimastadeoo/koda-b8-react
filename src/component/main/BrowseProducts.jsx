@@ -40,11 +40,11 @@ export default function BrowseProducts() {
 
   // --- Mapping kategori dari backend ---
   const kategoriProducts = React.useMemo(() => {
-    if (!categories || categories.length === 0) return [];
+    if (!categories || categories.leimgngth === 0) return [];
     return categories.map((cat) => ({
       id: cat.id,
       title: cat.name,
-      image: cat.url_img || "/img/placeholder.png",
+      image: cat.url_img || "example.jpeg",
       qty: products.filter((p) =>
         p.categories?.some((c) => c.id === cat.id)
       ).length,

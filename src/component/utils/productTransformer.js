@@ -7,7 +7,7 @@ export function transformProduct(product) {
   // Ambil gambar pertama dari array images, atau primary_image, atau placeholder
   const images = product.images?.length
     ? product.images.map(img => img.url_img)
-    : [product.primary_image || '/img/placeholder.png'];
+    : [product.primary_image || 'example.jpeg'];
 
   // Cek apakah ada diskon? Jika tidak ada, set 0
   const discount = product.discount || 0;
