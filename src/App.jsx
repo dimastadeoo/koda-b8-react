@@ -40,6 +40,7 @@ import ProtectedRoute from './component/ProtectedRoute';
 import Header from './component/Header';
 import { registerLogout } from "./api/authService";
 import { logoutUser } from "./redux/reducers/userSlice";
+import AdminRoute from './component/AdminRoute';
 
 
 // Konfigurasi Peta Rute URL halaman
@@ -122,20 +123,24 @@ const router = createBrowserRouter([
         ],
       },
       {
+        path: "/admin",
+        element: <Navigate to="/admin/dashboard" replace />,
+      },
+      {
         path: "/admin/list-products",
-        element: <ProductsList />,
+        element: <AdminRoute><ProductsList /></AdminRoute>,
       },
       {
         path: "/admin/list-orders",
-        element: <OrderList />,
+        element: <AdminRoute><OrderList /></AdminRoute>,
       },
       {
         path: "/admin/dashboard",
-        element: <Dashboard />,
+        element: <AdminRoute><Dashboard /></AdminRoute>,
       },
       {
         path: "/admin/list-customers",
-        element: <CustomerList />,
+        element: <AdminRoute><CustomerList /></AdminRoute>,
       },
       {
         path: "/checkout/:checkoutId",
