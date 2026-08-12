@@ -6,7 +6,8 @@ import profileDataReducer from './profileDataSlice.js'
 import productReducer from './productSlice.js'
 import addressReduceer from './addressSlice.js'
 import wishlistReducer from './wishlistSlice.js'
-import aadminReducer from './adminSlice.js'
+import adminReducer from './adminSlice.js'
+import adminOrderReducer from './adminOrderSlice.js'
 
 const rootReducer = combineReducers({
   user: userReducer,
@@ -15,7 +16,8 @@ const rootReducer = combineReducers({
   products: productReducer,
   address: addressReduceer,
   wishlist: wishlistReducer,
-  admin: aadminReducer,
+  admin: adminReducer,
+  adminOrders: adminOrderReducer,
   // tambahkan reducer lain di sini jika nanti ada
 });
 
