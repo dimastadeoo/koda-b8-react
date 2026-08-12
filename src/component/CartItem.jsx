@@ -2,7 +2,6 @@ import { useNavigate } from "react-router";
 import { FaHeart, FaRegHeart, FaStar, FaStarHalfAlt } from "react-icons/fa";
 import { useWishlist } from "./custom_hooks/useWhislist.js";
 import { getImageProducts } from "./utils/image.js";
-
 const formatRupiah = (number) => {
   return new Intl.NumberFormat("id-ID", {
     style: "currency",
