@@ -1,5 +1,8 @@
 import { useEffect } from "react";
 import { Outlet, useLocation } from "react-router";
+import { useAuth } from "./custom_hooks/useAuth";
+import { useWishlist } from "./custom_hooks/useWhislist";
+
 
 const pageTitles = [
   {
@@ -50,6 +53,16 @@ const pageTitles = [
 
 export default function RootLayout() {
   const { pathname, search } = useLocation();
+  const {isLoggedIn} = useAuth()
+  const {clear, loadWishlist} = useWishlist()
+
+  useEffect(() => {
+    if (!isLoggedIn) {
+      clear()
+    }else{
+      loadWishlist();
+    }
+  }, [loadWishlist, clear, isLoggedIn]);
 
   useEffect(() => {
     window.scrollTo({
