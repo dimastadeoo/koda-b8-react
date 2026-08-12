@@ -20,10 +20,10 @@ export default function AsideContent() {
           to="/"
           className="flex w-full items-center justify-center gap-3 text-base font-normal text-white md:justify-start"
         >
-          <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-[#1A73E8] text-sm">
-            B
-          </span>
-          <p className="hidden md:block">BeIiMudah Admin</p>
+          <div className="w-10 h-10 bg-green-600 text-white flex justify-center items-center text-xl font-bold rounded-lg">
+            E
+          </div>
+          <p className="hidden md:block">EShop Admin</p>
         </Link>
       </div>
 
