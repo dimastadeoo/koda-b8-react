@@ -41,6 +41,7 @@ export function useAuth() {
       return {
         success: true,
         message: result.message,
+        role: result.user.role,
       };
     } catch (err) {
       return {

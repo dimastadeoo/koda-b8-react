@@ -70,7 +70,9 @@ export default function Login() {
         message: result.message,
       });
 
-      if (result.success) {
+      if (result.success && result.role === 'admin'){
+        navigate("/admin");
+      }else if (result.success) {
         navigate("/main");
       }
     }
