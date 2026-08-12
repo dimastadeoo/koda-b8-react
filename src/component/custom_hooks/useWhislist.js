@@ -1,64 +1,84 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { useEffect, useCallback } from 'react';
+import { useCallback } from 'react';
+
 import {
   fetchWishlist,
   addWishlist,
   removeWishlist,
   clearWishlist,
 } from '../../redux/reducers/wishlistSlice';
+
 import { useAuth } from './useAuth';
 
 export function useWishlist() {
   const dispatch = useDispatch();
   const { isLoggedIn } = useAuth();
-  const { items, loading, error } = useSelector((state) => state.wishlist);
+
+  const {
+    items = [],
+    loading,
+    error,
+  } = useSelector((state) => state.wishlist);
 
   const loadWishlist = useCallback(() => {
-    if (isLoggedIn) {
-      dispatch(fetchWishlist());
-    }
+    if (!isLoggedIn) return;
+
+    dispatch(fetchWishlist());
   }, [dispatch, isLoggedIn]);
 
   const addToWishlist = useCallback(
-    (productId) => dispatch(addWishlist(productId)),
-    [dispatch]
+    (productId) => {
+      if (!isLoggedIn || !productId) return;
+
+      return dispatch(addWishlist(productId));
+    },
+    [dispatch, isLoggedIn]
   );
 
   const removeFromWishlist = useCallback(
-    (productId) => dispatch(removeWishlist(productId)),
-    [dispatch]
+    (productId) => {
+      if (!isLoggedIn || !productId) return;
+
+      return dispatch(removeWishlist(productId));
+    },
+    [dispatch, isLoggedIn]
   );
 
-  const clear = useCallback(() => dispatch(clearWishlist()), [dispatch]);
-
-  // Cek apakah produk ada di wishlist (berdasarkan productId)
   const isWishlisted = useCallback(
     (productId) => {
-      return items.some((item) => Number(item.id_product) === Number(productId));
+      return items.some(
+        (item) =>
+          Number(item.id_product) === Number(productId)
+      );
     },
     [items]
   );
 
-  // Toggle wishlist: tambah jika belum ada, hapus jika sudah ada
   const toggleWishlist = useCallback(
     (product) => {
-      const productId = product.id || product.productId;
+      const productId =
+        product?.id_product ??
+        product?.id ??
+        product?.productId;
+
       if (!productId) return;
+
       if (isWishlisted(productId)) {
-        removeFromWishlist(productId);
-      } else {
-        addToWishlist(productId);
+        return removeFromWishlist(productId);
       }
+
+      return addToWishlist(productId);
     },
-    [isWishlisted, addToWishlist, removeFromWishlist]
+    [
+      isWishlisted,
+      removeFromWishlist,
+      addToWishlist,
+    ]
   );
 
-  // Auto fetch saat login
-  useEffect(() => {
-    if (isLoggedIn) {
-      loadWishlist();
-    }
-  }, [isLoggedIn, loadWishlist]);
+  const clear = useCallback(() => {
+    dispatch(clearWishlist());
+  }, [dispatch]);
 
   return {
     wishlist: items,
