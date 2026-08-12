@@ -2,10 +2,20 @@ import { CartItem } from "../CartItem";
 import { useWishlist } from "../custom_hooks/useWhislist";
 import { transformProduct } from "../utils/productTransformer";
 
+
 export default function Wishlist() {
-  const { wishlist, loading } = useWishlist(false);
+  const { wishlist = [], loading, error} = useWishlist()
 
   if (loading) return <div className="p-6">Memuat wishlist...</div>;
+  if (error) {
+    return (
+      <div className="w-full rounded-2xl border border-red-200 bg-red-50 p-6">
+        <p className="text-sm text-red-600">
+          {error}
+        </p>
+      </div>
+    );
+  }
 
   // Transformasi data produk dari wishlist ke format CartItem
   const transformedItems = wishlist.map((item) => {
